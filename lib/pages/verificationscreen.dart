@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:growlife/pages/Signin.dart';
 import 'forgotpasswordscreen.dart';
 class VerificationScreen extends StatefulWidget {
   final TextEditingController textToShow;
@@ -42,7 +43,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
             SizedBox( height:MediaQuery.of(context).size.height*.03),
             InkWell(
               onTap: (){
-
+                 Navigator.push(context,MaterialPageRoute(builder: (context)=>SignInScreen()));
               },
               child: Container(
                 height:MediaQuery.of(context).size.height*.06,
