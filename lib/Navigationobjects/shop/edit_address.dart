@@ -23,6 +23,7 @@ class _EditAddressState extends State<EditAddress> {
       appBar:   AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(
@@ -32,14 +33,19 @@ class _EditAddressState extends State<EditAddress> {
                 child: Icon(Icons.arrow_back,color: Colors.black,size:  MediaQuery.of(context).size.height*.035,)),
             SizedBox(width:  MediaQuery.of(context).size.height*.030,),
             Text("Edit Address",style: GoogleFonts.lato(color: Colors.black,fontSize:  MediaQuery.of(context).size.height*.027,fontWeight: FontWeight.bold),),
-            SizedBox(width:  MediaQuery.of(context).size.height*.11,),
-            InkWell(
-                onTap:(){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>OrderSummary()));
-                },
-                child: Text("UPDATE",style: GoogleFonts.lato(color: Color(0xFF268E15),fontSize:  MediaQuery.of(context).size.height*.023,),)),
+
           ],
         ),
+        actions: [
+          InkWell(
+              onTap:(){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>OrderSummary()));
+              },
+              child: Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: Center(child: Text("UPDATE",style: GoogleFonts.lato(color: Color(0xFF268E15),fontSize:  MediaQuery.of(context).size.height*.023,),)),
+              )),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -106,7 +112,7 @@ class _EditAddressState extends State<EditAddress> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            height: MediaQuery.of(context).size.height*.08,
+                            height: MediaQuery.of(context).size.height*.09,
                             width: MediaQuery.of(context).size.width*.32,
                             color: Colors.white,
                             child:  Column(
@@ -122,7 +128,7 @@ class _EditAddressState extends State<EditAddress> {
                             ),
                           ),
                           Container(
-                            height: MediaQuery.of(context).size.height*.08,
+                            height: MediaQuery.of(context).size.height*.09,
                             width: MediaQuery.of(context).size.width*.32,
                             color: Colors.white,
                             child:  Column(

@@ -17,6 +17,7 @@ class _OrderDetailState extends State<OrderDetail> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(onTap: (){

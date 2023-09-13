@@ -103,7 +103,7 @@ class _HomeState extends State<Home> {
                       ),
                       SizedBox(width: MediaQuery.of(context).size.height*.23 ,),
                       Padding(
-                        padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height*.03),
+                        padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height*.03,left: MediaQuery.of(context).size.height*.02 ),
                         child: InkWell(
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
@@ -135,7 +135,7 @@ class _HomeState extends State<Home> {
                      crossAxisAlignment: CrossAxisAlignment.start,
                      children: [
                        SizedBox(
-                         height:MediaQuery.of(context).size.height*.341234,
+                         height:MediaQuery.of(context).size.height*.35,
                          child: PageView.builder(
                            controller: pagecontroller,
                              itemBuilder:(_,index){
@@ -174,10 +174,11 @@ class _HomeState extends State<Home> {
                                              height: MediaQuery.of(context).size.height*.045 ,
                                              width: MediaQuery.of(context).size.width*.28 ,
                                              decoration: BoxDecoration(
+                                               borderRadius: BorderRadius.circular(10),
                                                  color: Colors.white,
                                                  border: Border.all(
-                                                     color: Color(0xFF1F588E)
-                                                 )
+                                                     color: Color(0xFF1F588E),
+                                                 ),
                                              ),
                                              child: Center(child: Text("View Event",style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.height*.02,color: Color(0xFF1F588E),fontWeight: FontWeight.bold  ),)),
                                            ),
@@ -186,6 +187,7 @@ class _HomeState extends State<Home> {
                                              height: MediaQuery.of(context).size.height*.045 ,
                                              width: MediaQuery.of(context).size.width*.23 ,
                                              decoration: BoxDecoration(
+                                               borderRadius: BorderRadius.circular(10),
                                                  color: Colors.white,
                                                  border: Border.all(
                                                      color: Color(0xFF1F588E)

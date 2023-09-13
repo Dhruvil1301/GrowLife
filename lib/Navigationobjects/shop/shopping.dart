@@ -24,6 +24,8 @@ class _ShoppingState extends State<Shopping> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
+          elevation: 1,
+
           title: Row(
             children: [
               InkWell(onTap: (){
@@ -130,20 +132,24 @@ class _ShoppingState extends State<Shopping> {
                                crossAxisAlignment: CrossAxisAlignment.start,
                                children: [
                                  Row(
-                                   mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                   crossAxisAlignment: CrossAxisAlignment.start,
                                    children: [
                                      Padding(
                                        padding:  EdgeInsets.only(left:MediaQuery.of(context).size.height*.022,right:MediaQuery.of(context).size.height*.001,top :MediaQuery.of(context).size.height*.02 ),
                                        child: Image.asset("assets/shop/peace_lily.png",height:MediaQuery.of(context).size.height*.18,width: MediaQuery.of(context).size.height*.14,),
                                      ),
 
-                                     Padding(
-                                       padding:  EdgeInsets.only(bottom:MediaQuery.of(context).size.height*.11 ),
-                                       child: CircleAvatar(
-                                           radius: MediaQuery.of(context).size.height*.015,
-                                           backgroundColor: Colors.blueGrey.withOpacity(.2),
-                                           child: Icon(Icons.favorite_border,color: Colors.black,size: MediaQuery.of(context).size.height*.02,)),
-                                     )
+
+                                           Padding(
+                                             padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height*.028),
+                                             child: CircleAvatar(
+                                               radius:  MediaQuery.of(context).size.height*.015,
+                                               backgroundColor: Colors.blueGrey.withOpacity(.2),
+                                               child: Icon(Icons.favorite_border,color: Colors.black,size: MediaQuery.of(context).size.height*.02,)),
+                                           ),
+
+
                                    ],
                                  ),
 
@@ -154,7 +160,14 @@ class _ShoppingState extends State<Shopping> {
                                      crossAxisAlignment: CrossAxisAlignment.start,
                                      children: [
                                        Text("Peace Lily",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.025),),
-                                       Text("₹100",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.025,fontWeight: FontWeight.bold),),
+                                       Row(
+
+                                         children: [
+                                           Text("₹100",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.024,fontWeight: FontWeight.bold),),
+                                           SizedBox(width: MediaQuery.of(context).size.width*.01 ,),
+                                           Text("₹150",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.024,fontWeight: FontWeight.bold,color: Colors.black54,decoration: TextDecoration.lineThrough),),
+                                         ],
+                                       ),
                                        SizedBox(height: MediaQuery.of(context).size.height*.005 ,),
                                        Container(
                                          width: MediaQuery.of(context).size.height*.15,
@@ -222,7 +235,13 @@ class _ShoppingState extends State<Shopping> {
                                    crossAxisAlignment: CrossAxisAlignment.start,
                                    children: [
                                      Text("Rubber Plant",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.025),),
-                                     Text("₹120",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.025,fontWeight: FontWeight.bold),),
+                                     Row(
+                                       children: [
+                                         Text("₹120",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.024,fontWeight: FontWeight.bold),),
+                                         SizedBox(width: MediaQuery.of(context).size.width*.01 ,),
+                                         Text("₹150",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.024,fontWeight: FontWeight.bold,color: Colors.black54,decoration: TextDecoration.lineThrough),),
+                                       ],
+                                     ),
                                      SizedBox(height: MediaQuery.of(context).size.height*.005 ,),
                                      Container(
                                        width: MediaQuery.of(context).size.height*.15,
@@ -296,7 +315,13 @@ class _ShoppingState extends State<Shopping> {
                                      crossAxisAlignment: CrossAxisAlignment.start,
                                      children: [
                                        Text("Watering Can",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.025),),
-                                       Text("₹120",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.025,fontWeight: FontWeight.bold),),
+                                       Row(
+                                         children: [
+                                           Text("₹120",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.024,fontWeight: FontWeight.bold),),
+                                           SizedBox(width: MediaQuery.of(context).size.width*.01 ,),
+                                           Text("₹150",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.024,fontWeight: FontWeight.bold,color: Colors.black54,decoration: TextDecoration.lineThrough),),
+                                         ],
+                                       ),
                                        SizedBox(height: MediaQuery.of(context).size.height*.005 ,),
                                        Container(
                                          width: MediaQuery.of(context).size.height*.15,
@@ -365,7 +390,13 @@ class _ShoppingState extends State<Shopping> {
                                    crossAxisAlignment: CrossAxisAlignment.start,
                                    children: [
                                      Text("Garden Gloves",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.025),),
-                                     Text("₹80",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.025,fontWeight: FontWeight.bold),),
+                                     Row(
+                                       children: [
+                                         Text("₹80",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.024,fontWeight: FontWeight.bold),),
+                                         SizedBox(width: MediaQuery.of(context).size.width*.01 ,),
+                                         Text("₹130",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.024,fontWeight: FontWeight.bold,color: Colors.black54,decoration: TextDecoration.lineThrough),),
+                                       ],
+                                     ),
                                      SizedBox(height: MediaQuery.of(context).size.height*.005 ,),
                                      Container(
                                        width: MediaQuery.of(context).size.height*.15,
@@ -440,7 +471,13 @@ class _ShoppingState extends State<Shopping> {
                                      crossAxisAlignment: CrossAxisAlignment.start,
                                      children: [
                                        Text("Mud pot",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.025),),
-                                       Text("₹130",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.025,fontWeight: FontWeight.bold),),
+                                       Row(
+                                         children: [
+                                           Text("₹130",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.024,fontWeight: FontWeight.bold),),
+                                           SizedBox(width: MediaQuery.of(context).size.width*.01 ,),
+                                           Text("₹150",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.024,fontWeight: FontWeight.bold,color: Colors.black54,decoration: TextDecoration.lineThrough),),
+                                         ],
+                                       ),
                                        SizedBox(height: MediaQuery.of(context).size.height*.005 ,),
                                        Container(
                                          width: MediaQuery.of(context).size.height*.15,
@@ -508,7 +545,13 @@ class _ShoppingState extends State<Shopping> {
                                    crossAxisAlignment: CrossAxisAlignment.start,
                                    children: [
                                      Text("Plastic Pot",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.025),),
-                                     Text("₹100",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.025,fontWeight: FontWeight.bold),),
+                                     Row(
+                                       children: [
+                                         Text("₹100",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.025,fontWeight: FontWeight.bold),),
+                                         SizedBox(width: MediaQuery.of(context).size.width*.01 ,),
+                                         Text("₹150",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.024,fontWeight: FontWeight.bold,color: Colors.black54,decoration: TextDecoration.lineThrough),),
+                                       ],
+                                     ),
                                      SizedBox(height: MediaQuery.of(context).size.height*.005 ,),
                                      Container(
                                        width: MediaQuery.of(context).size.height*.15,

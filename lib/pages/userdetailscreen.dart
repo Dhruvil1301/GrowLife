@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/Navigationobjects/Home/Home.dart';
 import 'package:growlife/main.dart';
 import 'package:growlife/screen/homescreen.dart';
+import 'package:growlife/user/profile.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '';
@@ -238,7 +239,7 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                     InkWell(
                       onTap: (){
                         if(_formKey.currentState!.validate()){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile()));
                         }
                       },
                       child: Container(

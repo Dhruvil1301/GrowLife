@@ -22,6 +22,7 @@ class _Follower_FollowingState extends State<Follower_Following> with SingleTick
     _tabController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +30,7 @@ class _Follower_FollowingState extends State<Follower_Following> with SingleTick
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(

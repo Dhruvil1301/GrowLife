@@ -34,10 +34,14 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildNavItem(Icons.home, "HOME", 0, navigationProvider),
-                _buildNavItem(Icons.add_business, "SHOP", 1, navigationProvider),
-                 _buildNavItem(Icons.add_circle_outline_outlined, "POST", 2, navigationProvider),
-                _buildNavItem(Icons.shopping_bag, "EVENT", 3, navigationProvider),
+                _buildNavItem("HOME", 0, navigationProvider,'assets/Icon/Homewhite.png',
+                    'assets/Icon/Home.png'),
+                _buildNavItem( "SHOP", 1, navigationProvider,'assets/Icon/Shopwhite.png',
+                    'assets/Icon/Shop.png'),
+                 _buildNavItem( "POST", 2, navigationProvider,'assets/Icon/Addwhite.png',
+                     'assets/Icon/Add.png'),
+                _buildNavItem( "EVENT", 3, navigationProvider,'assets/Icon/Eventwhite.png',
+                    'assets/Icon/Event.png'),
               ],
             ),
           ),
@@ -53,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Events(),
   ];
 
-  Widget _buildNavItem(IconData icon, String label, int index, NavigationProvider provider) {
+  Widget _buildNavItem(String label, int index, NavigationProvider provider, String selectedImageAsset, String unselectedImageAsset) {
     bool isSelected = provider.selectedIndex == index;
     double translateY = isSelected ? -25.0 : 0.0; // Move icon up when selected
 
@@ -81,8 +85,15 @@ class _HomeScreenState extends State<HomeScreen> {
             CircleAvatar(
               backgroundColor: isSelected ? Color(0xFF1F588E) : Colors.transparent,
               radius: 25,
-              child: Icon(icon, color: isSelected ? Colors.white : Colors.black),
-            ),
+              child:
+
+                Image.asset(
+                  isSelected ? selectedImageAsset : unselectedImageAsset,
+                  width: 30, // Set the width and height as needed
+                  height: 30,
+                ),
+              ),
+
             SizedBox(height: 2),
             Text(
               label,

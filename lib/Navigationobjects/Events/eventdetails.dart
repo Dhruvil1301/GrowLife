@@ -21,6 +21,7 @@ class _EventDetailsState extends State<EventDetails> {
       appBar:   AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(
@@ -30,12 +31,17 @@ class _EventDetailsState extends State<EventDetails> {
                 child: Icon(Icons.arrow_back,color: Colors.black,size:  MediaQuery.of(context).size.height*.035,)),
             SizedBox(width:  MediaQuery.of(context).size.height*.030,),
                 Text("Event Details",style: GoogleFonts.lato(color: Colors.black,fontSize:  MediaQuery.of(context).size.height*.03,),),
-                SizedBox(width:  MediaQuery.of(context).size.height*.14,),
-                Icon(Icons.more_horiz,size: MediaQuery.of(context).size.height*.035 ,color: Colors.black,)
+
 
 
           ],
         ),
+        actions: [
+          Padding(
+            padding:  EdgeInsets.only(right: 10),
+            child: Icon(Icons.more_horiz,size: MediaQuery.of(context).size.height*.035 ,color: Colors.black,),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -131,6 +137,7 @@ class _EventDetailsState extends State<EventDetails> {
                     height: MediaQuery.of(context).size.height*.045 ,
                     width: MediaQuery.of(context).size.width*.24 ,
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
                         color: Colors.white,
                         border: Border.all(
                           width: 1.5,
@@ -149,6 +156,7 @@ class _EventDetailsState extends State<EventDetails> {
                     height: MediaQuery.of(context).size.height*.045 ,
                     width: MediaQuery.of(context).size.width*.23 ,
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
                         color: Colors.white,
                         border: Border.all(
                           width: 1.5,

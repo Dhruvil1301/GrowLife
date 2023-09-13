@@ -25,6 +25,7 @@ class _InviteAFriendState extends State<InviteAFriend> {
       appBar:  AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title:  isSearching? TextField(
           // Customize the TextField for search
           decoration: InputDecoration(

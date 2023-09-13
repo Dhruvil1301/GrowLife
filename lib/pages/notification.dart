@@ -17,6 +17,7 @@ class _NotificationsState extends State<Notifications> {
       appBar:   AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(
@@ -32,27 +33,27 @@ class _NotificationsState extends State<Notifications> {
       body: SingleChildScrollView(
 
         child: Padding(
-          padding:  EdgeInsets.symmetric(vertical:MediaQuery.of(context).size.height*.025 ),
+          padding:  EdgeInsets.symmetric(vertical:MediaQuery.of(context).size.height*.00,horizontal:MediaQuery.of(context).size.height*.015  ),
           child: Column(
             children: [
               Image.asset("assets/notification/eventreminder.png"),
-              SizedBox(height:MediaQuery.of(context).size.height*.025  ,),
+              SizedBox(height:MediaQuery.of(context).size.height*.02  ,),
               Image.asset("assets/notification/thankyou.png"),
-              SizedBox(height:MediaQuery.of(context).size.height*.025  ,),
+              SizedBox(height:MediaQuery.of(context).size.height*.02  ,),
               Image.asset("assets/notification/newproductlauch.png"),
-              SizedBox(height:MediaQuery.of(context).size.height*.025  ,),
+              SizedBox(height:MediaQuery.of(context).size.height*.02  ,),
               Image.asset("assets/notification/specialoffer.png"),
-              SizedBox(height:MediaQuery.of(context).size.height*.025  ,),
+              SizedBox(height:MediaQuery.of(context).size.height*.02  ,),
               Image.asset("assets/notification/communityupdate.png"),
-              SizedBox(height:MediaQuery.of(context).size.height*.025  ,),
+              SizedBox(height:MediaQuery.of(context).size.height*.02  ,),
               Image.asset("assets/notification/specialoffer.png"),
-              SizedBox(height:MediaQuery.of(context).size.height*.025  ,),
+              SizedBox(height:MediaQuery.of(context).size.height*.02 ,),
               Image.asset("assets/notification/thankyou.png"),
-              SizedBox(height:MediaQuery.of(context).size.height*.025  ,),
+              SizedBox(height:MediaQuery.of(context).size.height*.02  ,),
               Image.asset("assets/notification/communityupdate.png"),
-              SizedBox(height:MediaQuery.of(context).size.height*.025  ,),
+              SizedBox(height:MediaQuery.of(context).size.height*.02  ,),
               Image.asset("assets/notification/eventreminder.png"),
-              SizedBox(height:MediaQuery.of(context).size.height*.025  ,),
+              SizedBox(height:MediaQuery.of(context).size.height*.02  ,),
               Image.asset("assets/notification/newproductlauch.png"),
             ],
           ),

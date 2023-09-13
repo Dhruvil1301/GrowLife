@@ -30,6 +30,7 @@ class _WishlistPageState extends State<WishlistPage> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
+          elevation: 1,
           title: Row(
             children: [
               InkWell(

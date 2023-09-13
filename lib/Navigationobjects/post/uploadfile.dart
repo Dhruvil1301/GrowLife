@@ -44,6 +44,7 @@ class _VideoGridViewState extends State<VideoGridView> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(

@@ -31,11 +31,22 @@ class _SignInScreenState extends State<SignInScreen> {
               key: _formKey,
               child: Column(
                 children: [
-                  SizedBox(height:  MediaQuery.of(context).size.height*.05),
-                  Container(
-                      child: Image.asset("assets/images/Growlife.png",height: 70,width: 90,fit: BoxFit.fill,)),
-                  SizedBox(height:  MediaQuery.of(context).size.height*.014),
-                  Text('Welcome Back',style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:  35),),
+                  SizedBox(height:  MediaQuery.of(context).size.height*.02),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.01 ),
+                    child: Align(
+                      alignment: AlignmentDirectional.topStart,
+                      child: Row(
+                        children: [
+                          Container(
+                              child: Image.asset("assets/images/Growlife.png",height:  MediaQuery.of(context).size.height*.05,fit: BoxFit.fill,)),
+                          Image.asset("assets/images/GrowLifeText.png",height:MediaQuery.of(context).size.height*.02 ,)
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height:  MediaQuery.of(context).size.height*.04),
+                  Text('Welcome Back',style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize: MediaQuery.of(context).size.height*.035 ),),
                   SizedBox(height:  MediaQuery.of(context).size.height*.015),
                   Text('Login to your  account',style: GoogleFonts.lato(fontSize: 18),),
                   SizedBox(height:  MediaQuery.of(context).size.height*.05),
@@ -48,7 +59,8 @@ class _SignInScreenState extends State<SignInScreen> {
                             controller:UsernameorEmailController ,
                             decoration: InputDecoration(
                               hintText: "Username or Email",
-                              hintStyle: GoogleFonts.lato(fontSize:  MediaQuery.of(context).size.height*.023,fontWeight: FontWeight.bold),
+                              hintStyle: GoogleFonts.lato(fontSize:  MediaQuery.of(context).size.height*.021,fontWeight: FontWeight.bold),
+                              contentPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.02 ),
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.black
@@ -64,14 +76,15 @@ class _SignInScreenState extends State<SignInScreen> {
                               return null;
                             },
                           ),
-                        SizedBox(height:  MediaQuery.of(context).size.height*.04),
+                        SizedBox(height:  MediaQuery.of(context).size.height*.03),
                         TextFormField(
                           style: GoogleFonts.lato(),
                           controller: PasswordController,
                           obscureText: !_showPassword,
                           decoration: InputDecoration(
                               hintText: 'Password',
-                              hintStyle: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:  MediaQuery.of(context).size.height*.023),
+                              hintStyle: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:  MediaQuery.of(context).size.height*.021),
+                              contentPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.02 ),
                               suffixIcon: IconButton(
                                 icon: Icon(_showPassword ? Icons.visibility : Icons.visibility_off),
                                 onPressed: () {
@@ -108,9 +121,9 @@ class _SignInScreenState extends State<SignInScreen> {
                       alignment: Alignment.topRight,
                         child: TextButton(onPressed: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPassword()));
-                        }, child: Text("Forgot Password ?",style: GoogleFonts.lato(color: Colors.red,fontSize:22 ),))),
+                        }, child: Text("Forgot Password ?",style: GoogleFonts.lato(color: Colors.red,fontSize:MediaQuery.of(context).size.height*.023 ),))),
                   ),
-                  SizedBox(height:MediaQuery.of(context).size.height*.06 ),
+                  SizedBox(height:MediaQuery.of(context).size.height*.03),
                   InkWell(
                     onTap: (){
                       if(_formKey.currentState!.validate()){
@@ -118,8 +131,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       }
                     },
                     child: Container(
-                      height:  MediaQuery.of(context).size.height*.07,
-                      width:   MediaQuery.of(context).size.width*.33,
+                      height:  MediaQuery.of(context).size.height*.06,
+                      width:   MediaQuery.of(context).size.width*.43,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white,
@@ -136,30 +149,26 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ],
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-
-                          Padding(
-                            padding: EdgeInsets.only(left: MediaQuery.of(context).size.height*.02),
-                            child: Text("LOGIN",style: GoogleFonts.lato(color:  Color(0xFF1F588E),fontSize:  MediaQuery.of(context).size.height*.027,fontWeight: FontWeight.bold),
+                      child: Padding(
+                        padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.height*.029 ),
+                        child: Row(
+                          children: [
+                            Text("LOGIN",style: GoogleFonts.lato(color:  Color(0xFF1F588E),fontSize:  MediaQuery.of(context).size.height*.027,fontWeight: FontWeight.bold),
                             ),
-                          ),
-                          Padding(
-                            padding:  EdgeInsets.only(right: MediaQuery.of(context).size.width*.015 ),
-                            child: Icon(Icons.arrow_forward,color: Color(0xFF1F588E),size:  MediaQuery.of(context).size.height*.04),
-                          )
-                        ],
+                            SizedBox(width: MediaQuery.of(context).size.width*.03,),
+                             Icon(Icons.arrow_forward,color: Color(0xFF1F588E),size:  MediaQuery.of(context).size.height*.04),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                  SizedBox(height:  MediaQuery.of(context).size.height*.05),
+                  SizedBox(height:  MediaQuery.of(context).size.height*.04),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.height*.001,
+                        height: MediaQuery.of(context).size.height*.0015,
                         width:  MediaQuery.of(context).size.width*.16,
                         color: Colors.black,
                       ),
@@ -167,15 +176,97 @@ class _SignInScreenState extends State<SignInScreen> {
                       Text('or continue with',style: GoogleFonts.lato(fontSize:  MediaQuery.of(context).size.height*.022),),
                       SizedBox(width: MediaQuery.of(context).size.height*.02),
                       Container(
-                        height:  MediaQuery.of(context).size.height*.001,
+                        height:  MediaQuery.of(context).size.height*.0015,
                         width:  MediaQuery.of(context).size.width*.16,
                         color: Colors.black,
                       ),
                     ],
                   ),
-                  SizedBox(height:  MediaQuery.of(context).size.height*.015),
-                  Image.asset("assets/images/Icons.png",height:  MediaQuery.of(context).size.height*.04,),
-                  SizedBox(height:  MediaQuery.of(context).size.height*.005),
+                  SizedBox(height:  MediaQuery.of(context).size.height*.025),
+                  Container(
+                    height:  MediaQuery.of(context).size.height*.05,
+                    width:   MediaQuery.of(context).size.width*.75,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.9),
+                          spreadRadius: 0,
+                          blurRadius: 5,
+                          offset: Offset(0, 2), // changes the position of the shadow
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.03 ),
+                      child: Row(
+                        children: [
+                          Image.asset("assets/images/googlelogo.png",height:MediaQuery.of(context).size.height*.03 ,),
+                          SizedBox(width:MediaQuery.of(context).size.width*.05  ,),
+                          Text("Sign up with Google",style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.height*.023 ),)
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height:  MediaQuery.of(context).size.height*.01),
+                  Container(
+                    height:  MediaQuery.of(context).size.height*.05,
+                    width:   MediaQuery.of(context).size.width*.75,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.9),
+                          spreadRadius: 0,
+                          blurRadius: 5,
+                          offset: Offset(0, 2), // changes the position of the shadow
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.03 ),
+                      child: Row(
+                        children: [
+                          Image.asset("assets/images/facebooklogo.png",height:MediaQuery.of(context).size.height*.03 ,),
+                          SizedBox(width:MediaQuery.of(context).size.width*.05  ,),
+                          Text("Sign up with Facebook",style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.height*.023 ),)
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height:  MediaQuery.of(context).size.height*.01),
+                  Container(
+                    height:  MediaQuery.of(context).size.height*.05,
+                    width:   MediaQuery.of(context).size.width*.75,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.9),
+                          spreadRadius: 0,
+                          blurRadius: 5,
+                          offset: Offset(0, 2), // changes the position of the shadow
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.03 ),
+                      child: Row(
+                        children: [
+                          Image.asset("assets/images/applelogo.png",height:MediaQuery.of(context).size.height*.03 ,),
+                          SizedBox(width:MediaQuery.of(context).size.width*.05  ,),
+                          Text("Sign up with Apple",style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.height*.023 ),)
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height:  MediaQuery.of(context).size.height*.01),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:growlife/Dashboard/mobiledashboard.dart';
 import 'package:growlife/Navigationobjects/post/camera.dart';
 import 'package:growlife/Navigationobjects/shop/coupon.dart';
 import 'package:camera/camera.dart';
 import 'package:growlife/Navigationobjects/shop/myorder.dart';
+import 'package:growlife/pages/signupscreen.dart';
 import 'package:growlife/pages/userdetailscreen.dart';
 import 'package:growlife/pages/welcomescreen.dart';
 import 'package:flutter/services.dart';
@@ -31,6 +33,7 @@ void main() {
            ChangeNotifierProvider(create: (context) => WishlistProvider()),
           ChangeNotifierProvider(create: (context) => CameraProvider()),
           ChangeNotifierProvider(create: (context) => VideoProvider()),
+          ChangeNotifierProvider(create: (context) => DashboardNavigationProvider()),
 
 
 
@@ -47,13 +50,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorObservers: [navigatorObserver],
-      title: 'Flutter Demo',
+      title: 'Grow Life',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: WelcomeScreen(),
-    );
+      home:WelcomeScreen(),
+    ); 
   }
 }
 
@@ -221,5 +224,15 @@ class _DoubleClickToExitAppState extends State<DoubleClickToExitApp> {
     // Second click on back button within 2 seconds, exit the app.
     _isExitClicked = true;
     return true;
+  }
+}
+class DashboardNavigationProvider with ChangeNotifier {
+  int _selectedIndex = 0;
+
+  int get selectedIndex => _selectedIndex;
+
+  void setIndex(int index) {
+    _selectedIndex = index;
+    notifyListeners();
   }
 }

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/Navigationobjects/Events/eventdetails.dart';
+import 'package:growlife/Navigationobjects/Home/Home.dart';
+
+import '../../screen/homescreen.dart';
 class Events extends StatefulWidget {
   const Events({Key? key}) : super(key: key);
 
@@ -24,10 +27,13 @@ class _EventsState extends State<Events> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
+          elevation: 1,
           title: Row(
             children: [
               InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                  },
                   child: Icon(
                     Icons.arrow_back, color: Colors.black, size: MediaQuery
                       .of(context)

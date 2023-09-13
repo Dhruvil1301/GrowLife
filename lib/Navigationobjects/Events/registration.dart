@@ -16,6 +16,7 @@ class _RegistrationState extends State<Registration> {
       appBar:   AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(
@@ -34,8 +35,8 @@ class _RegistrationState extends State<Registration> {
             Center(child: Image.asset("assets/events/registration.png",height:MediaQuery.of(context).size.height*.2,width: MediaQuery.of(context).size.width*.45,)),
             SizedBox(height:MediaQuery.of(context).size.height*.03,),
             Container(
-              height: double.infinity,
-              width:  double.infinity,
+              height: MediaQuery.of(context).size.height*.9,
+              width: MediaQuery.of(context).size.width*1,
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [

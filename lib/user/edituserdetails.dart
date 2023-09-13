@@ -15,6 +15,9 @@ import '../main.dart';
  }
 
  class _EditProfileState extends State<EditProfile> {
+   final text=TextEditingController();
+   final text2=TextEditingController();
+
    File? file;
    ImagePicker image = ImagePicker();
    String _typeValue = '';
@@ -25,6 +28,7 @@ import '../main.dart';
        appBar: AppBar(
          automaticallyImplyLeading: false,
          backgroundColor: Colors.white,
+         elevation: 1,
          title: Row(
            children: [
              InkWell(
@@ -34,12 +38,20 @@ import '../main.dart';
                  child: Icon(Icons.arrow_back,color: Colors.black,size:  MediaQuery.of(context).size.height*.035,)),
              SizedBox(width:  MediaQuery.of(context).size.height*.030,),
              Text("Edit Profile",style: GoogleFonts.lato(color: Colors.black,fontSize:  MediaQuery.of(context).size.height*.025,),),
-             SizedBox(width:  MediaQuery.of(context).size.height*.16,),
-             Text("Update",style: GoogleFonts.lato(color: Color(0xFF1F588E),fontSize:  MediaQuery.of(context).size.height*.022,))
 
 
            ],
          ),
+         actions: [
+           Padding(
+             padding:  EdgeInsets.only(right: 10),
+             child: InkWell(
+               onTap: (){
+                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Profile()));
+               },
+                 child: Center(child: Text("Update",style: GoogleFonts.lato(color: Color(0xFF1F588E),fontSize:  MediaQuery.of(context).size.height*.022,)))),
+           )
+         ],
        ),
        body: SingleChildScrollView(
          child: Column(
@@ -78,8 +90,9 @@ import '../main.dart';
                    child: Text("Name",style: GoogleFonts.lato(fontWeight: FontWeight.bold,color: Colors.black45,fontSize:  MediaQuery.of(context).size.height*.025),),
                  ),
                  Padding(
-                     padding: EdgeInsets.symmetric(vertical: 0,horizontal: MediaQuery.of(context).size.width*.06),
+                     padding: EdgeInsets.symmetric(vertical: 0,horizontal: MediaQuery.of(context).size.width*.1),
                      child: TextFormField(
+                       controller: text,
                        style: GoogleFonts.lato(),
                        decoration: InputDecoration(
 
@@ -94,7 +107,7 @@ import '../main.dart';
                    child: Text("Username",style: GoogleFonts.lato(fontWeight: FontWeight.bold,color: Colors.black45,fontSize:  MediaQuery.of(context).size.height*.025),),
                  ),
                  Padding(
-                     padding: EdgeInsets.symmetric(vertical: 0,horizontal: MediaQuery.of(context).size.width*.06),
+                     padding: EdgeInsets.symmetric(vertical: 0,horizontal: MediaQuery.of(context).size.width*.1),
                      child: TextFormField(
                        style: GoogleFonts.lato(),
                        decoration: InputDecoration(
@@ -110,7 +123,7 @@ import '../main.dart';
                    child: Text("Bio",style: GoogleFonts.lato(fontWeight: FontWeight.bold,color: Colors.black45,fontSize:  MediaQuery.of(context).size.height*.025),),
                  ),
                  Padding(
-                     padding: EdgeInsets.symmetric(vertical: 0,horizontal: MediaQuery.of(context).size.width*.06),
+                     padding: EdgeInsets.symmetric(vertical: 0,horizontal: MediaQuery.of(context).size.width*.1),
                      child: TextFormField(
                        style: GoogleFonts.lato(),
                        decoration: InputDecoration(
@@ -127,7 +140,7 @@ import '../main.dart';
                  ),
                  SizedBox(height: MediaQuery.of(context).size.height*.022),
                  Padding(
-                   padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width*.06 ),
+                   padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width*.1 ),
                    child: DropdownButtonFormField(items:  [
                      DropdownMenuItem(child: Text("Male"),value:'1'),
                      DropdownMenuItem(child: Text('Female'),value:'2'),
@@ -159,7 +172,7 @@ import '../main.dart';
                    child: Text("Phone Number",style: GoogleFonts.lato(fontWeight: FontWeight.bold,color: Colors.black45,fontSize:  MediaQuery.of(context).size.height*.025),),
                  ),
                  Padding(
-                     padding: EdgeInsets.symmetric(vertical: 0,horizontal: MediaQuery.of(context).size.width*.06),
+                     padding: EdgeInsets.symmetric(vertical: 0,horizontal: MediaQuery.of(context).size.width*.1),
                      child: TextFormField(
                        keyboardType: TextInputType.number,
                        style: GoogleFonts.lato(),
@@ -176,8 +189,9 @@ import '../main.dart';
                    child: Text("Email",style: GoogleFonts.lato(fontWeight: FontWeight.bold,color: Colors.black45,fontSize:  MediaQuery.of(context).size.height*.025),),
                  ),
                  Padding(
-                     padding: EdgeInsets.symmetric(vertical: 0,horizontal: MediaQuery.of(context).size.width*.06),
+                     padding: EdgeInsets.symmetric(vertical: 0,horizontal: MediaQuery.of(context).size.width*.1),
                      child: TextFormField(
+                       controller: text2,
                        style: GoogleFonts.lato(),
                        decoration: InputDecoration(
 

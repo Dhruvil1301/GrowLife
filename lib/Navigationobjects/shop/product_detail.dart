@@ -100,6 +100,7 @@ class _ProductDetailState extends State<ProductDetail> {
       appBar:   AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
+      elevation: 1,
       title: Row(
         children: [
           InkWell(

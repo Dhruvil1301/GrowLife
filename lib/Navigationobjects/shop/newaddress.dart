@@ -24,6 +24,7 @@ class _NewAddressState extends State<NewAddress> {
       appBar:   AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(
@@ -34,13 +35,19 @@ class _NewAddressState extends State<NewAddress> {
             SizedBox(width:  MediaQuery.of(context).size.height*.030,),
             Text("New Address",style: GoogleFonts.lato(color: Colors.black,fontSize:  MediaQuery.of(context).size.height*.027,fontWeight: FontWeight.bold),),
             SizedBox(width:  MediaQuery.of(context).size.height*.11,),
-            InkWell(
+
+          ],
+        ),
+        actions: [
+          InkWell(
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>OrderSummary()));
               },
-                child: Text("DONE",style: GoogleFonts.lato(color: Colors.blue,fontSize:  MediaQuery.of(context).size.height*.023,),)),
-          ],
-        ),
+              child: Padding(
+                padding:  EdgeInsets.only(right: 10),
+                child: Center(child: Text("DONE",style: GoogleFonts.lato(color: Colors.blue,fontSize:  MediaQuery.of(context).size.height*.023,),)),
+              )),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -107,7 +114,7 @@ class _NewAddressState extends State<NewAddress> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            height: MediaQuery.of(context).size.height*.08,
+                            height: MediaQuery.of(context).size.height*.09,
                             width: MediaQuery.of(context).size.width*.32,
                             color: Colors.white,
                             child:  Column(
@@ -123,8 +130,8 @@ class _NewAddressState extends State<NewAddress> {
                             ),
                           ),
                           Container(
-                            height: MediaQuery.of(context).size.height*.08,
-                            width: MediaQuery.of(context).size.width*.32,
+                            height: MediaQuery.of(context).size.height*.09,
+                            width: MediaQuery.of(context).size.width*.35,
                             color: Colors.white,
                             child:  Column(
                               mainAxisAlignment: MainAxisAlignment.start,

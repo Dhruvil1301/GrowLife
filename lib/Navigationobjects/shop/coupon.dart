@@ -15,6 +15,7 @@ class _CouponState extends State<Coupon> {
       appBar:   AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+
         title: Row(
           children: [
             InkWell(

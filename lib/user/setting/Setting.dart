@@ -1,6 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:growlife/pages/notification.dart';
 import 'package:growlife/user/setting/help.dart';
 import 'package:growlife/user/setting/invite_a_friend.dart';
 import 'package:growlife/user/profile.dart';
@@ -20,6 +21,7 @@ class _SettingState extends State<Setting> {
       appBar:  AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(
@@ -38,22 +40,27 @@ class _SettingState extends State<Setting> {
         padding:  EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*.05 ,horizontal: MediaQuery.of(context).size.height*.02 ),
         child: Column(
           children: [
-            Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border:Border.all(
-                      width: 2,
-                      color: Colors.black
-                    )
-                  ),
-                    child: Icon(Icons.person,color:Colors.black,size:MediaQuery.of(context).size.height*.035,)),
-                SizedBox(width:MediaQuery.of(context).size.height*.015 ,),
-                Text("Account Center",style: GoogleFonts.lato(color: Colors.black,fontSize:MediaQuery.of(context).size.height*.027 ),),
-                SizedBox(width:MediaQuery.of(context).size.height*.15 ,),
-                Icon(Icons.arrow_forward_ios_outlined,color: Colors.black,size:MediaQuery.of(context).size.height*.025)
-              ],
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile()));
+              },
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border:Border.all(
+                        width: 2,
+                        color: Colors.black
+                      )
+                    ),
+                      child: Icon(Icons.person,color:Colors.black,size:MediaQuery.of(context).size.height*.035,)),
+                  SizedBox(width:MediaQuery.of(context).size.height*.015 ,),
+                  Text("Account Center",style: GoogleFonts.lato(color: Colors.black,fontSize:MediaQuery.of(context).size.height*.027 ),),
+                  SizedBox(width:MediaQuery.of(context).size.height*.15 ,),
+                  Icon(Icons.arrow_forward_ios_outlined,color: Colors.black,size:MediaQuery.of(context).size.height*.025)
+                ],
+              ),
             ),
             SizedBox(height:MediaQuery.of(context).size.height*.05 ,),
             InkWell(
@@ -71,14 +78,19 @@ class _SettingState extends State<Setting> {
               ),
             ),
             SizedBox(height:MediaQuery.of(context).size.height*.05 ,),
-            Row(
-              children: [
-                Icon(Icons.notifications_none_rounded,color:Colors.black,size:MediaQuery.of(context).size.height*.035,),
-                SizedBox(width:MediaQuery.of(context).size.height*.015 ,),
-                Text("Notification",style: GoogleFonts.lato(color: Colors.black,fontSize:MediaQuery.of(context).size.height*.027 ),),
-                SizedBox(width:MediaQuery.of(context).size.height*.2005 ,),
-                Icon(Icons.arrow_forward_ios_outlined,color: Colors.black,size:MediaQuery.of(context).size.height*.025)
-              ],
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
+              },
+              child: Row(
+                children: [
+                  Icon(Icons.notifications_none_rounded,color:Colors.black,size:MediaQuery.of(context).size.height*.035,),
+                  SizedBox(width:MediaQuery.of(context).size.height*.015 ,),
+                  Text("Notification",style: GoogleFonts.lato(color: Colors.black,fontSize:MediaQuery.of(context).size.height*.027 ),),
+                  SizedBox(width:MediaQuery.of(context).size.height*.2005 ,),
+                  Icon(Icons.arrow_forward_ios_outlined,color: Colors.black,size:MediaQuery.of(context).size.height*.025)
+                ],
+              ),
             ),
             SizedBox(height:MediaQuery.of(context).size.height*.05 ,),
             Row(

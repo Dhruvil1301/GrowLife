@@ -55,7 +55,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
               child: Center(
                 child: InkWell(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Tracking()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Tracking()));
                  },
                   child: Container(
                     height:MediaQuery.of(context).size.height*.055 ,
@@ -94,6 +94,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
       appBar:   AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(
@@ -137,6 +138,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   onTap: (){
                     changeImage();
                     _showDialog();
+
 
                   },
                   child: Container(

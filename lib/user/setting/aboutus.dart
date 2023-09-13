@@ -24,6 +24,7 @@ class _AboutUsState extends State<AboutUs> {
       appBar:  AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(

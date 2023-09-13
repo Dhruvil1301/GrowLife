@@ -48,6 +48,9 @@ dependencies:
   photo_manager: ^2.7.1
   permission_handler: ^10.4.3
   file_picker: ^5.5.0
+  percent_indicator: ^4.2.3
+  fl_chart: ^0.63.0
+  syncfusion_flutter_charts: ^22.2.12
 
 
 dev_dependencies:
@@ -165,6 +168,48 @@ flutter:
     - assets/notification/specialoffer.png
     - assets/notification/thankyou.png
     - assets/images/ShopIcon.png
+    - assets/Icon/Shop.png
+    - assets/Icon/Shopwhite.png
+    - assets/Icon/Addwhite.png
+    - assets/Icon/Add.png
+    - assets/Icon/Event.png
+    - assets/Icon/Eventwhite.png
+    - assets/Icon/Home.png
+    - assets/Icon/Homewhite.png
+    - assets/dashboard/drawerright.png
+    - assets/dashboard/welcome.png
+    - assets/dashboard/expences.png
+    - assets/dashboard/revenue.png
+    - assets/dashboard/sales.png
+    - assets/dashboard/usersicon.png
+    - assets/dashboard/avadevis.png
+    - assets/dashboard/account.png
+    - assets/dashboard/accountgrey.png
+    - assets/dashboard/menu.png
+    - assets/dashboard/menugrey.png
+    - assets/dashboard/msg.png
+    - assets/dashboard/msggrey.png
+    - assets/dashboard/notification.png
+    - assets/dashboard/notificationgrey.png
+    - assets/dashboard/Graph.png
+    - assets/dashboard/james.png
+    - assets/images/applelogo.png
+    - assets/images/facebooklogo.png
+    - assets/images/googlelogo.png
+    - assets/dashboard/drawerleft.png
+    - assets/dashboard/analytics.png
+    - assets/dashboard/analyticswhite.png
+    - assets/dashboard/Event.png
+    - assets/dashboard/Eventwhite.png
+    - assets/dashboard/member.png
+    - assets/dashboard/memberwhite.png
+    - assets/dashboard/product.png
+    - assets/dashboard/productwhite.png
+    - assets/dashboard/menuwhite.png
+    - assets/dashboard/logouticon.png
+    - assets/dashboard/arrowdown.png
+    - assets/dashboard/feedback.png
+    - assets/dashboard/setting.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -27,6 +27,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
       appBar:  AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(

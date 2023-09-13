@@ -35,13 +35,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    SizedBox(height:  MediaQuery.of(context).size.height*.015),
-                    Container(
-                        child: Image.asset("assets/images/Growlife.png",height:  MediaQuery.of(context).size.height*.10,width:  MediaQuery.of(context).size.width*.25,fit: BoxFit.fill,)),
+                    SizedBox(height:  MediaQuery.of(context).size.height*.01),
+                    Align(
+                      alignment: AlignmentDirectional.topStart,
+                      child: Row(
+                        children: [
+                          Container(
+                              child: Image.asset("assets/images/Growlife.png",height:  MediaQuery.of(context).size.height*.05,fit: BoxFit.fill,)),
+                          Image.asset("assets/images/GrowLifeText.png",height:MediaQuery.of(context).size.height*.02 ,)
+                        ],
+                      ),
+                    ),
                     SizedBox(height:  MediaQuery.of(context).size.height*.012),
-                    Text('Sign Up',style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:  MediaQuery.of(context).size.height*.04),),
-                    SizedBox(height:  MediaQuery.of(context).size.height*.016),
-                    Text('Create your new account',style: GoogleFonts.lato(fontSize:  MediaQuery.of(context).size.height*.026),),
+                    Text('Sign Up',style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:  MediaQuery.of(context).size.height*.035),),
+                    SizedBox(height:  MediaQuery.of(context).size.height*.013),
+                    Text('Create your new account',style: GoogleFonts.lato(fontSize:  MediaQuery.of(context).size.height*.024),),
                     SizedBox(height:  MediaQuery.of(context).size.height*.03),
                     Padding(
                       padding:  EdgeInsets.symmetric(horizontal:  MediaQuery.of(context).size.width*.093),
@@ -51,7 +59,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             hintText: "Email",
-                            hintStyle: GoogleFonts.lato(fontSize:  MediaQuery.of(context).size.height*.023,fontWeight: FontWeight.bold),
+                            hintStyle: GoogleFonts.lato(fontSize:  MediaQuery.of(context).size.height*.021,fontWeight: FontWeight.bold),
+                            contentPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.02),
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
                                   color: Colors.black
@@ -76,7 +85,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller:usernameController ,
                         decoration: InputDecoration(
                           hintText: "Username",
-                          hintStyle: GoogleFonts.lato(fontSize:  MediaQuery.of(context).size.height*.023,fontWeight: FontWeight.bold),
+                          hintStyle: GoogleFonts.lato(fontSize:  MediaQuery.of(context).size.height*.021,fontWeight: FontWeight.bold),
+                          contentPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.02),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
                                 color: Colors.black
@@ -102,7 +112,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         obscureText: !_showPassword,
                         decoration: InputDecoration(
                           hintText: 'Password',
-                          hintStyle: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:  MediaQuery.of(context).size.height*.023),
+                          hintStyle: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:  MediaQuery.of(context).size.height*.021),
+                            contentPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.02),
                           suffixIcon: IconButton(
                             icon: Icon(_showPassword ? Icons.visibility : Icons.visibility_off),
                             onPressed: () {
@@ -140,7 +151,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         decoration: InputDecoration(
 
                             hintText: "Confirm Password",
-                            hintStyle: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:  MediaQuery.of(context).size.height*.023),
+                            hintStyle: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:  MediaQuery.of(context).size.height*.021),
+                            contentPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.02),
                             suffixIcon: IconButton(
                               icon: Icon(_showConfirmPassword ? Icons.visibility : Icons.visibility_off),
                               onPressed: () {
@@ -167,7 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         },
                       ),
                     ),
-                    SizedBox(height:  MediaQuery.of(context).size.height*.018),
+                    SizedBox(height:  MediaQuery.of(context).size.height*.025),
                     InkWell(
                       onTap: (){
                             if(_formKey.currentState!.validate()){
@@ -176,8 +188,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       }
                       },
                       child: Container(
-                        height:  MediaQuery.of(context).size.height*.07,
-                        width:   MediaQuery.of(context).size.width*.34,
+                        height:  MediaQuery.of(context).size.height*.06,
+                        width:   MediaQuery.of(context).size.width*.45,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white,
@@ -194,20 +206,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ],
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
+                        child: Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.025),
+                          child: Row(
 
-                            Padding(
-                              padding: EdgeInsets.only(left: MediaQuery.of(context).size.height*.008),
-                              child: Text("SIGN UP",style: GoogleFonts.lato(color:  Color(0xFF1F588E),fontSize:  MediaQuery.of(context).size.height*.025,fontWeight: FontWeight.bold),
+                            children: [
+                              Text("SIGN UP",style: GoogleFonts.lato(color:  Color(0xFF1F588E),fontSize:  MediaQuery.of(context).size.height*.025,fontWeight: FontWeight.bold),
                               ),
-                            ),
-                            Padding(
-                              padding:  EdgeInsets.only(right:  MediaQuery.of(context).size.width*.015),
-                              child: Icon(Icons.arrow_forward,color: Color(0xFF1F588E),size:  MediaQuery.of(context).size.height*.04),
-                            )
-                          ],
+                              SizedBox(width: MediaQuery.of(context).size.width*.03,),
+                              Icon(Icons.arrow_forward,color: Color(0xFF1F588E),size:  MediaQuery.of(context).size.height*.04),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -217,7 +226,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          height: MediaQuery.of(context).size.height*.001,
+                          height: MediaQuery.of(context).size.height*.0015,
                           width:  MediaQuery.of(context).size.width*.16,
                           color: Colors.black,
                         ),
@@ -225,15 +234,97 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Text('or continue with',style: GoogleFonts.lato(fontSize:  MediaQuery.of(context).size.height*.022),),
                         SizedBox(width: MediaQuery.of(context).size.height*.02),
                         Container(
-                          height:  MediaQuery.of(context).size.height*.001,
+                          height:  MediaQuery.of(context).size.height*.0015,
                           width:  MediaQuery.of(context).size.width*.16,
                           color: Colors.black,
                         ),
                       ],
                     ),
-                    SizedBox(height:  MediaQuery.of(context).size.height*.013),
-                    Image.asset("assets/images/Icons.png",height:  MediaQuery.of(context).size.height*.035,width:  MediaQuery.of(context).size.width*.4),
-                    SizedBox(height:  MediaQuery.of(context).size.height*.005),
+                    SizedBox(height:  MediaQuery.of(context).size.height*.016),
+                    Container(
+                      height:  MediaQuery.of(context).size.height*.05,
+                      width:   MediaQuery.of(context).size.width*.75,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.9),
+                            spreadRadius: 0,
+                            blurRadius: 5,
+                            offset: Offset(0, 2), // changes the position of the shadow
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.03 ),
+                        child: Row(
+                          children: [
+                               Image.asset("assets/images/googlelogo.png",height:MediaQuery.of(context).size.height*.03 ,),
+                               SizedBox(width:MediaQuery.of(context).size.width*.05  ,),
+                               Text("Sign up with Google",style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.height*.023 ),)
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height:  MediaQuery.of(context).size.height*.01),
+                    Container(
+                      height:  MediaQuery.of(context).size.height*.05,
+                      width:   MediaQuery.of(context).size.width*.75,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.9),
+                            spreadRadius: 0,
+                            blurRadius: 5,
+                            offset: Offset(0, 2), // changes the position of the shadow
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.03 ),
+                        child: Row(
+                          children: [
+                            Image.asset("assets/images/facebooklogo.png",height:MediaQuery.of(context).size.height*.03 ,),
+                            SizedBox(width:MediaQuery.of(context).size.width*.05  ,),
+                            Text("Sign up with Facebook",style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.height*.023 ),)
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height:  MediaQuery.of(context).size.height*.01),
+                    Container(
+                      height:  MediaQuery.of(context).size.height*.05,
+                      width:   MediaQuery.of(context).size.width*.75,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.9),
+                            spreadRadius: 0,
+                            blurRadius: 5,
+                            offset: Offset(0, 2), // changes the position of the shadow
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.03 ),
+                        child: Row(
+                          children: [
+                            Image.asset("assets/images/applelogo.png",height:MediaQuery.of(context).size.height*.03 ,),
+                            SizedBox(width:MediaQuery.of(context).size.width*.05  ,),
+                            Text("Sign up with Apple",style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.height*.023 ),)
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height:  MediaQuery.of(context).size.height*.01),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,

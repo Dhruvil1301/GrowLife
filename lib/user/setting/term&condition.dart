@@ -24,6 +24,7 @@ class _TermandConditionState extends State<TermandCondition> {
       appBar:  AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(

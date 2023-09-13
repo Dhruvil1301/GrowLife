@@ -2,6 +2,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/Navigationobjects/shop/calling.dart';
+import 'package:growlife/Navigationobjects/shop/myorder.dart';
 import 'package:growlife/Navigationobjects/shop/paymentmethod.dart';
 class Tracking extends StatefulWidget {
   const Tracking({Key? key}) : super(key: key);
@@ -17,11 +18,12 @@ class _TrackingState extends State<Tracking> {
       appBar:   AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(
                 onTap:(){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PaymentMethod()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MyOrder()));
                 },
                 child: Icon(Icons.arrow_back,color: Colors.black,size:  MediaQuery.of(context).size.height*.035,)),
             SizedBox(width:  MediaQuery.of(context).size.height*.030,),

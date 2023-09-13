@@ -25,6 +25,7 @@ class _DonationState extends State<Donation> {
       appBar:   AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(
@@ -43,8 +44,8 @@ class _DonationState extends State<Donation> {
             Center(child: Image.asset("assets/events/donation.png",height:MediaQuery.of(context).size.height*.18,width: MediaQuery.of(context).size.width*.6,)),
             SizedBox(height:MediaQuery.of(context).size.height*.03,),
             Container(
-              height: double.infinity,
-              width:  double.infinity,
+              height: MediaQuery.of(context).size.height*.9,
+              width: MediaQuery.of(context).size.width*1,
               decoration: BoxDecoration(
                   color: Colors.white,
                   boxShadow: [

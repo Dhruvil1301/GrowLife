@@ -31,7 +31,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       ..initialize().then((_) {
         setState(() {});
       })
-      ..setLooping(true)
+      ..setLooping(false)
       ..play();
   }
 
@@ -41,6 +41,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
+        elevation: 1,
         leading: IconButton(
           icon: Icon(EvaIcons.arrowBack,color: Colors.black,size: MediaQuery.of(context).size.height*.035 ,),
           onPressed: (){
@@ -205,7 +206,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   SizedBox(height: MediaQuery.of(context).size.height*.02,),
                   Row(
                     children: [
-                      Icon(Icons.person_outline_outlined,color: Colors.black,size: MediaQuery.of(context).size.height*.032,),
+                      Icon(Icons.people,color: Colors.black,size: MediaQuery.of(context).size.height*.032,),
                       Padding(
                         padding:  EdgeInsets.only(left: MediaQuery.of(context).size.height*.015,right: MediaQuery.of(context).size.width*.435),
                         child: Text("Tag People",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.026,color: Colors.black),),

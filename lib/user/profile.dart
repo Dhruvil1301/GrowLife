@@ -8,6 +8,7 @@ import "package:provider/provider.dart";
 
 import "../main.dart";
 class Profile extends StatefulWidget {
+
   const Profile({Key? key}) : super(key: key);
 
   @override
@@ -41,6 +42,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(
@@ -50,16 +52,21 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 child: Icon(Icons.arrow_back,color: Colors.black,size:  MediaQuery.of(context).size.height*.035,)),
             SizedBox(width:  MediaQuery.of(context).size.height*.030,),
             Text("Profile",style: GoogleFonts.lato(color: Colors.black,fontSize:  MediaQuery.of(context).size.height*.03,),),
-            SizedBox(width:  MediaQuery.of(context).size.height*.23,),
-            InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Setting()));
-              },
-                child: Icon(Icons.settings,size: MediaQuery.of(context).size.height*.035 ,color: Colors.black,))
+
 
 
           ],
         ),
+        actions: [
+          InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Setting()));
+              },
+              child: Padding(
+                padding:  EdgeInsets.only(right: 10),
+                child: Icon(Icons.settings,size: MediaQuery.of(context).size.height*.035 ,color: Colors.black,),
+              ))
+        ],
       ),
       body: SingleChildScrollView(
         child: Stack(
@@ -178,23 +185,27 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                     color: Colors.black,
                                   ),
                                   Expanded(
-                                    child: TabBarView(
-                                      controller: _tabController,
-                                      children: [
-                                        // Widgets for Tab 1 content
-                                       Column(
-                                         children: [
-                                           for(int i=0;i<5;i++)
-                                           Padding(
-                                             padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.height*.01,vertical: MediaQuery.of(context).size.height*.01 ),
-                                             child: i==0||i==3?Image.asset("assets/images/tbvideo.png"):i==1||i==4?Image.asset("assets/images/tbvideo2.png"):Image.asset("assets/images/tbvideo3.png")
-                                           ),
-                                         ],
-                                       ),
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      child: TabBarView(
+                                        controller: _tabController,
+                                        children: [
+                                          // Widgets for Tab 1 content
+                                         Column(
+                                           children: [
+                                             for(int i=0;i<4;i++)
+                                             Padding(
+                                               padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.height*.01,vertical: MediaQuery.of(context).size.height*.01 ),
+                                               child: i==0||i==3?Image.asset("assets/images/tbvideo.png"):i==1||i==4?Image.asset("assets/images/tbvideo2.png"):Image.asset("assets/images/tbvideo3.png")
+                                             ),
+                                           ],
+                                         ),
 
-                                        // Widgets for Tab 2 content
-                                        Center(child: Text('Tab 2 Content')),
-                                      ],
+                                          // Widgets for Tab 2 content
+                                          Center(child: Text('Tab 2 Content')),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],

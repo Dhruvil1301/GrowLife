@@ -18,6 +18,7 @@ class _OrderSummaryState extends State<OrderSummary> {
       appBar:   AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
+        elevation: 1,
         title: Row(
           children: [
             InkWell(
