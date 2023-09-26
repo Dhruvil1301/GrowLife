@@ -1,6 +1,6 @@
 import 'dart:ui';
-import 'package:growlife/src/Common/View/Navigationobjects/Events/Donation.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/Events/registration.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/Events/Donation.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/Events/registration.dart';
 
 import 'events.dart';
 import 'package:flutter/material.dart';

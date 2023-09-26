@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/src/Common/Providers/providerall.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/plants.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/shopping.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/plants.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/shopping.dart';
 import 'package:provider/provider.dart';
 
 
@@ -59,7 +59,7 @@ class _WishlistPageState extends State<WishlistPage> {
                        border: OutlineInputBorder(
                            borderRadius: BorderRadius.circular(15)
                        ),
-
+                         contentPadding: EdgeInsets.all(MediaQuery.of(context).size.height*.01)
                      ),
                    ),
                  ),
@@ -106,48 +106,70 @@ class _WishlistItemContainerState extends State<WishlistItemContainer> {
           padding:  EdgeInsets.symmetric(horizontal: 10,vertical: 10),
           child: Column(
             children: [
-              Container(
-                width: MediaQuery.of(context).size.height * 0.20,
-                height: MediaQuery.of(context).size.height * 0.33,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      blurRadius: 10.0,
-                      spreadRadius: 2.0,
+              Stack(
+                children: [
+                  Container(
+                    width:  MediaQuery.of(context).size.width*.432,
+                    height:  MediaQuery.of(context).size.height*.32,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 10.0,
+                          spreadRadius: 2.0,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    child: Stack(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.height * 0.022,
-                            right: MediaQuery.of(context).size.height * 0.001,
-                            top: MediaQuery.of(context).size.height * 0.02,
-                          ),
-                          child: Image.asset(
-                            widget.item.imagePath,
-                            height: MediaQuery.of(context).size.height * 0.18,
-                            width: MediaQuery.of(context).size.height * 0.14,
+                        Positioned(
+                          top:MediaQuery.of(context).size.height*.018 ,
+                          left: MediaQuery.of(context).size.width*.062 ,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                      widget.item.imagePath,
+                                      height: MediaQuery.of(context).size.height * 0.18,
+                                      width: MediaQuery.of(context).size.height * 0.14,
+                                    ),
+
+                              Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(widget.item.name, style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height * 0.025)),
+                                    Text(widget.item.price, style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height * 0.025, fontWeight: FontWeight.bold)),
+                                    SizedBox(height: MediaQuery.of(context).size.height * 0.005),
+                                    Container(
+                                      width: MediaQuery.of(context).size.height * 0.15,
+                                      height: MediaQuery.of(context).size.height * 0.04,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        border: Border.all(
+                                          color: Color(0xFF327E47),
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                      child: Center(child: Text("Buy Now", style: GoogleFonts.lato(color: Color(0xFF327E47), fontSize: MediaQuery.of(context).size.height * 0.025))),
+                                    ),
+                                  ],
+                                ),
+
+                            ],
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).size.height * 0.11,
-                          ),
+                        Positioned(
+                          right: 0,
+                          top:MediaQuery.of(context).size.height*.019  ,
                           child: CircleAvatar(
                             radius: MediaQuery.of(context).size.height * 0.015,
                             backgroundColor: Colors.blueGrey.withOpacity(0.2),
                             child: Icon(
-                               Icons.favorite_outlined, // Change favorite icon based on the isFavorite property
+                              Icons.favorite_outlined, // Change favorite icon based on the isFavorite property
                               color:  Colors.red , // Change color based on the isFavorite property
                               size: MediaQuery.of(context).size.height * 0.02,
                             ),
@@ -155,34 +177,8 @@ class _WishlistItemContainerState extends State<WishlistItemContainer> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.height * 0.025,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(widget.item.name, style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height * 0.025)),
-                          Text(widget.item.price, style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height * 0.025, fontWeight: FontWeight.bold)),
-                          SizedBox(height: MediaQuery.of(context).size.height * 0.005),
-                          Container(
-                            width: MediaQuery.of(context).size.height * 0.15,
-                            height: MediaQuery.of(context).size.height * 0.04,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                color: Color(0xFF327E47),
-                                width: 1.0,
-                              ),
-                            ),
-                            child: Center(child: Text("Buy Now", style: GoogleFonts.lato(color: Color(0xFF327E47), fontSize: MediaQuery.of(context).size.height * 0.025))),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),

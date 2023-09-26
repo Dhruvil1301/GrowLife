@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/edit_address.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/paymentmethod.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/product_detail.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/edit_address.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/paymentmethod.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/product_detail.dart';
 class OrderSummary extends StatefulWidget {
   const OrderSummary({Key? key}) : super(key: key);
 

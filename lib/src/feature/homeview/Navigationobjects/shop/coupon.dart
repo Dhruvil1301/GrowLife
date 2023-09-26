@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/shopping.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/shopping.dart';
 class Coupon extends StatefulWidget {
   const Coupon({Key? key}) : super(key: key);
 

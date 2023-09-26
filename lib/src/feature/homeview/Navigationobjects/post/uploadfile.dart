@@ -4,7 +4,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/src/Common/Providers/providerall.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/post/addDetail.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/post/addDetail.dart';
+
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 class VideoGridView extends StatefulWidget {

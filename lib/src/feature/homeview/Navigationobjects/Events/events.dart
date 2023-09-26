@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/Events/eventdetails.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/Events/eventdetails.dart';
+
 
 import '../../../../feature/homeview/homescreen.dart';
 class Events extends StatefulWidget {

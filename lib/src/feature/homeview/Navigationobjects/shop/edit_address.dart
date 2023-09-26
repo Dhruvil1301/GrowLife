@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/ordersummary.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/product_detail.dart';
-class NewAddress extends StatefulWidget {
-  const NewAddress({Key? key}) : super(key: key);
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/ordersummary.dart';
+
+class EditAddress extends StatefulWidget {
+  const EditAddress({Key? key}) : super(key: key);
 
   @override
-  State<NewAddress> createState() => _NewAddressState();
+  State<EditAddress> createState() => _EditAddressState();
 }
 
-class _NewAddressState extends State<NewAddress> {
+class _EditAddressState extends State<EditAddress> {
   TextEditingController buildingController = TextEditingController();
   TextEditingController areaController = TextEditingController();
   TextEditingController pincodeController = TextEditingController();
   TextEditingController cityController = TextEditingController();
-  TextEditingController stateController = TextEditingController();
+   TextEditingController stateController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   @override
@@ -29,23 +29,22 @@ class _NewAddressState extends State<NewAddress> {
           children: [
             InkWell(
                 onTap:(){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductDetail()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>OrderSummary()));
                 },
                 child: Icon(Icons.arrow_back,color: Colors.black,size:  MediaQuery.of(context).size.height*.035,)),
             SizedBox(width:  MediaQuery.of(context).size.height*.030,),
-            Text("New Address",style: GoogleFonts.lato(color: Colors.black,fontSize:  MediaQuery.of(context).size.height*.027,fontWeight: FontWeight.bold),),
-            SizedBox(width:  MediaQuery.of(context).size.height*.11,),
+            Text("Edit Address",style: GoogleFonts.lato(color: Colors.black,fontSize:  MediaQuery.of(context).size.height*.027,fontWeight: FontWeight.bold),),
 
           ],
         ),
         actions: [
           InkWell(
-              onTap: (){
+              onTap:(){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>OrderSummary()));
               },
               child: Padding(
-                padding:  EdgeInsets.only(right: 10),
-                child: Center(child: Text("DONE",style: GoogleFonts.lato(color: Colors.blue,fontSize:  MediaQuery.of(context).size.height*.023,),)),
+                padding: EdgeInsets.only(right: 10),
+                child: Center(child: Text("UPDATE",style: GoogleFonts.lato(color: Color(0xFF268E15),fontSize:  MediaQuery.of(context).size.height*.023,),)),
               )),
         ],
       ),
@@ -131,7 +130,7 @@ class _NewAddressState extends State<NewAddress> {
                           ),
                           Container(
                             height: MediaQuery.of(context).size.height*.09,
-                            width: MediaQuery.of(context).size.width*.35,
+                            width: MediaQuery.of(context).size.width*.32,
                             color: Colors.white,
                             child:  Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -158,8 +157,8 @@ class _NewAddressState extends State<NewAddress> {
                         style: GoogleFonts.lato(),
                         controller: buildingController,
                         decoration: InputDecoration(
-                            hintStyle: GoogleFonts.lato(),
-                            hintText: "Land Mark (optional)"
+                          hintStyle: GoogleFonts.lato(),
+                          hintText: "Land Mark (optional)"
                         ),
                       )
                     ],
@@ -167,7 +166,7 @@ class _NewAddressState extends State<NewAddress> {
 
 
 
-                ],
+                    ],
               ),
             ),
             SizedBox(height:  MediaQuery.of(context).size.height*.025,),

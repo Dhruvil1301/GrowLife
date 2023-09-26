@@ -1,13 +1,9 @@
-
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:growlife/main.dart';
 import 'package:growlife/src/Common/Providers/providerall.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -483,7 +479,7 @@ class _MenuState extends State<Menu> {
           body: SingleChildScrollView(
 
             child: Padding(
-              padding:  EdgeInsets.symmetric(vertical:MediaQuery.of(context).size.height*.02 ),
+              padding:  EdgeInsets.symmetric(vertical:MediaQuery.of(context).size.height*.02, ),
               child: Column(
                 children: [
                   Row(
@@ -1010,7 +1006,7 @@ class _MenuState extends State<Menu> {
   }
 
 }
-class Dashboard extends StatelessWidget {
+class MobileDashboard extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool isDrawerOpen = false;
   @override
@@ -1099,75 +1095,889 @@ class Dashboard extends StatelessWidget {
     );
   }
 }
-
-
-class SalesData {
-  final double timeInHours;
-  final double sales;
-
-  SalesData(this.timeInHours, this.sales);
+class DesktopDashboard extends StatefulWidget {
+  @override
+  State<DesktopDashboard> createState() => _DesktopDashboardState();
 }
 
-class MultiLineGraph extends StatelessWidget {
+class _DesktopDashboardState extends State<DesktopDashboard> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: 300,
-        width: 300,
-        child: LineChart(
-          LineChartData(
-            gridData: FlGridData(show: false),
-            titlesData: FlTitlesData(show: false),
-            borderData: FlBorderData(
-              show: false,
-              border: Border.all(
-                color: Color(0xff37434d),
-                width: 1,
-              ),
-            ),
-            minX: 21,
-            maxX: 27, // Adjust the maximum x-axis value as needed
-            minY: 0,
-            maxY: 12, // Adjust the maximum y-axis value as needed
-            lineBarsData: [
-              // Data for this month
-              LineChartBarData(
-                spots: [
-                  FlSpot(21, 0),
-                  FlSpot(22, 1),
-                  FlSpot(21, 2),
-                  FlSpot(23, 4),
-                  FlSpot(24, 8),
-                  FlSpot(22, 6),
-                  FlSpot(26, 2),
-                ],
-                isCurved: true,
-                color: Colors.blue, // Line color for this month
-                dotData: FlDotData(show: false),
-                belowBarData: BarAreaData(show: false),
-              ),
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Padding(
+        padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*.02 ,bottom:MediaQuery.of(context).size.height*.02 , left: MediaQuery.of(context).size.width*.01),
+           child: Row(
+             mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Image.asset("assets/images/Growlife.png",height: MediaQuery.of(context).size.width*.03,),
+                        SizedBox(width: MediaQuery.of(context).size.width*.01 ,),
+                        Text("GROWLIFE",style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:MediaQuery.of(context).size.width*.018 ),),
+                      ],
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height*.02,),
 
-              // Data for last month
-              LineChartBarData(
-                spots: [
-                  FlSpot(22, 1),
-                  FlSpot(21, 2),
-                  FlSpot(24, 3),
-                  FlSpot(23, 3),
-                  FlSpot(24, 2),
-                  FlSpot(25, 2),
-                  FlSpot(26, 1),
-                ],
-                isCurved: true,
-                color: Colors.red, // Line color for last month
-                dotData: FlDotData(show: false),
-                belowBarData: BarAreaData(show: false),
-              ),
-            ],
-          ),
-        ),
+
+                         Padding(
+                          padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width*.02),
+                          child: Container(
+                            height:MediaQuery.of(context).size.height*1.63 ,
+                            width: MediaQuery.of(context).size.width*.15,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: Colors.black38,
+                                width: .5
+                              )
+                            ),
+                            child: Padding(
+                              padding:  EdgeInsets.symmetric(vertical:MediaQuery.of(context).size.height*.03),
+                              child: Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: (){
+
+                                    },
+                                    child: Align(
+                                      alignment: AlignmentDirectional.center,
+                                      child: Container(
+                                        height:MediaQuery.of(context).size.height*.06,
+                                        width:MediaQuery.of(context).size.width*.132 ,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Color(0xFF6683ED) ,
+                                        ),
+                                        child: Padding(
+                                          padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.01),
+                                          child: Center(
+                                            child: Row(
+                                              children: [
+                                                Image.asset("assets/dashboard/menuwhite.png",height: MediaQuery.of(context).size.height*.03,),
+                                                SizedBox(width: MediaQuery.of(context).size.width*.01,),
+                                                Text("Dashboard",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.014 ,color: Colors.white ,fontWeight: FontWeight.bold),)
+                                              ],
+                                            ),
+                                          ),
+                                        ) ,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height:MediaQuery.of(context).size.height*.04 ,),
+                                  GestureDetector(
+                                    onTap: (){
+
+                                    },
+                                    child: Align(
+                                      alignment: AlignmentDirectional.topStart,
+                                      child: Container(
+                                        height:MediaQuery.of(context).size.height*.06,
+                                        color:  Colors.white,
+                                        child: Padding(
+                                          padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.018),
+                                          child: Row(
+                                            children: [
+                                              Image.asset("assets/dashboard/member.png",height: MediaQuery.of(context).size.height*.03),
+                                              SizedBox(width: MediaQuery.of(context).size.width*.01,),
+                                              Text("Users",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.014,color: Colors.black54,fontWeight: FontWeight.bold),)
+                                            ],
+                                          ),
+                                        ) ,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height:MediaQuery.of(context).size.height*.04 ,),
+                                  GestureDetector(
+                                    onTap: (){
+
+                                    },
+                                    child: Align(
+                                      alignment: AlignmentDirectional.topStart,
+                                      child: Container(
+                                        height:MediaQuery.of(context).size.height*.06,
+                                        color: Colors.white,
+                                        child: Padding(
+                                          padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.018),
+                                          child: Row(
+                                            children: [
+                                              Image.asset("assets/dashboard/Event.png",height: MediaQuery.of(context).size.height*.03),
+                                              SizedBox(width: MediaQuery.of(context).size.width*.01,),
+                                              Text("Events",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.014,color:Colors.black54,fontWeight: FontWeight.bold),)
+                                            ],
+                                          ),
+                                        ) ,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height:MediaQuery.of(context).size.height*.04 ,),
+                                  GestureDetector(
+                                    onTap: (){
+
+                                    },
+                                    child: Align(
+                                      alignment: AlignmentDirectional.topStart,
+                                      child: Container(
+                                        height:MediaQuery.of(context).size.height*.06,
+                                        color: Colors.white,
+                                        child: Padding(
+                                          padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.018),
+                                          child: Row(
+                                            children: [
+                                              Image.asset("assets/dashboard/product.png",height: MediaQuery.of(context).size.height*.03),
+                                              SizedBox(width: MediaQuery.of(context).size.width*.01,),
+                                              Text("Products",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.014,color: Colors.black54,fontWeight: FontWeight.bold),)
+                                            ],
+                                          ),
+                                        ) ,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height:MediaQuery.of(context).size.height*.04 ,),
+                                  GestureDetector(
+                                    onTap: (){
+
+                                    },
+                                    child: Align(
+                                      alignment: AlignmentDirectional.topStart,
+                                      child: Container(
+                                        height:MediaQuery.of(context).size.height*.06,
+                                        color:  Colors.white,
+                                        child: Padding(
+                                          padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.018),
+                                          child: Row(
+                                            children: [
+                                              Image.asset("assets/dashboard/analytics.png",height: MediaQuery.of(context).size.height*.03),
+                                              SizedBox(width: MediaQuery.of(context).size.width*.01,),
+                                              Text("Analytics",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.014,color:Colors.black54,fontWeight: FontWeight.bold),)
+                                            ],
+                                          ),
+                                        ) ,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height:MediaQuery.of(context).size.height*.04 ,),
+                                  GestureDetector(
+                                    onTap: (){
+
+                                    },
+                                    child: Align(
+                                      alignment: AlignmentDirectional.topStart,
+                                      child: Container(
+                                        height:MediaQuery.of(context).size.height*.06,
+                                        color:  Colors.white,
+                                        child: Padding(
+                                          padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.018),
+                                          child: Row(
+                                            children: [
+                                              Image.asset("assets/dashboard/member.png",height: MediaQuery.of(context).size.height*.03),
+                                              SizedBox(width: MediaQuery.of(context).size.width*.01,),
+                                              Text("Members",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.014,color:Colors.black54,fontWeight: FontWeight.bold),)
+                                            ],
+                                          ),
+                                        ) ,
+                                      ),
+                                    ),
+                                  ),
+                                   Column(
+                                          children: [
+                                            SizedBox(height:MediaQuery.of(context).size.height*.04 ,),
+                                            GestureDetector(
+                                              onTap: (){
+
+                                              },
+                                              child: Align(
+                                                alignment: AlignmentDirectional.topStart,
+                                                child: Container(
+                                                  height:MediaQuery.of(context).size.height*.06,
+                                                  color:  Colors.white,
+                                                  child: Padding(
+                                                    padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.018),
+                                                    child: Row(
+                                                      children: [
+                                                        Image.asset("assets/dashboard/feedback.png",height: MediaQuery.of(context).size.height*.03),
+                                                        SizedBox(width: MediaQuery.of(context).size.width*.01,),
+                                                        Text("Feedback",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.014,color:Colors.black54,fontWeight: FontWeight.bold),)
+                                                      ],
+                                                    ),
+                                                  ) ,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(height:MediaQuery.of(context).size.height*.04 ,),
+                                            GestureDetector(
+                                              onTap: (){
+
+                                              },
+                                              child: Align(
+                                                alignment: AlignmentDirectional.topStart,
+                                                child: Container(
+                                                  height:MediaQuery.of(context).size.height*.06,
+                                                  color:  Colors.white,
+                                                  child: Padding(
+                                                    padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.018),
+                                                    child: Row(
+                                                      children: [
+                                                        Image.asset("assets/dashboard/setting.png",height: MediaQuery.of(context).size.height*.03),
+                                                        SizedBox(width: MediaQuery.of(context).size.width*.01,),
+                                                        Text("Setting",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.014,color:Colors.black54,fontWeight: FontWeight.bold),)
+                                                      ],
+                                                    ),
+                                                  ) ,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(height:MediaQuery.of(context).size.height*.15 ,),
+                                            Align(
+                                              alignment: AlignmentDirectional.topStart,
+                                              child: Container(
+                                                height:MediaQuery.of(context).size.height*.06,
+                                                color:  Colors.white,
+                                                child: Padding(
+                                                  padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.018),
+                                                  child: Row(
+                                                    children: [
+                                                      Text("Teams",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.015,color:Colors.black54,fontWeight: FontWeight.bold),)
+                                                    ],
+                                                  ),
+                                                ) ,
+                                              ),
+                                            ),
+                                            SizedBox(height:MediaQuery.of(context).size.height*.03 ,),
+
+                                            GestureDetector(
+                                              onTap: (){
+
+                                              },
+                                              child: Align(
+                                                alignment: AlignmentDirectional.topStart,
+                                                child: Container(
+                                                  height:MediaQuery.of(context).size.height*.06,
+                                                  color:  Colors.white,
+                                                  child: Padding(
+                                                    padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width*.018),
+                                                    child: Row(
+                                                      children: [
+                                                        Container(
+                                                          height: MediaQuery.of(context).size.height*.02,
+                                                          width: MediaQuery.of(context).size.width*.01,
+                                                          decoration: BoxDecoration(
+                                                              shape: BoxShape.circle,
+                                                              color: Color(0xFF6683ED)
+                                                          ),
+                                                        ),
+                                                        SizedBox(width:MediaQuery.of(context).size.width*.01 ,),
+                                                        Text("Marketing",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.012,color:Colors.black),)
+                                                      ],
+                                                    ),
+                                                  ) ,
+                                                ),
+                                              ),
+                                            ),
+                                            GestureDetector(
+                                              onTap: (){
+
+                                              },
+                                              child: Align(
+                                                alignment: AlignmentDirectional.topStart,
+                                                child: Container(
+                                                  height:MediaQuery.of(context).size.height*.06,
+                                                  color:  Colors.white,
+                                                  child: Padding(
+                                                    padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.018),
+                                                    child: Row(
+                                                      children: [
+                                                        Container(
+                                                          height: MediaQuery.of(context).size.height*.02,
+                                                          width: MediaQuery.of(context).size.width*.01,
+                                                          decoration: BoxDecoration(
+                                                              shape: BoxShape.circle,
+                                                              color:  Color(0xFF68ED66)
+                                                          ),
+                                                        ),
+                                                        SizedBox(width:MediaQuery.of(context).size.width*.01,),
+                                                        Text("Development",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.012,color:Colors.black),)
+                                                      ],
+                                                    ),
+                                                  ) ,
+                                                ),
+                                              ),
+                                            ),
+                                            GestureDetector(
+                                              onTap: (){
+
+                                              },
+                                              child: Align(
+                                                alignment: AlignmentDirectional.topStart,
+                                                child: Container(
+                                                  height:MediaQuery.of(context).size.height*.06,
+                                                  color:  Colors.white,
+                                                  child: Padding(
+                                                    padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.018),
+                                                    child: Row(
+                                                      children: [
+                                                        Container(
+                                                          height: MediaQuery.of(context).size.height*.02,
+                                                          width: MediaQuery.of(context).size.width*.01,
+                                                          decoration: BoxDecoration(
+                                                            shape: BoxShape.circle,
+                                                            color:   Color(0xFFEDC766),
+                                                          ),
+                                                        ),
+                                                        SizedBox(width:MediaQuery.of(context).size.width*.01 ,),
+                                                        Text("Activities & Tasks",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.012,color:Colors.black),)
+                                                      ],
+                                                    ),
+                                                  ) ,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(height:MediaQuery.of(context).size.height*.3 ,),
+                                            GestureDetector(
+                                              onTap: (){
+
+                                              },
+                                              child: Align(
+                                                alignment: AlignmentDirectional.topStart,
+                                                child: Container(
+                                                  height:MediaQuery.of(context).size.height*.06,
+                                                  color:  Colors.white,
+                                                  child: Padding(
+                                                    padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*.018),
+                                                    child: Row(
+                                                      children: [
+                                                        Image.asset("assets/dashboard/logouticon.png",height: MediaQuery.of(context).size.height*.02),
+                                                        SizedBox(width: MediaQuery.of(context).size.width*.02,),
+                                                        Text("LOGOUT",style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.width*.014 ,color: Color(0xFFF66D6D),fontWeight: FontWeight.bold),)
+                                                      ],
+                                                    ),
+                                                  ) ,
+                                                ),
+                                              ),
+                                            )
+
+                                          ],
+                                        ),
+
+                                ],
+                              ),
+                            ) ,
+                          ),
+                        ),
+
+
+
+
+                  ],
+                ),
+                SizedBox(width: MediaQuery.of(context).size.width*.02 ,),
+                Column(
+                     mainAxisAlignment: MainAxisAlignment.start,
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                       Row(
+                         mainAxisAlignment: MainAxisAlignment.start,
+                         children: [
+                           Container(
+                             width: MediaQuery.of(context).size.width*.5,
+                             height: MediaQuery.of(context).size.height*.07 ,
+                             child: TextFormField(
+                              decoration: InputDecoration(
+
+                                  hintText: "Search",
+                                  hintStyle: GoogleFonts.lato(),
+                                  prefixIcon: Icon(Icons.search),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                  contentPadding:EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width*.02 )
+                              ),
+                  ),
+                           ),
+                           SizedBox(width: MediaQuery.of(context).size.width*.04 ,),
+                           Image.asset("assets/dashboard/notificationgrey.png",height:MediaQuery.of(context).size.width*.025 ,),
+                           SizedBox(width: MediaQuery.of(context).size.width*.012 ,),
+                           Image.asset("assets/dashboard/msggrey.png",height:MediaQuery.of(context).size.width*.025),
+                           SizedBox(width: MediaQuery.of(context).size.width*.012 ,),
+                           Row(
+                             mainAxisAlignment: MainAxisAlignment.start,
+                             children: [
+                               Image.asset("assets/dashboard/accountgrey.png",height:MediaQuery.of(context).size.width*.035),
+                               SizedBox(width: MediaQuery.of(context).size.width*.007 ,),
+                               Column(
+                                 mainAxisAlignment: MainAxisAlignment.start,
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 children: [
+                                   Text("Rajesh",style: GoogleFonts.lato(color:  Color(0xFF6683ED),fontSize:MediaQuery.of(context).size.width*.012,fontWeight: FontWeight.bold ),),
+                                   Text("Marketing Administration",style: GoogleFonts.lato(color:  Colors.black54,fontSize:MediaQuery.of(context).size.width*.01 ),),
+                                 ],
+                               )
+                             ],
+                           ),
+                         ],
+                       ),
+                       SizedBox(height:MediaQuery.of(context).size.height*.03 ,),
+                       Image.asset("assets/dashboard/welcome.png",width:MediaQuery.of(context).size.width*.8  ,),
+                       SizedBox(height:MediaQuery.of(context).size.height*.02 ,),
+                       Align(
+                           alignment: AlignmentDirectional.topStart,
+                           child: Text("Dashboard",style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.width*.02,fontWeight: FontWeight.bold),)),
+                       Padding(
+                         padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*.04,horizontal: MediaQuery.of(context).size.width*.042),
+                         child: Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           children: [
+                             Container(
+                               height:MediaQuery.of(context).size.height*.33,
+                               width: MediaQuery.of(context).size.width*.15,
+                               decoration: BoxDecoration(
+                                   borderRadius: BorderRadius.circular(15),
+                                   color: Colors.white,
+                                   boxShadow: [
+                                     BoxShadow(
+                                       color: Colors.black26,
+                                       spreadRadius: 1,
+                                       blurRadius: 1,
+                                     ),
+                                   ]
+                               ),
+                               child: Padding(
+                                 padding:  EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*.02,horizontal: MediaQuery.of(context).size.width*.02),
+                                 child: Column(
+                                   mainAxisAlignment: MainAxisAlignment.start,
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                   children: [
+
+                                     Row(
+                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                       crossAxisAlignment: CrossAxisAlignment.start,
+                                       children: [
+                                         Align(
+                                           alignment: AlignmentDirectional.topStart,
+                                           child: Stack(
+                                             alignment: Alignment.center,
+                                             children: [
+                                               CircularPercentIndicator(radius: 33,
+                                                 backgroundColor: Colors.white,
+                                                 progressColor:  Color(0xFFF76D6D),
+                                                 lineWidth: 8,
+                                                 percent: .7,
+                                                 circularStrokeCap: CircularStrokeCap.round,
+                                               ),
+                                               Text(
+                                                 '70%', // Your text here
+                                                 style: GoogleFonts.lato(
+                                                     fontSize:MediaQuery.of(context).size.width*.018 , // Adjust the font size as needed
+
+                                                     color: Colors.black
+                                                 ),
+                                               ),
+                                             ],
+                                           ),
+                                         ),
+
+                                         Image.asset("assets/dashboard/sales.png",height:MediaQuery.of(context).size.width*.02,)
+                                       ],
+                                     ),
+                                     SizedBox(height: MediaQuery.of(context).size.height*.01,),
+                                     Text("Sales",style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize: MediaQuery.of(context).size.width*.022),),
+                                     SizedBox(height: MediaQuery.of(context).size.height*.01,),
+                                     Text("\$25,970",style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize: MediaQuery.of(context).size.width*.017),),
+                                     SizedBox(height: MediaQuery.of(context).size.height*.019,),
+                                     Align(
+                                         alignment: Alignment.bottomRight,
+                                         child: Text("Last 24 hours",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.01 ,fontWeight: FontWeight.bold),))
+
+
+
+                                   ],
+                                 ),
+                               ),
+                             ),
+                             SizedBox(width:MediaQuery.of(context).size.width*.03 ,),
+                             Container(
+                               height:MediaQuery.of(context).size.height*.33,
+                               width: MediaQuery.of(context).size.width*.15,
+                               decoration: BoxDecoration(
+                                   borderRadius: BorderRadius.circular(15),
+                                   color: Colors.white,
+                                   boxShadow: [
+                                     BoxShadow(
+                                       color: Colors.black26,
+                                       spreadRadius: 1,
+                                       blurRadius: 1,
+                                     ),
+                                   ]
+                               ),
+                               child: Padding(
+                                 padding:  EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*.02,horizontal: MediaQuery.of(context).size.width*.02),
+                                 child: Column(
+                                   mainAxisAlignment: MainAxisAlignment.start,
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                   children: [
+
+                                     Row(
+                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                       crossAxisAlignment: CrossAxisAlignment.start,
+                                       children: [
+                                         Align(
+                                           alignment: AlignmentDirectional.topStart,
+                                           child: Stack(
+                                             alignment: Alignment.center,
+                                             children: [
+                                               CircularPercentIndicator(radius: 33,
+                                                 backgroundColor: Colors.white,
+                                                 progressColor: Color(0xFFEDC766) ,
+                                                 lineWidth: 8,
+                                                 percent: .8,
+                                                 circularStrokeCap: CircularStrokeCap.round,
+                                               ),
+                                               Text(
+                                                 '80%', // Your text here
+                                                 style: GoogleFonts.lato(
+                                                     fontSize: MediaQuery.of(context).size.width*.018, // Adjust the font size as needed
+
+                                                     color: Colors.black
+                                                 ),
+                                               ),
+                                             ],
+                                           ),
+                                         ),
+
+                                         Image.asset("assets/dashboard/revenue.png",height:MediaQuery.of(context).size.width*.02,)
+                                       ],
+                                     ),
+                                     SizedBox(height: MediaQuery.of(context).size.height*.01,),
+                                     Text("Revenue",style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:  MediaQuery.of(context).size.width*.022),),
+                                     SizedBox(height: MediaQuery.of(context).size.height*.01,),
+                                     Text("\$14,270",style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:  MediaQuery.of(context).size.width*.017),),
+                                     SizedBox(height: MediaQuery.of(context).size.height*.019,),
+                                     Align(
+                                         alignment: Alignment.bottomRight,
+                                         child: Text("Last 24 hours",style: GoogleFonts.lato(fontSize:  MediaQuery.of(context).size.width*.01,fontWeight: FontWeight.bold),))
+
+
+
+                                   ],
+                                 ),
+                               ),
+                             ),
+                             SizedBox(width:MediaQuery.of(context).size.width*.03 ,),
+                             Container(
+                               height:MediaQuery.of(context).size.height*.33,
+                               width: MediaQuery.of(context).size.width*.15,
+                               decoration: BoxDecoration(
+                                   borderRadius: BorderRadius.circular(15),
+                                   color: Colors.white,
+                                   boxShadow: [
+                                     BoxShadow(
+                                       color: Colors.black26,
+                                       spreadRadius: 1,
+                                       blurRadius: 1,
+                                     ),
+                                   ]
+                               ),
+                               child: Padding(
+                                 padding:  EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*.02,horizontal: MediaQuery.of(context).size.width*.02),
+                                 child: Column(
+                                   mainAxisAlignment: MainAxisAlignment.start,
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                   children: [
+
+                                     Row(
+                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                       crossAxisAlignment: CrossAxisAlignment.start,
+                                       children: [
+                                         Align(
+                                           alignment: AlignmentDirectional.topStart,
+                                           child: Stack(
+                                             alignment: Alignment.center,
+                                             children: [
+                                               CircularPercentIndicator(radius: 33,
+                                                 backgroundColor: Colors.white,
+                                                 progressColor: Color(0xFF68ED66),
+                                                 lineWidth: 8,
+                                                 percent: .6,
+                                                 circularStrokeCap: CircularStrokeCap.round,
+                                               ),
+                                               Text(
+                                                 '60%', // Your text here
+                                                 style: GoogleFonts.lato(
+                                                     fontSize:MediaQuery.of(context).size.width*.018 , // Adjust the font size as needed
+
+                                                     color: Colors.black
+                                                 ),
+                                               ),
+                                             ],
+                                           ),
+                                         ),
+
+                                         Image.asset("assets/dashboard/expences.png",height:MediaQuery.of(context).size.width*.02,)
+                                       ],
+                                     ),
+                                     SizedBox(height: MediaQuery.of(context).size.height*.01,),
+                                     Text("Expences",style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize: MediaQuery.of(context).size.width*.022),),
+                                     SizedBox(height: MediaQuery.of(context).size.height*.01,),
+                                     Text("\$4,270",style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize: MediaQuery.of(context).size.width*.017),),
+                                     SizedBox(height: MediaQuery.of(context).size.height*.019,),
+                                     Align(
+                                         alignment: Alignment.bottomRight,
+                                         child: Text("Last 24 hours",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.01,fontWeight: FontWeight.bold),))
+
+
+
+                                   ],
+                                 ),
+                               ),
+                             ),
+                             SizedBox(width:MediaQuery.of(context).size.width*.03 ,),
+                             Container(
+                               height:MediaQuery.of(context).size.height*.33,
+                               width: MediaQuery.of(context).size.width*.15,
+                               decoration: BoxDecoration(
+                                   borderRadius: BorderRadius.circular(15),
+                                   color: Colors.white,
+                                   boxShadow: [
+                                     BoxShadow(
+                                       color: Colors.black26,
+                                       spreadRadius: 1,
+                                       blurRadius: 1,
+                                     ),
+                                   ]
+                               ),
+                               child: Padding(
+                                 padding:  EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*.02,horizontal: MediaQuery.of(context).size.width*.02),
+                                 child: Column(
+                                   mainAxisAlignment: MainAxisAlignment.start,
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                   children: [
+
+                                     Row(
+                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                       crossAxisAlignment: CrossAxisAlignment.start,
+                                       children: [
+                                         Align(
+                                           alignment: AlignmentDirectional.topStart,
+                                           child: Stack(
+                                             alignment: Alignment.center,
+                                             children: [
+                                               CircularPercentIndicator(radius: 33,
+                                                 backgroundColor: Colors.white,
+                                                 progressColor:Color(0xFF18A0FB) ,
+                                                 lineWidth: 9,
+                                                 percent: .8,
+                                                 circularStrokeCap: CircularStrokeCap.round,
+                                               ),
+                                               Text(
+                                                 '80%', // Your text here
+                                                 style: GoogleFonts.lato(
+                                                     fontSize:MediaQuery.of(context).size.width*.018, // Adjust the font size as needed
+
+                                                     color: Colors.black
+                                                 ),
+                                               ),
+                                             ],
+                                           ),
+                                         ),
+
+                                         Image.asset("assets/dashboard/usersicon.png",height:MediaQuery.of(context).size.width*.02,)
+                                       ],
+                                     ),
+                                     SizedBox(height: MediaQuery.of(context).size.height*.01,),
+                                     Text("User",style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize: MediaQuery.of(context).size.width*.022),),
+                                     SizedBox(height: MediaQuery.of(context).size.height*.01,),
+                                     Text("240",style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize: MediaQuery.of(context).size.width*.017),),
+                                     SizedBox(height: MediaQuery.of(context).size.height*.019,),
+                                     Align(
+                                         alignment: Alignment.bottomRight,
+                                         child: Text("Last 4 hours",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width*.01,fontWeight: FontWeight.bold),))
+
+
+
+                                   ],
+                                 ),
+                               ),
+                             ),
+                           ],
+                         ),
+                       ),
+                       Align(
+                           alignment: AlignmentDirectional.topStart,
+                           child: Text("Recently Payment",style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.width*.02,fontWeight: FontWeight.bold),)),
+                       SizedBox(height:MediaQuery.of(context).size.height*.02 ,),
+                       SingleChildScrollView(
+                         scrollDirection: Axis.horizontal,
+                         child: Row(
+                           children: [
+                             for (int i = 0; i < 3; i++)
+                               Padding(
+                                 padding: EdgeInsets.symmetric(
+                                   horizontal: MediaQuery.of(context).size.height * 0.02,
+                                   vertical: MediaQuery.of(context).size.height * 0.01,
+                                 ),
+                                 child: Align(
+                                   alignment: AlignmentDirectional.topStart,
+                                   child: Container(
+                                     height: MediaQuery.of(context).size.height * 0.15,
+                                     width: MediaQuery.of(context).size.width * 0.23,
+                                     decoration: BoxDecoration(
+                                       color: Colors.white,
+                                       borderRadius: BorderRadius.circular(10),
+                                       border: Border.all(
+                                         color: Colors.black26,
+                                         width: 1,
+                                       ),
+                                     ),
+                                     child: Padding(
+                                       padding: EdgeInsets.symmetric(
+                                         vertical: MediaQuery.of(context).size.height * 0.01,
+                                         horizontal: MediaQuery.of(context).size.height * 0.01,
+                                       ),
+                                       child: Column(
+                                         children: [
+                                           Row(
+                                             mainAxisAlignment: MainAxisAlignment.start,
+                                             crossAxisAlignment: CrossAxisAlignment.start,
+                                             children: [
+                                               Image.asset(
+                                                 "assets/dashboard/avadevis.png",
+                                                 height: MediaQuery.of(context).size.height * 0.06,
+                                               ),
+                                               SizedBox(
+                                                 width: MediaQuery.of(context).size.width * 0.02,
+                                               ),
+                                               Column(
+                                                 mainAxisAlignment: MainAxisAlignment.start,
+                                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                                 children: [
+                                                   Text(
+                                                     "Ava Davis",
+                                                     style: GoogleFonts.lato(fontSize: 22),
+                                                   ),
+                                                   SizedBox(
+                                                     height: MediaQuery.of(context).size.height * 0.005,
+                                                   ),
+                                                   Text(
+                                                     "22-08-2023",
+                                                     style: GoogleFonts.lato(
+                                                       fontSize: 16,
+                                                       color: Colors.black26,
+                                                     ),
+                                                   ),
+                                                 ],
+                                               ),
+                                               i == 2
+                                                   ? SizedBox(
+                                                 width: MediaQuery.of(context).size.width * 0.01,
+                                               )
+                                                   : SizedBox(
+                                                 width: MediaQuery.of(context).size.width * 0.03,
+                                               ),
+                                               i == 2
+                                                   ? Container(
+                                                 height:
+                                                 MediaQuery.of(context).size.height * 0.035,
+                                                 width: MediaQuery.of(context).size.width * 0.07,
+                                                 decoration: BoxDecoration(
+                                                   color: Color(0xFFEDC766).withOpacity(0.3),
+                                                   borderRadius: BorderRadius.circular(15),
+                                                 ),
+                                                 child: Center(
+                                                   child: Text(
+                                                     "PENDING",
+                                                     style: GoogleFonts.lato(
+                                                       color: Color(0xFFEDC766),
+                                                       fontSize: 15,
+                                                     ),
+                                                   ),
+                                                 ),
+                                               )
+                                                   : Container(
+                                                 height:
+                                                 MediaQuery.of(context).size.height * 0.035,
+                                                 width: MediaQuery.of(context).size.width * 0.06,
+                                                 decoration: BoxDecoration(
+                                                   color: Color(0xFF29B927).withOpacity(0.3),
+                                                   borderRadius: BorderRadius.circular(15),
+                                                 ),
+                                                 child: Center(
+                                                   child: Text(
+                                                     "DONE",
+                                                     style: GoogleFonts.lato(
+                                                       color: Color(0xFF29B927),
+                                                       fontSize: 15,
+                                                     ),
+                                                   ),
+                                                 ),
+                                               ),
+                                             ],
+                                           ),
+                                           Align(
+                                             alignment: Alignment.bottomRight,
+                                             child: Text(
+                                               "\$25,970",
+                                               style: GoogleFonts.lato(
+                                                 fontSize: 18,
+                                                 fontWeight: FontWeight.bold,
+                                                 color: i == 2 ? Color(0xFFEDC766) : Color(0xFF29B927),
+                                               ),
+                                             ),
+                                           ),
+                                         ],
+                                       ),
+                                     ),
+                                   ),
+                                 ),
+                               ),
+                           ],
+                         ),
+                       ),
+                       Padding(
+                         padding:  EdgeInsets.symmetric(vertical:MediaQuery.of(context).size.height*.02,horizontal: MediaQuery.of(context).size.width*.02 ),
+                         child: Image.asset("assets/dashboard/Graph.png"),
+                       ),
+
+
+
+                     ],
+                   ),
+
+
+
+
+              ],
+            )
       ),
     );
   }
 }
+
+
+
+class DashboardScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final screenWidth = constraints.maxWidth;
+
+          if (screenWidth > 600) {
+            // Desktop layout
+            return DesktopDashboard();
+          } else {
+            // Mobile layout
+            return Menu();
+          }
+        },
+      ),
+    );
+  }
+}
+

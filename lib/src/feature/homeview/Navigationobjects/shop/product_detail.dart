@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/src/Common/Providers/providerall.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/newaddress.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/plants.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/newaddress.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/plants.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetail extends StatefulWidget {
@@ -109,30 +109,41 @@ class _ProductDetailState extends State<ProductDetail> {
               child: Icon(Icons.arrow_back,color: Colors.black,size:  MediaQuery.of(context).size.height*.035,)),
           SizedBox(width:  MediaQuery.of(context).size.height*.030,),
           Text("Product Detail",style: GoogleFonts.lato(color: Colors.black,fontSize:  MediaQuery.of(context).size.height*.03,),),
-          SizedBox(width:  MediaQuery.of(context).size.height*.08,),
-          Icon(Icons.favorite_border,color: Colors.black,size:  MediaQuery.of(context).size.height*.035,),
-          SizedBox(width:  MediaQuery.of(context).size.height*.015,),
-          Icon(Icons.shopping_cart_outlined,color: Colors.black,size:  MediaQuery.of(context).size.height*.035,)
+
+
         ],
       ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.width*.02 ),
+            child: Row(
+              children: [
+                Icon(Icons.favorite_border,color: Colors.black,size:  MediaQuery.of(context).size.height*.035,),
+                SizedBox(width:  MediaQuery.of(context).size.width*.05,),
+                Icon(Icons.shopping_cart_outlined,color: Colors.black,size:  MediaQuery.of(context).size.height*.035,)
+              ],
+            ),
+          ),
+
+        ],
     ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Stack(
               children: [
-                Image.asset("assets/shop/product_detail.png",height:MediaQuery.of(context).size.height*.4 ,width: MediaQuery.of(context).size.height*.6,),
+                Image.asset("assets/shop/product_detail.png"),
                 Positioned(
-                  left: MediaQuery.of(context).size.height*.38,
-                  top: MediaQuery.of(context).size.height*.32,
+                  left: MediaQuery.of(context).size.width*.85,
+                  top: MediaQuery.of(context).size.height*.35,
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
                     radius:MediaQuery.of(context).size.height*.026,
                         child: Image.asset("assets/shop/wishlisticon.png",height:MediaQuery.of(context).size.height*.03,width: MediaQuery.of(context).size.height*.03 ,)),
                   ),
                 Positioned(
-                  left: MediaQuery.of(context).size.height*.38,
-                  top: MediaQuery.of(context).size.height*.25,
+                  left: MediaQuery.of(context).size.width*.85,
+                  top: MediaQuery.of(context).size.height*.28,
                   child:Container(
                     width: MediaQuery.of(context).size.height*.05,
                     height: MediaQuery.of(context).size.height*.05,

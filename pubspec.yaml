@@ -51,6 +51,7 @@ dependencies:
   percent_indicator: ^4.2.3
   fl_chart: ^0.63.0
   syncfusion_flutter_charts: ^22.2.12
+  animated_splash_screen: ^1.3.0
 
 
 dev_dependencies:
@@ -210,6 +211,7 @@ flutter:
     - assets/dashboard/arrowdown.png
     - assets/dashboard/feedback.png
     - assets/dashboard/setting.png
+    - assets/desktop/desktopwelcome.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

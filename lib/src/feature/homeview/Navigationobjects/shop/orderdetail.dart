@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/myorder.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/tracking.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/wishlist.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/myorder.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/tracking.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/wishlist.dart';
 class OrderDetail extends StatefulWidget {
   const OrderDetail({Key? key}) : super(key: key);
 

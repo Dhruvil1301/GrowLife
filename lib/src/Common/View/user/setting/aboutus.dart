@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/Events/events.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/shopping.dart';
+
 import 'package:growlife/src/Common/View/user/setting/Contact.dart';
 import 'package:growlife/src/Common/View/user/setting/Setting.dart';
 import 'package:growlife/src/Common/View/user/setting/help.dart';
 import 'package:growlife/src/Common/View/user/setting/privacypolicy.dart';
 import 'package:growlife/src/Common/View/user/setting/term&condition.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/Events/events.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/shopping.dart';
 import 'package:growlife/src/feature/homeview/homescreen.dart';
 class AboutUs extends StatefulWidget {
   const AboutUs({Key? key}) : super(key: key);

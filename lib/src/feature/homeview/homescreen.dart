@@ -1,14 +1,14 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/src/Common/Providers/providerall.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/Events/events.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/post/camera.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/post/click.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/shopping.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/Events/events.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/Home/Home.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/post/camera.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/post/click.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/shopping.dart';
 import 'package:provider/provider.dart';
-import '../../Common/View/Navigationobjects/Home/Home.dart';
+
 
 
 class HomeScreen extends StatefulWidget {

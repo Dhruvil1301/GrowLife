@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/ordersummary.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/tracking.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/ordersummary.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/tracking.dart';
 class PaymentMethod extends StatefulWidget {
   const PaymentMethod({Key? key}) : super(key: key);
 

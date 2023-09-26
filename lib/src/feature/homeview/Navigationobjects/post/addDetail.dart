@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/Home/Home.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/post/uploadfile.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/Home/Home.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/post/uploadfile.dart';
 import 'package:video_player/video_player.dart';
 class VideoPlayerScreen extends StatefulWidget {
   final File videoFile;

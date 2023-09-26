@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:growlife/src/Common/View/Navigationobjects/shop/plants.dart';
+
+import 'package:growlife/src/feature/homeview/Navigationobjects/shop/plants.dart';
 
 class NavigationProvider extends ChangeNotifier {
   int _selectedIndex = 0;
