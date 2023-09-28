@@ -5,6 +5,7 @@ import 'package:growlife/src/Common/View/pages/notification.dart';
 import 'package:growlife/src/Common/View/user/profile.dart';
 import 'package:growlife/src/Common/View/user/setting/help.dart';
 import 'package:growlife/src/Common/View/user/setting/invite_a_friend.dart';
+import 'package:growlife/src/Common/View/user/setting/library.dart';
 import 'package:growlife/src/Common/View/user/setting/privacypolicy.dart';
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
@@ -88,6 +89,21 @@ class _SettingState extends State<Setting> {
                   SizedBox(width:MediaQuery.of(context).size.height*.015 ,),
                   Text("Notification",style: GoogleFonts.lato(color: Colors.black,fontSize:MediaQuery.of(context).size.height*.027 ),),
                   SizedBox(width:MediaQuery.of(context).size.height*.2005 ,),
+                  Icon(Icons.arrow_forward_ios_outlined,color: Colors.black,size:MediaQuery.of(context).size.height*.025)
+                ],
+              ),
+            ),
+            SizedBox(height:MediaQuery.of(context).size.height*.05 ,),
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Library()));
+              },
+              child: Row(
+                children: [
+                  Icon(Icons.library_add_check_outlined,color:Colors.black,size:MediaQuery.of(context).size.height*.035,),
+                  SizedBox(width:MediaQuery.of(context).size.width*.025 ,),
+                  Text("Library",style: GoogleFonts.lato(color: Colors.black,fontSize:MediaQuery.of(context).size.height*.027 ),),
+                  SizedBox(width:MediaQuery.of(context).size.width*.56 ,),
                   Icon(Icons.arrow_forward_ios_outlined,color: Colors.black,size:MediaQuery.of(context).size.height*.025)
                 ],
               ),

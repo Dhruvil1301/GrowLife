@@ -212,6 +212,9 @@ flutter:
     - assets/dashboard/feedback.png
     - assets/dashboard/setting.png
     - assets/desktop/desktopwelcome.png
+    - assets/images/historyimg.png
+    - assets/images/arrowdown.png
+    - assets/images/naturing.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
