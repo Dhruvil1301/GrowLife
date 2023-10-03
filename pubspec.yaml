@@ -52,6 +52,9 @@ dependencies:
   fl_chart: ^0.63.0
   syncfusion_flutter_charts: ^22.2.12
   animated_splash_screen: ^1.3.0
+  flutter_riverpod: ^2.4.1
+  sidebarx: ^0.16.2
+  responsive_builder: ^0.7.0
 
 
 dev_dependencies:
@@ -215,6 +218,9 @@ flutter:
     - assets/images/historyimg.png
     - assets/images/arrowdown.png
     - assets/images/naturing.png
+    - assets/dashboard/feedbackwhite.png
+    - assets/dashboard/settingwhite.png
+    - assets/dashboard/desktopadminwelcom.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

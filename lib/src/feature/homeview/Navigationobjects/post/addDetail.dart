@@ -3,6 +3,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/src/feature/homeview/Navigationobjects/Home/Home.dart';
+import 'package:growlife/src/feature/homeview/Navigationobjects/post/location.dart';
 import 'package:growlife/src/feature/homeview/Navigationobjects/post/uploadfile.dart';
 import 'package:video_player/video_player.dart';
 class VideoPlayerScreen extends StatefulWidget {
@@ -190,16 +191,21 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     ],
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height*.02,),
-                  Row(
-                    children: [
-                      Icon(Icons.location_on_outlined,color: Colors.black,size: MediaQuery.of(context).size.height*.032,),
-                      Padding(
-                        padding:  EdgeInsets.only(left: MediaQuery.of(context).size.height*.015,right: MediaQuery.of(context).size.width*.49 ),
-                        child: Text("Location",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.026,color: Colors.black),),
-                      ),
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>PostLocation()));
+                    },
+                    child: Row(
+                      children: [
+                        Icon(Icons.location_on_outlined,color: Colors.black,size: MediaQuery.of(context).size.height*.032,),
+                        Padding(
+                          padding:  EdgeInsets.only(left: MediaQuery.of(context).size.height*.015,right: MediaQuery.of(context).size.width*.49 ),
+                          child: Text("Location",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.026,color: Colors.black),),
+                        ),
 
-                      Icon(Icons.arrow_forward_ios,color: Colors.black,size: MediaQuery.of(context).size.height*.025,),
-                    ],
+                        Icon(Icons.arrow_forward_ios,color: Colors.black,size: MediaQuery.of(context).size.height*.025,),
+                      ],
+                    ),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height*.02,),
                   Row(
