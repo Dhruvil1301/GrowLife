@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:growlife/src/Common/Providers/providerall.dart';
-import 'package:growlife/src/Common/View/Dashboard/adminpanel.dart';
+import 'package:growlife/src/Common/View/AdminPanel/adminpanel.dart';
 import 'package:growlife/src/Common/View/pages/welcomescreen.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
