@@ -1,11 +1,6 @@
 import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:growlife/src/Common/View/user/setting/theme.dart';
-
-
-import 'package:growlife/src/feature/homeview/Navigationobjects/shop/plants.dart';
 
 class NavigationProvider extends ChangeNotifier {
   int _selectedIndex = 0;
@@ -47,20 +42,6 @@ class StarRatingProvider with ChangeNotifier {
 
   void toggleStar(int index) {
     _selectedStars[index] = !_selectedStars[index];
-    notifyListeners();
-  }
-}
-class WishlistProvider extends ChangeNotifier {
-  List<ShopItem> _wishlistItems = [];
-
-  List<ShopItem> get wishlistItems => _wishlistItems;
-
-  void addToWishlist(ShopItem item) {
-    _wishlistItems.add(item);
-    notifyListeners();
-  }
-  void removeFromWishlist(ShopItem item) {
-    _wishlistItems.remove(item);
     notifyListeners();
   }
 }
@@ -172,16 +153,7 @@ class _DoubleClickToExitAppState extends State<DoubleClickToExitApp> {
     return true;
   }
 }
-class DashboardNavigationProvider with ChangeNotifier {
-  int _selectedIndex = 0;
 
-  int get selectedIndex => _selectedIndex;
-
-  void setIndex(int index) {
-    _selectedIndex = index;
-    notifyListeners();
-  }
-}
 
 
 

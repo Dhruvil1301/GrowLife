@@ -55,6 +55,11 @@ dependencies:
   flutter_riverpod: ^2.4.1
   sidebarx: ^0.16.2
   responsive_builder: ^0.7.0
+  dotted_border: ^2.1.0
+  http: ^1.1.0
+  shimmer: ^3.0.0
+  go_router: ^13.0.1
+
 
 
 
@@ -83,146 +88,12 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/Welcome.png
-    - assets/images/Icons.png
-    - assets/images/GrowLifeText.png
-    - assets/images/Growlife.png
-    - assets/images/notification.png
-    - assets/images/profile.png
-    - assets/images/greencolor.png
-    - assets/images/verification.png
-    - assets/images/Homepage1.png
-    - assets/images/circularimg1.png
-    - assets/images/video1.png
-    - assets/images/video2.png
-    - assets/images/video1.1.png
-    - assets/images/Pause.png
-    - assets/images/circularimg2.png
-    - assets/share/bluetooth.png
-    - assets/share/copylink.png
-    - assets/share/drive.png
-    - assets/share/facebook.png
-    - assets/share/instagram.png
-    - assets/share/mail.png
-    - assets/share/more.png
-    - assets/share/tiwtter.png
-    - assets/share/whatsapp.png
-    - assets/shop/accessories.png
-    - assets/shop/fertilizers.png
-    - assets/shop/planters.png
-    - assets/shop/plants.png
-    - assets/shop/garden_gloves.png
-    - assets/shop/mud_pot.png
-    - assets/shop/peace_lily.png
-    - assets/shop/plastic_pot.png
-    - assets/shop/rubber_plant.png
-    - assets/shop/watering_can.png
-    - assets/shop/fiddle_leaf.png
-    - assets/shop/monstera.png
-    - assets/shop/Pothos.png
-    - assets/shop/succulent.png
-    - assets/shop/product_detail.png
-    - assets/shop/wishlisticon.png
-    - assets/shop/ordersummary.png
-    - assets/shop/phoneicon.png
-    - assets/shop/address.png
-    - assets/shop/payment.png
-    - assets/shop/payment_done.png
-    - assets/shop/googlepay.png
-    - assets/shop/paytm.png
-    - assets/shop/phonepay.png
-    - assets/shop/netbanking.png
-    - assets/shop/debitcard.png
-    - assets/shop/cash.png
-    - assets/shop/fiddleleaf.png
-    - assets/shop/gardenhoses.png
-    - assets/shop/gardentool.png
-    - assets/shop/rubber.png
-    - assets/shop/paymentsuccess.png
-    - assets/shop/cross.png
-    - assets/shop/greencorrect.png
-    - assets/shop/deliveryboy.png
-    - assets/shop/customdeliveryboy.png
-    - assets/shop/callingicon.png
-    - assets/shop/pecentage.png
-    - assets/events/ev1.png
-    - assets/events/ev2.png
-    - assets/events/ev3.png
-    - assets/events/ev4.png
-    - assets/events/ev5.png
-    - assets/events/ev6.png
-    - assets/events/evd1.png
-    - assets/events/evd2.png
-    - assets/events/registration.png
-    - assets/events/donation.png
-    - assets/images/tbvideo.png
-    - assets/images/tbvideo2.png
-    - assets/images/tbvideo3.png
-    - assets/images/invite_a_friend_msg.png
-    - assets/images/event_donation.png
-    - assets/images/account.png
-    - assets/images/shop_purchase.png
-    - assets/images/technical_support.png
-    - assets/images/help.png
-    - assets/images/aboutus.png
-    - assets/images/mission.png
-    - assets/images/contactus.png
-    - assets/notification/communityupdate.png
-    - assets/notification/eventreminder.png
-    - assets/notification/newproductlauch.png
-    - assets/notification/specialoffer.png
-    - assets/notification/thankyou.png
-    - assets/images/ShopIcon.png
-    - assets/Icon/Shop.png
-    - assets/Icon/Shopwhite.png
-    - assets/Icon/Addwhite.png
-    - assets/Icon/Add.png
-    - assets/Icon/Event.png
-    - assets/Icon/Eventwhite.png
-    - assets/Icon/Home.png
-    - assets/Icon/Homewhite.png
-    - assets/dashboard/drawerright.png
-    - assets/dashboard/welcome.png
-    - assets/dashboard/expences.png
-    - assets/dashboard/revenue.png
-    - assets/dashboard/sales.png
-    - assets/dashboard/usersicon.png
-    - assets/dashboard/avadevis.png
-    - assets/dashboard/account.png
-    - assets/dashboard/accountgrey.png
-    - assets/dashboard/menu.png
-    - assets/dashboard/menugrey.png
-    - assets/dashboard/msg.png
-    - assets/dashboard/msggrey.png
-    - assets/dashboard/notification.png
-    - assets/dashboard/notificationgrey.png
-    - assets/dashboard/Graph.png
-    - assets/dashboard/james.png
-    - assets/images/applelogo.png
-    - assets/images/facebooklogo.png
-    - assets/images/googlelogo.png
-    - assets/dashboard/drawerleft.png
-    - assets/dashboard/analytics.png
-    - assets/dashboard/analyticswhite.png
-    - assets/dashboard/Event.png
-    - assets/dashboard/Eventwhite.png
-    - assets/dashboard/member.png
-    - assets/dashboard/memberwhite.png
-    - assets/dashboard/product.png
-    - assets/dashboard/productwhite.png
-    - assets/dashboard/menuwhite.png
-    - assets/dashboard/logouticon.png
-    - assets/dashboard/arrowdown.png
-    - assets/dashboard/feedback.png
-    - assets/dashboard/setting.png
-    - assets/desktop/desktopwelcome.png
-    - assets/images/historyimg.png
-    - assets/images/arrowdown.png
-    - assets/images/naturing.png
-    - assets/dashboard/feedbackwhite.png
-    - assets/dashboard/settingwhite.png
-    - assets/dashboard/desktopadminwelcom.png
-  #   - images/a_dot_ham.jpeg
+   - assets/images/
+   - assets/events/
+   - assets/Icon/
+   - assets/shop/
+   - assets/share/
+   - assets/notification/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
