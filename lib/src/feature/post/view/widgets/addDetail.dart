@@ -6,11 +6,13 @@ import 'package:growlife/src/Common/view/widgets/commonappbar.dart';
 import 'package:growlife/src/feature/home/view/widgets/Home.dart';
 import 'package:growlife/src/feature/post/view/widgets/location.dart';
 import 'package:growlife/src/feature/post/view/widgets/uploadfile.dart';
+import 'package:growlife/src/res/color.dart';
+import 'package:growlife/src/utils/route.dart';
 import 'package:video_player/video_player.dart';
 class VideoPlayerScreen extends StatefulWidget {
   final File videoFile;
 
-  VideoPlayerScreen({required this.videoFile});
+  const VideoPlayerScreen({required this.videoFile});
 
   @override
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
@@ -70,7 +72,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         ),
                       ],
                     )
-                        : CircularProgressIndicator(),
+                        : const CircularProgressIndicator(),
                   ),
                 ),
                 Expanded(
@@ -87,7 +89,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Write a Caption",
-                                hintStyle: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height * 0.02,color: Colors.black),
+                                hintStyle:GoogleFonts.plusJakartaSans(fontSize: 16, color: Colors.black, fontWeight: FontWeight.w500),
                                 counterText:
                                 '${_textEditingController.text.length}/$maxLength',
                                 counterStyle: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height * 0.018)
@@ -126,7 +128,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               children: [
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal:  MediaQuery.of(context).size.height*.03,vertical:  MediaQuery.of(context).size.height*.015),
-                  child: Text("Add Description",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.022,color: Colors.black,fontWeight: FontWeight.bold ),),
+                  child: Text("Add Description",style: GoogleFonts.poppins(fontSize: 14,color: Colors.black,fontWeight: FontWeight.w400 ),),
                 ),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal:  MediaQuery.of(context).size.height*.03,),
@@ -140,7 +142,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     ),
                     child: TextFormField(
                       decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10),
+                          contentPadding: const EdgeInsets.all(10),
                           border: InputBorder.none,
                           counterText:
                           '${addDiscriptionController.text.length}/$addDisLength',
@@ -167,46 +169,46 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
                   Padding(
                     padding:  EdgeInsets.only(left: MediaQuery.of(context).size.height*.045),
-                    child: Text("Visibility",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.017,color: Colors.black38),),
+                    child: Text("Visibility",style: GoogleFonts.plusJakartaSans(fontSize: 12,color: Colors.black38),),
                   ),
                   Row(
                     children: [
-                      Icon(Icons.remove_red_eye_outlined,color: Colors.black,size: MediaQuery.of(context).size.height*.032,),
+                      const Icon(Icons.remove_red_eye_outlined,color: Colors.black,size: 25,),
                       Padding(
-                        padding:  EdgeInsets.only(left: MediaQuery.of(context).size.height*.015,right: MediaQuery.of(context).size.width*.55 ),
-                        child: Text("Public",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.026,color: Colors.black),),
+                        padding:  EdgeInsets.only(left: MediaQuery.of(context).size.height*.015,right: MediaQuery.of(context).size.width*.6 ),
+                        child: Text("Public",style: GoogleFonts.plusJakartaSans(fontSize:16,color: Colors.black,fontWeight: FontWeight.w500),),
                       ),
 
-                      Icon(Icons.arrow_forward_ios,color: Colors.black,size: MediaQuery.of(context).size.height*.025,),
+                      const Icon(Icons.arrow_forward_ios,color: Colors.black,size: 20,),
                     ],
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height*.02,),
                   InkWell(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>PostLocation()));
+                      router.push(PostLocation.routePath);
                     },
                     child: Row(
                       children: [
-                        Icon(Icons.location_on_outlined,color: Colors.black,size: MediaQuery.of(context).size.height*.032,),
+                        const Icon(Icons.location_on_outlined,color: Colors.black,size:25,),
                         Padding(
-                          padding:  EdgeInsets.only(left: MediaQuery.of(context).size.height*.015,right: MediaQuery.of(context).size.width*.49 ),
-                          child: Text("Location",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.026,color: Colors.black),),
+                          padding:  EdgeInsets.only(left: MediaQuery.of(context).size.height*.015,right: MediaQuery.of(context).size.width*.55 ),
+                          child: Text("Location",style: GoogleFonts.plusJakartaSans(fontSize:16,color: Colors.black,fontWeight: FontWeight.w500),),
                         ),
 
-                        Icon(Icons.arrow_forward_ios,color: Colors.black,size: MediaQuery.of(context).size.height*.025,),
+                        const Icon(Icons.arrow_forward_ios,color: Colors.black,size: 20,),
                       ],
                     ),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height*.02,),
                   Row(
                     children: [
-                      Icon(Icons.people,color: Colors.black,size: MediaQuery.of(context).size.height*.032,),
+                      const Icon(Icons.people,color: Colors.black,size: 25,),
                       Padding(
-                        padding:  EdgeInsets.only(left: MediaQuery.of(context).size.height*.015,right: MediaQuery.of(context).size.width*.435),
-                        child: Text("Tag People",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.026,color: Colors.black),),
+                        padding:  EdgeInsets.only(left: MediaQuery.of(context).size.height*.015,right: MediaQuery.of(context).size.width*.5),
+                        child: Text("Tag People",style: GoogleFonts.plusJakartaSans(fontSize:16,color: Colors.black,fontWeight: FontWeight.w500),),
                       ),
 
-                      Icon(Icons.arrow_forward_ios,color: Colors.black,size: MediaQuery.of(context).size.height*.025,),
+                      Icon(Icons.arrow_forward_ios,color: Colors.black,size: 20,),
                     ],
                   ),
                   Padding(
@@ -221,21 +223,21 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             color: Colors.black54,
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          child: Center(child: Text("Save Draft",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.023,color: Colors.white,fontWeight: FontWeight.bold),)),
+                          child: Center(child: Text("Save Draft",style: GoogleFonts.plusJakartaSans(fontSize:18,color: Colors.white,fontWeight: FontWeight.w600),)),
                         ),
 
                         InkWell(
                           onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const Home()));
                           },
                           child: Container(
                             height: MediaQuery.of(context).size.height*.06,
                             width: MediaQuery.of(context).size.width*.28,
                             decoration: BoxDecoration(
-                              color: Color(0xFF1F588E),
+                              color:AppColor.primary,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: Center(child: Text("Post",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.023,color: Colors.white,fontWeight: FontWeight.bold),)),
+                            child: Center(child: Text("Post",style:  GoogleFonts.plusJakartaSans(fontSize:18,color: Colors.white,fontWeight: FontWeight.w600),)),
                           ),
                         ),
                       ],

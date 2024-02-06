@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,9 +11,12 @@ import 'package:growlife/src/res/assets.dart';
 import 'package:growlife/src/utils/route.dart';
 import 'package:provider/provider.dart';
 
+import '../../../shopping/view/widgets/product_detail.dart';
 import 'videodetail.dart';
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  final File? image;
+
+  const Home({Key? key, this.image}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -27,12 +32,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async{
-        final exit = await showExitConfirmationDialog(context);
-        return exit ?? false;
-      },
-      child: SafeArea(child:
+    return SafeArea(child:
           Scaffold(
             backgroundColor: Colors.white,
             body: SingleChildScrollView(
@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
                         ),
                         child: InkWell(
                           onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const Profile()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> Profile(image: widget.image,)));
                           },
                           child: Stack(
                             children: [
@@ -56,12 +56,12 @@ class _HomeState extends State<Home> {
                                 height: MediaQuery.of(context).size.height*.075,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.034),
-                                  image: Provider.of<CustomImageProvider>(context).image != null
+                                  image:widget.image != null
                                       ? DecorationImage(
-                                    image: FileImage(Provider.of<CustomImageProvider>(context).image!),
+                                    image: FileImage(widget.image!),
                                     fit: BoxFit.cover,
                                   )
-                                      :null ,
+                                      : null,
                                 ),
                               ),
                               Positioned(
@@ -223,33 +223,8 @@ class _HomeState extends State<Home> {
               ),
             ),
           )
-      ),
     );
   }
-  Future showExitConfirmationDialog(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Confirm Exit"),
-          content: const Text("Are you sure you want to exit the app?"),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(false); // Return false to cancel the exit
-              },
-              child: const Text("No"),
-            ),
-            TextButton(
-              onPressed: () {
-                SystemNavigator.pop(); // Return true to confirm the exit
-              },
-              child: const Text("Yes"),
-            ),
-          ],
-        );
-      },
-    );
-  }
+
 }
 

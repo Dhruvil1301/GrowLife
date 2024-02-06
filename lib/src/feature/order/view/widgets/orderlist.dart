@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/src/feature/feedback/view/feedback.dart';
 import 'package:growlife/src/feature/order/view/widgets/orderdetail.dart';
+import 'package:growlife/src/res/color.dart';
 class OrderList extends StatelessWidget {
   final String name;
   final String image;
@@ -32,14 +33,14 @@ class OrderList extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text("Delivered on ",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.020,fontWeight: FontWeight.bold ),),
-                        Text(delDate,style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.020,fontWeight: FontWeight.bold ),),
+                        Text("Delivered on ",style: GoogleFonts.poppins(fontSize:16, ),),
+                        Text(delDate,style: GoogleFonts.poppins(fontSize:16, ),),
                       ],
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height*.013 ,),
                     Row(
                       children: [
-                        Text(name,style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.022,color: Colors.black38 ),),
+                        Text(name,style:  GoogleFonts.poppins(fontSize:16, color: Colors.black38),),
                         SizedBox(width:  MediaQuery.of(context).size.width*.27,),
                         Icon(Icons.arrow_forward_ios_outlined,color: Colors.black,size: MediaQuery.of(context).size.height*.021,)
                       ],
@@ -47,8 +48,8 @@ class OrderList extends StatelessWidget {
                     SizedBox(height: MediaQuery.of(context).size.height*.013 ,),
                     Row(
                       children: [
-                        Text("Order No. ",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.021, ),),
-                        Text(num,style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.021, ),),
+                        Text("Order No. ",style: GoogleFonts.poppins(fontSize:16, ),),
+                        Text(num,style: GoogleFonts.poppins(fontSize:16, ),),
                       ],
                     ),
                   ],
@@ -74,7 +75,7 @@ class OrderList extends StatelessWidget {
             padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.height*.025 ),
             child: Align(
                 alignment: AlignmentDirectional.topStart,
-                child: Text("ADD FEEDBACK",style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.height*.021,color: Color(0xFF1F588E) ),)),
+                child: Text("ADD FEEDBACK",style:  GoogleFonts.poppins(fontSize:16,fontWeight: FontWeight.w500,color: AppColor.primary ),)),
           ),
         ),
         SizedBox(height: MediaQuery.of(context).size.height*.01 ,),

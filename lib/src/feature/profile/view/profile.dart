@@ -1,18 +1,16 @@
+import 'dart:io';
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
-import "package:growlife/src/Common/Providers/providerall.dart";
 import 'package:growlife/src/Common/view/widgets/commonappbar.dart';
 import 'package:growlife/src/feature/editprofile/view/edituserdetails.dart';
 import 'package:growlife/src/feature/account/view/follwers_following.dart';
 import 'package:growlife/src/feature/setting/view/Setting.dart';
-import 'package:growlife/src/feature/home/view/homescreen.dart';
 import 'package:growlife/src/res/color.dart';
 import 'package:growlife/src/utils/route.dart';
-import "package:provider/provider.dart";
 class Profile extends StatefulWidget {
+  final File? image;
 
-
-  const Profile({Key? key}) : super(key: key);
+  const Profile({Key? key, this.image}) : super(key: key);
   static const routePath="/profile";
 
   @override
@@ -42,11 +40,11 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFDCE9F8),
+      backgroundColor: const Color(0xFFDCE9F8),
       appBar: CommonAppBar(title: "Profile",action: [
         IconButton(onPressed: (){
           router.push(Setting.routePath);
-        }, icon: Icon(Icons.settings,size: 25,))
+        }, icon: const Icon(Icons.settings,size: 25,))
       ],),
       body: SingleChildScrollView(
         child: Stack(
@@ -89,14 +87,14 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                         padding: EdgeInsets.only(right:MediaQuery.of(context).size.height*.06,top: MediaQuery.of(context).size.height*.03),
                                         child: InkWell(
                                            onTap:(){
-                                             Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfile()));
+                                             Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile(image: widget.image,)));
                                              },
                                           child: Row(
                                             children: [
 
                                               Text("Edit",style:  GoogleFonts.plusJakartaSans(fontSize:14 ,color: AppColor.primary),),
                                               SizedBox(width:MediaQuery.of(context).size.width*.02 ,),
-                                              Icon(Icons.edit,color: Color(0xFF1F588E) ,)
+                                              const Icon(Icons.edit,color: Color(0xFF1F588E) ,)
                                             ],
                                           ),
                                         ),
@@ -122,7 +120,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                           children: [
                                             InkWell(
                                               onTap:(){
-                                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Follower_Following())) ;
+                                               Navigator.push(context, MaterialPageRoute(builder: (context)=>const Follower_Following())) ;
                                               },
                                                 child: Text("Followers",style:  GoogleFonts.plusJakartaSans(fontSize:14 ,fontWeight: FontWeight.w500),)),
                                             Text("100",style: GoogleFonts.plusJakartaSans(fontSize:14 ,fontWeight: FontWeight.w400),),
@@ -152,9 +150,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                         labelColor: Colors.black,
                                         isScrollable: true,
                                         labelStyle: GoogleFonts.poppins(fontSize:14 ,fontWeight: FontWeight.w500),
-                                        tabs: [
+                                        tabs: const[
                                           Tab(text: 'Videos'),
-                                          Tab(text: 'Events'),
+                                           Tab(text: 'Events'),
                                         ],
                                       ),
                                     ),
@@ -183,7 +181,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                          ),
 
                                           // Widgets for Tab 2 content
-                                          Center(child: Text('Tab 2 Content')),
+                                          const Center(child: Text('Tab 2 Content')),
                                         ],
                                       ),
                                     ),
@@ -205,12 +203,12 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 height: MediaQuery.of(context).size.height*.11,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.034),
-                  image: Provider.of<CustomImageProvider>(context).image != null
+                  image:widget.image != null
                       ? DecorationImage(
-                    image: FileImage(Provider.of<CustomImageProvider>(context).image!),
+                    image: FileImage(widget.image!),
                     fit: BoxFit.cover,
                   )
-                      :null ,
+                      : null,
                 ),
               ),
             ),

@@ -18,12 +18,7 @@ class Shopping extends StatefulWidget {
 class _ShoppingState extends State<Shopping> {
   @override
   Widget build(BuildContext context) {
-    return  WillPopScope(
-      onWillPop: () async {
-        final exit = await showExitConfirmationDialog(context);
-        return exit ?? false;
-      },
-      child: Scaffold(
+    return  Scaffold(
         backgroundColor: Colors.white,
         appBar: CommonAppBar(
             title: "Shop",
@@ -42,7 +37,7 @@ class _ShoppingState extends State<Shopping> {
                   child: TextFormField(
                     decoration: InputDecoration(
                       hintText: "Search Product",
-                      hintStyle: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.height*.023 ),
+                      hintStyle: GoogleFonts.poppins(fontSize:16 ),
                       prefixIcon: Icon(Icons.search,size:MediaQuery.of(context).size.height*.035 ,),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -70,35 +65,7 @@ class _ShoppingState extends State<Shopping> {
             ),
           ),
         ),
-      ),
     );
   }
 
-  Future showExitConfirmationDialog(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Confirm Exit", style: GoogleFonts.lato(),),
-          content: Text("Are you sure you want to exit the app?",
-            style: GoogleFonts.lato(),),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(
-                    false); // Return false to cancel the exit
-              },
-              child: Text("No", style: GoogleFonts.lato(),),
-            ),
-            TextButton(
-              onPressed: () {
-                SystemNavigator.pop(); // Return true to confirm the exit
-              },
-              child: Text("Yes", style: GoogleFonts.lato(),),
-            ),
-          ],
-        );
-      },
-    );
-  }
 }

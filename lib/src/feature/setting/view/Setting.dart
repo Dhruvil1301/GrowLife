@@ -2,7 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/src/Common/view/widgets/commonappbar.dart';
-import 'package:growlife/src/feature/notification/view/notification.dart';
+import 'package:growlife/src/feature/order/view/myorder.dart';
 import 'package:growlife/src/feature/profile/view/profile.dart';
 import 'package:growlife/src/feature/help/view/help.dart';
 import 'package:growlife/src/feature/invite/view/invite_a_friend.dart';
@@ -54,7 +54,7 @@ class _SettingState extends State<Setting> {
               SizedBox(height:MediaQuery.of(context).size.height*.05 ,),
               InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PrivacyPolicy()));
+                router.push(PrivacyPolicy.routePath);
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -99,15 +99,19 @@ class _SettingState extends State<Setting> {
                 ),
               ),
               SizedBox(height:MediaQuery.of(context).size.height*.05 ,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(EvaIcons.globe,color:Colors.black,size:MediaQuery.of(context).size.height*.035,),
-                  SizedBox(width:MediaQuery.of(context).size.height*.015 ,),
-                  Text("Language",style: GoogleFonts.poppins(color: Colors.black,fontSize:20,fontWeight: FontWeight.w400 ),),
-                  SizedBox(width:MediaQuery.of(context).size.height*.23 ,),
-                  Icon(Icons.arrow_forward_ios_outlined,color: Colors.black,size:MediaQuery.of(context).size.height*.025)
-                ],
+              InkWell(
+                onTap: (){
+                  router.push(MyOrder.routePath);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(EvaIcons.shoppingCartOutline,color:Colors.black,size:MediaQuery.of(context).size.height*.035,),
+                    Text("Order",style: GoogleFonts.poppins(color: Colors.black,fontSize:20,fontWeight: FontWeight.w400 ),),
+                    SizedBox(width:MediaQuery.of(context).size.height*.23 ,),
+                    Icon(Icons.arrow_forward_ios_outlined,color: Colors.black,size:MediaQuery.of(context).size.height*.025)
+                  ],
+                ),
               ),
               SizedBox(height:MediaQuery.of(context).size.height*.05 ,),
               InkWell(
@@ -117,7 +121,7 @@ class _SettingState extends State<Setting> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.people,color:Colors.black,size:MediaQuery.of(context).size.height*.035,),
+                    Icon(EvaIcons.people,color:Colors.black,size:MediaQuery.of(context).size.height*.035,),
                     SizedBox(width:MediaQuery.of(context).size.height*.015 ,),
                     Text("Invite a Friend",style: GoogleFonts.poppins(color: Colors.black,fontSize:20,fontWeight: FontWeight.w400 ),),
                     SizedBox(width:MediaQuery.of(context).size.height*.173 ,),
@@ -128,7 +132,7 @@ class _SettingState extends State<Setting> {
               SizedBox(height:MediaQuery.of(context).size.height*.05 ,),
               InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Help()));
+                 router.push(Help.routePath);
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

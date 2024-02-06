@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/src/Common/view/widgets/commonappbar.dart';
+import 'package:growlife/src/feature/order/view/widgets/orderdetail.dart';
 import 'package:growlife/src/feature/order/view/widgets/orderlist.dart';
 import 'package:growlife/src/feature/home/view/homescreen.dart';
 import 'package:growlife/src/res/assets.dart';
+import 'package:growlife/src/utils/route.dart';
 class MyOrder extends StatefulWidget {
 
 
@@ -18,7 +20,12 @@ class _MyOrderState extends State<MyOrder> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: CommonAppBar(title: "My Order"),
+      appBar: CommonAppBar(title: "My Order",
+        action: [
+          IconButton(onPressed: (){}, icon: const Icon(Icons.favorite_border,size: 25,)),
+          IconButton(onPressed: (){}, icon: const Icon(Icons.shopping_cart_outlined,size: 25,)),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -30,18 +37,23 @@ class _MyOrderState extends State<MyOrder> {
                      TextFormField(
                       decoration: InputDecoration(
                         hintText: "Search Product",
-                        hintStyle: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.height*.023 ),
+                        hintStyle: GoogleFonts.poppins(fontSize:16),
                         prefixIcon: Icon(Icons.search,size:MediaQuery.of(context).size.height*.035 ,),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)
                         ),
+                        contentPadding: EdgeInsets.all(10)
                       ),
                     ),
-                  SizedBox(height: MediaQuery.of(context).size.height*.03 ,),
+                  SizedBox(height: MediaQuery.of(context).size.height*.02 ,),
                 ],
               ),
             ),
-            const OrderList(name: "Fiddle leaf fig", image: ShopAssets.fiddleleaf, delDate: "Jun 29,2023", num:"20060230"),
+            InkWell(
+              onTap: (){
+                router.push(OrderDetail.routePath);
+              },
+                child: const OrderList(name: "Fiddle leaf fig", image: ShopAssets.fiddleleaf, delDate: "Jun 29,2023", num:"20060230")),
             const OrderList(name: "Garden Gloves", image: ShopAssets.garden_gloves, delDate: "Jun 29,2023", num:"20060230"),
             const OrderList(name: "Fiddle leaf fig", image: ShopAssets.fiddleleaf, delDate: "Jun 29,2023", num:"20060230"),
             SizedBox(height: MediaQuery.of(context).size.height*.03 ,),

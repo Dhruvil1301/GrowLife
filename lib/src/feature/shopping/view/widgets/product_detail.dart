@@ -27,21 +27,23 @@ class _ProductDetailState extends State<ProductDetail> {
   late List<String> LowMaintenance=["The Rubber Plant is relativelyeasy to care for and can thrive in various indoor environments"];
   late List<String> StressReduction=["he presence of plants, including the Rubber Plant, has been shown to reduce stress and create a calming atmosphere."];
 
-
-
-
+  int _rating = 4;
+  int selectedIndex = 0;
+  void updateIndex(int index) {
+    // Update the selected index
+    selectedIndex = index;
+  }
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<BottomNavigationProvider>(context);
     return  Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        currentIndex: provider.selectedIndex,
+        currentIndex: selectedIndex,
         onTap: (index) {
-          provider.updateIndex(index);
+          updateIndex(index);
         },
         items: [
           BottomNavigationBarItem(
@@ -328,7 +330,25 @@ class _ProductDetailState extends State<ProductDetail> {
                   padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.015 ),
                   child: Container(
                     alignment: AlignmentDirectional.topStart,
-                      child: StarRating()),
+                      child: Row(
+                        children: List.generate(5, (index) {
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _rating = index + 1;
+                              });
+                            },
+                            child: Padding(
+                              padding:  const EdgeInsets.symmetric(horizontal: 5),
+                              child: Icon(
+                                index < _rating ? Icons.star : Icons.star_border,
+                                color: index<_rating ?const Color.fromRGBO(255, 215, 0, 1.0):Colors.black38,
+                                size: 36.0,
+                              ),
+                            ),
+                          );
+                        }),
+                      ),),
                 ),
             SizedBox(height: MediaQuery.of(context).size.height*.01,),
             Padding(
@@ -357,28 +377,5 @@ class _ProductDetailState extends State<ProductDetail> {
       ),
     );
 
-  }
-}
-class StarRating extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var starProvider = Provider.of<StarRatingProvider>(context);
-
-    return Row(
-      children: List.generate(5, (index) {
-        return GestureDetector(
-          onTap: () => starProvider.toggleStar(index),
-          child: Icon(
-            starProvider.selectedStars[index]
-                ? Icons.star
-                : Icons.star_border,
-            size: MediaQuery.of(context).size.height*.04,
-            color: starProvider.selectedStars[index]
-                ? Colors.yellow
-                : Colors.grey,
-          ),
-        );
-      }),
-    );
   }
 }

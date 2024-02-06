@@ -16,20 +16,7 @@ void main() {
     DeviceOrientation.portraitDown
   ]);
   runApp(
-    DoubleClickToExitApp(
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => NavigationProvider()),
-          ChangeNotifierProvider(create: (context) => CustomImageProvider()),
-          ChangeNotifierProvider(create: (context) => BottomNavigationProvider()),
-          ChangeNotifierProvider(create: (context) => StarRatingProvider()),
-          ChangeNotifierProvider(create: (context) => CameraProvider()),
-          ChangeNotifierProvider(create: (context) => VideoProvider()),
-
-        ],
-        child: App(),
-      ),
-    ),
+    App(),
   );
 }
 

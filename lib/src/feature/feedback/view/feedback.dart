@@ -5,9 +5,12 @@ import 'package:growlife/src/feature/feedback/view/widgets/rating.dart';
 import 'package:growlife/src/feature/order/view/myorder.dart';
 import 'package:growlife/src/feature/home/view/homescreen.dart';
 import 'package:growlife/src/res/assets.dart';
+import 'package:growlife/src/res/color.dart';
+import 'package:growlife/src/utils/route.dart';
 class AddFeedback extends StatefulWidget {
-  const AddFeedback({Key? key}) : super(key: key);
 
+  const AddFeedback({Key? key}) : super(key: key);
+  static const routePath="/addfeedback";
   @override
   State<AddFeedback> createState() => _AddFeedbackState();
 }
@@ -26,11 +29,11 @@ class _AddFeedbackState extends State<AddFeedback> {
         title: Row(
           children: [
             InkWell(onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyOrder()));
+            router.push(MyOrder.routePath);
             },
-                child: Icon(Icons.close,color: Colors.black54,size:  MediaQuery.of(context).size.height*.035,)),
+                child: const Icon(Icons.close,color: Colors.black54,size: 25)),
             SizedBox(width:  MediaQuery.of(context).size.height*.032,),
-            Text("ADD FEEDBACK",style: GoogleFonts.lato(color: const Color(0xFF1F588E),fontSize:  MediaQuery.of(context).size.height*.025,),),
+            Text("ADD FEEDBACK",style: GoogleFonts.plusJakartaSans(color: AppColor.primary,fontSize: 18,fontWeight: FontWeight.w600),),
 
           ],
         ),
@@ -54,10 +57,10 @@ class _AddFeedbackState extends State<AddFeedback> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Fiddle leaf fig",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.020,fontWeight: FontWeight.bold ),),
+                          Text("Fiddle leaf",style: GoogleFonts.poppins(fontSize: 16),),
                           SizedBox(height: MediaQuery.of(context).size.height*.013 ,),
 
-                              Text("Rate this product",style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.022, ),),
+                              Text("Rate this product",style: GoogleFonts.poppins(fontSize: 16),),
                           SizedBox(height: MediaQuery.of(context).size.height*.013 ,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +100,7 @@ class _AddFeedbackState extends State<AddFeedback> {
               padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.height*.025,vertical:MediaQuery.of(context).size.height*.015 ),
               child: Align(
                   alignment: AlignmentDirectional.topStart,
-                  child: Text("Add Photo or Video",style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.height*.022,fontWeight: FontWeight.bold ),)),
+                  child: Text("Add Photo or Video",style:GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w600),)),
             ),
             Padding(
               padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.height*.05 ),
@@ -121,9 +124,9 @@ class _AddFeedbackState extends State<AddFeedback> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Add Photo",style: GoogleFonts.lato(color:  const Color(0xFF1F588E),fontSize: MediaQuery.of(context).size.height*.02,fontWeight: FontWeight.bold ),),
+                              Text("Add Photo",style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w500,color: AppColor.primary),),
                               SizedBox(width:MediaQuery.of(context).size.height*.005 ,),
-                              Icon(Icons.camera_alt_outlined,size:MediaQuery.of(context).size.height*.030,color:const Color(0xFF1F588E) ,)
+                              const Icon(Icons.camera_alt_outlined,size:20,color:AppColor.primary ,)
                             ],
                           ),
                         ),
@@ -143,9 +146,9 @@ class _AddFeedbackState extends State<AddFeedback> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Add Video",style: GoogleFonts.lato(color:  const Color(0xFF1F588E),fontSize: MediaQuery.of(context).size.height*.02,fontWeight: FontWeight.bold ),),
+                              Text("Add Video",style: GoogleFonts.poppins(fontSize: 16,fontWeight: FontWeight.w500,color: AppColor.primary),),
                               SizedBox(width:MediaQuery.of(context).size.height*.005 ,),
-                              Icon(EvaIcons.videoOutline,size:MediaQuery.of(context).size.height*.030,color:const Color(0xFF1F588E) ,)
+                              const Icon(EvaIcons.videoOutline,size:20,color:AppColor.primary,)
                             ],
                           ),
                         ),
@@ -159,7 +162,7 @@ class _AddFeedbackState extends State<AddFeedback> {
               padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.height*.025,vertical:MediaQuery.of(context).size.height*.015 ),
               child: Align(
                   alignment: AlignmentDirectional.topStart,
-                  child: Text("Write a Review",style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.height*.022,fontWeight: FontWeight.bold ),)),
+                  child: Text("Write a Review",style: GoogleFonts.poppins(fontSize:16,fontWeight: FontWeight.w600 ),)),
             ),
             Container(
               width: MediaQuery.of(context).size.width * 0.9,
@@ -175,7 +178,7 @@ class _AddFeedbackState extends State<AddFeedback> {
                 maxLines: 10,
                 decoration: InputDecoration(
                   hintText: 'How was the product ?',
-                  hintStyle: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.020 ),
+                  hintStyle: GoogleFonts.poppins(fontSize: 14 ),
                   contentPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.02, vertical:  MediaQuery.of(context).size.height*.018),
                   border: InputBorder.none,
                 ),
@@ -187,8 +190,7 @@ class _AddFeedbackState extends State<AddFeedback> {
                 alignment: AlignmentDirectional.topStart,
                 child: InkWell(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
-                    _feedback(context);
+                  router.pushReplacement(HomeScreen.routePath);
                   },
                   child: Container(
                       width: MediaQuery.of(context).size.width * 0.32,
@@ -208,7 +210,7 @@ class _AddFeedbackState extends State<AddFeedback> {
                       child:  Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Send",style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:MediaQuery.of(context).size.height*.025,color: Colors.white )),
+                          Text("Send",style: GoogleFonts.poppins(fontWeight: FontWeight.w500,fontSize:18,color: Colors.white )),
                           SizedBox(width:MediaQuery.of(context).size.width*.03 ,),
                           Transform.rotate(
                             angle: -30 * (3.141592653589793 / 180),
@@ -227,199 +229,6 @@ class _AddFeedbackState extends State<AddFeedback> {
           ],
         ),
       ),
-    );
-  }
-  void _feedback(BuildContext context) {
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          titlePadding: EdgeInsets.zero,
-          contentPadding: EdgeInsets.zero,
-          title: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Container(
-              width: double.infinity,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: MediaQuery.of(context).size.height * 0.03,
-
-                    ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.008),
-                        Align(
-                          alignment: AlignmentDirectional.topStart,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Icon(
-                                      Icons.close,
-                                      size:
-                                      MediaQuery.of(context).size.height * 0.04,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                      width:
-                                      MediaQuery.of(context).size.width * 0.02),
-                                  Text(
-                                    "Feedback",
-                                    style: GoogleFonts.lato(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize:
-                                      MediaQuery.of(context).size.height * 0.028,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                              Text(
-                                "We value your feedback! Please let us",
-                                style: GoogleFonts.lato(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                    MediaQuery.of(context).size.height * 0.018),
-                              ),
-                              SizedBox(
-                                  height:
-                                  MediaQuery.of(context).size.height * 0.008),
-                              Text(
-                                "know how we can improve your",
-                                style: GoogleFonts.lato(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                    MediaQuery.of(context).size.height * 0.018),
-                              ),
-                              SizedBox(
-                                  height:
-                                  MediaQuery.of(context).size.height * 0.008),
-                              Text(
-                                "experience.",
-                                style: GoogleFonts.lato(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                    MediaQuery.of(context).size.height * 0.018),
-                              ),
-                              SizedBox(
-                                  height:
-                                  MediaQuery.of(context).size.height * 0.015),
-                              Text(
-                                "Rate Us",
-                                style: GoogleFonts.lato(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                    MediaQuery.of(context).size.height * 0.021),
-                              ),
-                              SizedBox(
-                                  height:
-                                  MediaQuery.of(context).size.height * 0.008),
-                              StarRating(),
-                              SizedBox(
-                                  height:
-                                  MediaQuery.of(context).size.height * 0.01),
-                              Text(
-                                "Tell us more",
-                                style: GoogleFonts.lato(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize:
-                                    MediaQuery.of(context).size.height * 0.021),
-                              ),
-                              SizedBox(
-                                  height:
-                                  MediaQuery.of(context).size.height * 0.01),
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.9,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      spreadRadius: 1,
-                                      blurRadius: 1,
-                                    )
-                                  ]
-
-                                ),
-                                child: TextFormField(
-                                  maxLines: 5,
-                                  decoration: InputDecoration(
-                                    hintText: 'How we can improve ?',
-                                    hintStyle: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height*.020 ),
-                                    contentPadding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.02, vertical:  MediaQuery.of(context).size.height*.018),
-                                    border: InputBorder.none,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                  height:
-                                  MediaQuery.of(context).size.height * 0.015),
-                              Center(
-                                child: InkWell(
-                                  onTap: (){
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                      width: MediaQuery.of(context).size.width * 0.6,
-                                      height: MediaQuery.of(context).size.height*.06,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        color: const Color(0xFF1F95D8),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.8),
-                                            spreadRadius: 2,
-                                            blurRadius: 2,
-                                            offset: const Offset(0, 1),
-                                          ),
-                                        ],
-                                      ),
-                                      child:  Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Text("Send Feedback",style: GoogleFonts.lato(fontWeight: FontWeight.bold,fontSize:MediaQuery.of(context).size.height*.025,color: Colors.white )),
-                                          SizedBox(width:MediaQuery.of(context).size.width*.03 ,),
-                                          Transform.rotate(
-                                            angle: -30 * (3.141592653589793 / 180),
-                                            child: const Icon(
-                                              Icons.send,
-                                              color: Colors.white,
-                                              size: 24,
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                  ),
-                                ),
-                              ),
-
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 
