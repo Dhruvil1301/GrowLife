@@ -9,6 +9,7 @@ import 'package:growlife/src/feature/invite/view/invite_a_friend.dart';
 import 'package:growlife/src/feature/library/view/library.dart';
 import 'package:growlife/src/feature/privacypolicy/view/privacypolicy.dart';
 import 'package:growlife/src/feature/auth/view/signupscreen.dart';
+import 'package:growlife/src/feature/timespent/view/appactivity.dart';
 import 'package:growlife/src/utils/route.dart';
 class Setting extends StatefulWidget {
 
@@ -77,6 +78,22 @@ class _SettingState extends State<Setting> {
                     Icon(Icons.notifications_none_rounded,color:Colors.black,size:MediaQuery.of(context).size.height*.035,),
                     SizedBox(width:MediaQuery.of(context).size.height*.015 ,),
                     Text("Notification",style:  GoogleFonts.poppins(color: Colors.black,fontSize:20,fontWeight: FontWeight.w400 ),),
+                    SizedBox(width:MediaQuery.of(context).size.height*.2005 ,),
+                    Icon(Icons.arrow_forward_ios_outlined,color: Colors.black,size:MediaQuery.of(context).size.height*.025)
+                  ],
+                ),
+              ),
+              SizedBox(height:MediaQuery.of(context).size.height*.05 ,),
+              InkWell(
+                onTap: (){
+                  router.push(AppActivity.routePath);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(Icons.stacked_line_chart_outlined,color:Colors.black,size:MediaQuery.of(context).size.height*.035,),
+                    SizedBox(width:MediaQuery.of(context).size.height*.015 ,),
+                    Text("App Activity",style:  GoogleFonts.poppins(color: Colors.black,fontSize:20,fontWeight: FontWeight.w400 ),),
                     SizedBox(width:MediaQuery.of(context).size.height*.2005 ,),
                     Icon(Icons.arrow_forward_ios_outlined,color: Colors.black,size:MediaQuery.of(context).size.height*.025)
                   ],

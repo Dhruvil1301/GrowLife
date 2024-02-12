@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:growlife/src/feature/aboutus/view/aboutus.dart';
+import 'package:growlife/src/feature/chat/view/chat.dart';
+import 'package:growlife/src/feature/chat/view/widgets/calling.dart';
+import 'package:growlife/src/feature/chat/view/widgets/chatscreen.dart';
 import 'package:growlife/src/feature/costumersupport/view/Contact.dart';
 import 'package:growlife/src/feature/editprofile/view/edituserdetails.dart';
 import 'package:growlife/src/feature/event/view/events.dart';
@@ -32,9 +35,10 @@ import 'package:growlife/src/feature/shopping/view/widgets/plants.dart';
 import 'package:growlife/src/feature/shopping/view/widgets/product.dart';
 import 'package:growlife/src/feature/shopping/view/widgets/product_detail.dart';
 import 'package:growlife/src/feature/term_condition/view/term&condition.dart';
+import 'package:growlife/src/feature/timespent/view/appactivity.dart';
 import 'package:growlife/src/feature/welcome/view/welcomescreen.dart';
 final GoRouter router=GoRouter(
-    initialLocation:UserDetailScreen.routePath,
+    initialLocation:HomeScreen.routePath,
     routes: [
       GoRoute(
         path: ProductDetail.routePath,
@@ -176,7 +180,7 @@ final GoRouter router=GoRouter(
       GoRoute(
         path: HomeScreen.routePath,
         builder: (BuildContext context, GoRouterState state) {
-          return  HomeScreen();
+          return  const HomeScreen();
         },
       ),
       GoRoute(
@@ -243,6 +247,30 @@ final GoRouter router=GoRouter(
         path: PostLocation.routePath,
         builder: (BuildContext context, GoRouterState state) {
           return  const PostLocation();
+        },
+      ),
+      GoRoute(
+        path: AppActivity.routePath,
+        builder: (BuildContext context, GoRouterState state) {
+          return  const AppActivity();
+        },
+      ),
+      GoRoute(
+        path: ChatView.routePath,
+        builder: (BuildContext context, GoRouterState state) {
+          return  const ChatView();
+        },
+      ),
+      GoRoute(
+        path: ChatScreen.routePath,
+        builder: (BuildContext context, GoRouterState state) {
+          return  const ChatScreen();
+        },
+      ),
+      GoRoute(
+        path: UserCalling.routePath,
+        builder: (BuildContext context, GoRouterState state) {
+          return  const UserCalling();
         },
       ),
     ]

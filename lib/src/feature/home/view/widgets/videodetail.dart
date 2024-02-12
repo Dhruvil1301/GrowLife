@@ -16,6 +16,7 @@ class VideoDetailScreen extends StatefulWidget {
 class _VideoDetailScreenState extends State<VideoDetailScreen> {
   String selectedQuality = 'Auto';
   String selectedSpeed ="Normal";
+  int _selectedDownloadQuality = 0;
   bool isFeatureEnabled = false;
   void _updateFeature(bool newValue) {
     setState(() {
@@ -34,7 +35,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
           isFeatureEnabled ? 'Captions turned ON' : 'Captions turned OFF',
         style: GoogleFonts.lato(),),
 
-      duration: Duration(seconds: 3), // Adjust the duration as needed
+      duration: const Duration(seconds: 3), // Adjust the duration as needed
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -58,7 +59,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                   left:MediaQuery.of(context).size.height*.01 ,
                     child: InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
                       },
                         child: Icon(Icons.arrow_back,color: Colors.white,size: MediaQuery.of(context).size.height*.035,)),
                 ),
@@ -76,7 +77,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                          showModalBottomSheet(
                            context: context,
                            backgroundColor: Colors.white,
-                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+                           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
                            builder: (BuildContext context) {
                              return Container(
                                constraints: BoxConstraints(
@@ -103,7 +104,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
 
                                        children: [
                                          ListTile(
-                                           leading: Icon(Icons.settings),
+                                           leading: const Icon(Icons.settings),
                                            title: Row(
                                              children: [
                                                Text('Quality:',style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.width*.04 ),),
@@ -133,7 +134,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                                            },
                                          ),
                                          ListTile(
-                                           leading: Icon(Icons.closed_caption),
+                                           leading: const Icon(Icons.closed_caption),
                                            title: Row(
                                              children: [
                                                Text('Captions',style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.width*.04)),
@@ -155,7 +156,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                                            },
                                          ),
                                          ListTile(
-                                           leading: Icon(Icons.speed),
+                                           leading: const Icon(Icons.speed),
                                            title: Row(
                                              children: [
                                                Text('Speed',style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.width*.04 ),),
@@ -271,7 +272,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                 children: [
                   Column(
                     children: [
-                      Icon(Icons.favorite,color: Colors.red,size: 25,),
+                      const Icon(Icons.favorite,color: Colors.red,size: 25,),
                       Text("20k",style: GoogleFonts.roboto(fontSize: 12),),
                     ],
                   ),
@@ -282,13 +283,13 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                           showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(15))),// Enable scrolling in the bottom sheet
+                            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(15))),// Enable scrolling in the bottom sheet
                             builder: (BuildContext context) {
                               return Commentbox();
                             },
                           );
                         },
-                          child: Icon(Icons.comment_outlined,color: Colors.black,size: 25)),
+                          child: const Icon(Icons.comment_outlined,color: Colors.black,size: 25)),
                       Text("20k",style: GoogleFonts.roboto(fontSize: 12),),
                     ],
                   ),
@@ -298,7 +299,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                         context: context,
                         backgroundColor: Colors.white,
                         elevation: 0,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
                         builder: (BuildContext context) {
                           return Container(
                             constraints: BoxConstraints(
@@ -361,9 +362,182 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                       );
 
                     },
-                      child: Icon(Icons.share,color: Colors.black,size: 25)),
-                  
-                  Icon(Icons.more_vert_sharp,color: Colors.black,size: 25),
+                      child: Column(
+                        children: [
+                          const Icon(Icons.share_rounded,color: Colors.black,size: 25),
+                          Text("Share",style: GoogleFonts.roboto(fontSize: 12),)
+                        ],
+                      )),
+
+                  InkWell(
+                    onTap: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        backgroundColor: Colors.white,
+                        elevation: 0,
+                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+                        builder: (BuildContext context) {
+                          return StatefulBuilder(
+                            builder: (BuildContext context, StateSetter setState) {
+                              return Container(
+                                constraints: BoxConstraints(
+                                  minHeight: MediaQuery.of(context).size.height * .2,
+                                  maxHeight: MediaQuery.of(context).size.height * .4,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * .01),
+                                      child: Container(
+                                        height: 5,
+                                        width: MediaQuery.of(context).size.width * .2,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          color: Colors.black26,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: Text("Download Quality", style: GoogleFonts.poppins(fontSize: 16)),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio<int>(
+                                                activeColor: AppColor.greenColor,
+                                                value: 0,
+                                                groupValue: _selectedDownloadQuality,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    _selectedDownloadQuality = value!;
+                                                  });
+                                                },
+                                              ),
+                                              Text(
+                                                'Low (144p)',
+                                                style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio<int>(
+                                                activeColor: AppColor.greenColor,
+                                                value: 1,
+                                                groupValue: _selectedDownloadQuality,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    _selectedDownloadQuality = value!;
+                                                  });
+                                                },
+                                              ),
+                                              Text(
+                                                'Medium (360p)',
+                                                style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio<int>(
+                                                activeColor: AppColor.greenColor,
+                                                value: 2,
+                                                groupValue: _selectedDownloadQuality,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    _selectedDownloadQuality = value!;
+                                                  });
+                                                },
+                                              ),
+                                              Text(
+                                                'High (720p)',
+                                                style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio<int>(
+                                                activeColor: AppColor.greenColor,
+                                                value: 3,
+                                                groupValue: _selectedDownloadQuality,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    _selectedDownloadQuality = value!;
+                                                  });
+                                                },
+                                              ),
+                                              Text(
+                                                'Full HD (1080p)',
+                                                style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.circular(5),
+                                              border: Border.all(
+                                                color: AppColor.lightGreenColor,
+                                                width: 2
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 60),
+                                              child: Center(
+                                                child: Text("Cancel", style: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w500, color: AppColor.lightGreenColor)),
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              color: AppColor.lightGreenColor,
+                                              borderRadius: BorderRadius.circular(5),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 60),
+                                              child: Center(
+                                                child: Text("Download", style: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.white)),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        const Icon(Icons.download_outlined, color: Colors.black, size: 25),
+                        Text("Download", style: GoogleFonts.roboto(fontSize: 12)),
+                      ],
+                    ),
+                  ),
+
+
+
+
+                  const Icon(Icons.more_vert_sharp,color: Colors.black,size: 25),
 
                 ],
               ),
@@ -375,7 +549,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
             ),
             SizedBox(height: MediaQuery.of(context).size.height*.02 ,),
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 10),
+              padding:  const EdgeInsets.symmetric(horizontal: 10),
               child: Container(
                 alignment: AlignmentDirectional.topStart,
                   child: Text("Recommended videos",style: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w500,fontSize: 20),)),

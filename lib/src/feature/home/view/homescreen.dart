@@ -111,16 +111,17 @@ class _HomeScreenState extends State<HomeScreen> {
               radius: 25,
               child: Image.asset(
                 isSelected ? selectedImageAsset : unselectedImageAsset,
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
               ),
             ),
             const SizedBox(height: 2),
             Text(
               label,
-              style: GoogleFonts.lato(
-                color: isSelected ? const Color(0xFF1F588E) : Colors.white,
-                fontSize: MediaQuery.of(context).size.height * .019,
+              style: GoogleFonts.montserrat(
+                color: isSelected ? AppColor.primary : Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w600
               ),
             ),
           ],

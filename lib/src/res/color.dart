@@ -7,4 +7,7 @@ class AppColor{
   static const lightGreenColor= Color(0xFF268E15);
   static const backgroundColor=Color(0xFFDCE9F8);
   static const greenColor= Color(0xFF0FA958);
+  static  const barColor =  Color(0xFF6AFFB1);
+  static const msgContainerColor=Color(0xFFE1FFE9);
+
 }

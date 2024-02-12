@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/src/Common/Providers/providerall.dart';
+import 'package:growlife/src/feature/chat/view/chat.dart';
 import 'package:growlife/src/feature/home/view/widgets/videoList.dart';
 import 'package:growlife/src/feature/notification/view/notification.dart';
 import 'package:growlife/src/feature/profile/view/profile.dart';
@@ -101,7 +102,7 @@ class _HomeState extends State<Home> {
                             ),
 
                       ),
-                      SizedBox(width: MediaQuery.of(context).size.height*.23 ,),
+                      SizedBox(width: MediaQuery.of(context).size.height*.18 ,),
                       Padding(
                         padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height*.035,left: MediaQuery.of(context).size.height*.02 ),
                         child: InkWell(
@@ -110,10 +111,10 @@ class _HomeState extends State<Home> {
                             },
                             child: Stack(
                               children: [
-                                const Icon(Icons.notifications,color: Colors.black,size:30,),
+                                const Icon(Icons.notifications,color: Colors.black,size:25,),
                                 Positioned(
-                                    left: 20,
-                                  top: 2,
+                                    right: 0,
+                                    top: 0,
                                     child:
                                     Container(
                                       height: 8,
@@ -123,6 +124,31 @@ class _HomeState extends State<Home> {
                                         color: Color(0xFF20C968)
                                       ),
                                     ),
+                                )
+                              ],
+                            )),
+                      ),
+                      Padding(
+                        padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height*.035,left: MediaQuery.of(context).size.height*.02 ),
+                        child: InkWell(
+                            onTap: (){
+                             router.push(ChatView.routePath);
+                            },
+                            child: Stack(
+                              children: [
+                                const Icon(Icons.chat_bubble_outline,color: Colors.black,size:25,),
+                                Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  child:
+                                  Container(
+                                    height: 8,
+                                    width: 8,
+                                    decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Color(0xFF20C968)
+                                    ),
+                                  ),
                                 )
                               ],
                             )),

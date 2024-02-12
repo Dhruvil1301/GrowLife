@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/src/feature/post/view/widgets/uploadfile.dart';
 import 'package:growlife/src/feature/home/view/homescreen.dart';
 import 'package:growlife/src/utils/route.dart';
-import 'package:video_player/video_player.dart';
 class Camera extends StatefulWidget {
   @override
   _CameraState createState() => _CameraState();
