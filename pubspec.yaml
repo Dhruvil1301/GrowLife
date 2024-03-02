@@ -61,6 +61,7 @@ dependencies:
   go_router: ^13.0.1
   video_thumbnail: ^0.5.3
   flutter_charts: ^0.5.2
+  shared_preferences: ^2.2.2
 
 
 

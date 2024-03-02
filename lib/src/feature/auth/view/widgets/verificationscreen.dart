@@ -27,61 +27,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   bool _showConfirmPassword=false;
 
 
-  Future<void> Reset(String otp, String password,String Confirmpassword) async {
-    final apiUrl = Uri.parse("https://uptight-shift-crow.cyclic.cloud/Users/v1/api/reset");
-    final Map<String, dynamic> data = {
-      "otp": otp,
-      "password": password,
-      "passwordConfirm": Confirmpassword,
-    };
-    final Map<String, String> headers = {
-      'Content-Type': 'application/json', // Assuming 'Content-Type' is 'application/json'
 
-    };
-    // Other headers if required
-    final String jsonData = json.encode(data);
-
-    final response = await http.post(
-        apiUrl,
-        headers: headers,
-        body: jsonData
-    );
-
-    if (response.statusCode == 200) {
-      // Successful signup, you can handle the response here
-      String message ="Password Changed Successfully";
-      showSuccessSnackbar(context, message);
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ShimmerScreen()));
-      print("Password Changed successful");
-    } else {
-      final jsonResponse = json.decode(response.body);
-      final String message = "Invaild OTP (Please check your email)";
-      showErrorSnackbar(context, message);
-      print("Error: $message");
-    }
-  }
-
-  void showErrorSnackbar(BuildContext context, String errorMessage) {
-    final snackBar = SnackBar(
-      behavior: SnackBarBehavior.floating, // Optional: You can choose how the snackbar behaves
-      duration: Duration(seconds: 3),
-      content: Text(errorMessage,style: GoogleFonts.lato(fontSize: 15.sp,color: Colors.white,fontWeight: FontWeight.bold),),
-      backgroundColor: Colors.red,
-      padding: EdgeInsets.all(15.sp),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
-  void showSuccessSnackbar(BuildContext context, String message) {
-    final snackBar = SnackBar(
-      behavior: SnackBarBehavior.floating, // Optional: You can choose how the snackbar behaves
-      duration: Duration(seconds: 3),
-      padding: EdgeInsets.all(15.sp),
-      content: Text(message,style: GoogleFonts.lato(fontSize: 15.sp,color: Colors.white,fontWeight: FontWeight.bold),),
-      backgroundColor: Colors.green,
-    );
-
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
 
   @override
   void dispose() {
@@ -268,7 +214,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 InkWell(
                   onTap: (){
                     if(_formKey.currentState!.validate()){
-                     Reset(otp,passwordController.text,confirmpasswordController.text);
+
                     }
                   },
                   child: Container(

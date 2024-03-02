@@ -27,6 +27,7 @@ class ChatList extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+
             Text(name,style: GoogleFonts.lato(fontWeight: FontWeight.w500,fontSize: 14),),
             Text(lastMsgTime,style: GoogleFonts.lato(fontWeight: FontWeight.w400,fontSize: 12,color: Colors.black45),),
 

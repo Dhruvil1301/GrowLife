@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:growlife/src/feature/aboutus/view/aboutus.dart';
+import 'package:growlife/src/feature/auth/view/signin.dart';
+import 'package:growlife/src/feature/auth/view/signupscreen.dart';
+import 'package:growlife/src/feature/auth/view/widgets/forgotpasswordscreen.dart';
 import 'package:growlife/src/feature/chat/view/chat.dart';
 import 'package:growlife/src/feature/chat/view/widgets/calling.dart';
 import 'package:growlife/src/feature/chat/view/widgets/chatscreen.dart';
@@ -38,12 +41,30 @@ import 'package:growlife/src/feature/term_condition/view/term&condition.dart';
 import 'package:growlife/src/feature/timespent/view/appactivity.dart';
 import 'package:growlife/src/feature/welcome/view/welcomescreen.dart';
 final GoRouter router=GoRouter(
-    initialLocation:HomeScreen.routePath,
+    initialLocation:SignUpScreen.routePath,
     routes: [
+      GoRoute(
+        path: SignUpScreen.routePath,
+        builder: (BuildContext context, GoRouterState state) {
+          return const SignUpScreen();
+        },
+      ),
       GoRoute(
         path: ProductDetail.routePath,
         builder: (BuildContext context, GoRouterState state) {
           return const ProductDetail();
+        },
+      ),
+      GoRoute(
+        path: SignInScreen.routePath,
+        builder: (BuildContext context, GoRouterState state) {
+          return const SignInScreen();
+        },
+      ),
+      GoRoute(
+        path: ForgotPassword.routePath,
+        builder: (BuildContext context, GoRouterState state) {
+          return  ForgotPassword();
         },
       ),
       GoRoute(

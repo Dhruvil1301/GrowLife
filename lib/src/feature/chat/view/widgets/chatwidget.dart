@@ -17,12 +17,12 @@ class ChatWidget extends StatelessWidget {
            ChatList(image: ImageAssets.circularimg1, name:"John Deo", lastMsg: "Hello", lastMsgTime: "18:31", No_of_unreadMsg: "5", unreadMsg: true,onTap: (){
              router.push(ChatScreen.routePath);
            },),
-          ChatList(image: ImageAssets.circularimg1, name:"John Deo", lastMsg: "How are you?", lastMsgTime: "16:04", No_of_unreadMsg: "5", unreadMsg: false),
-          ChatList(image: ImageAssets.circularimg1, name:"John Deo", lastMsg: "Hello", lastMsgTime: "06:12", No_of_unreadMsg: "5", unreadMsg: false),
-          ChatList(image: ImageAssets.circularimg1, name:"John Deo", lastMsg: "Hello", lastMsgTime: "Yesterday", No_of_unreadMsg: "5", unreadMsg: false),
-          ChatList(image: ImageAssets.circularimg1, name:"John Deo", lastMsg: "Hello", lastMsgTime: "Yesterday", No_of_unreadMsg: "5", unreadMsg: false),
-          ChatList(image: ImageAssets.circularimg1, name:"John Deo", lastMsg: "Hello", lastMsgTime: "Jan 23", No_of_unreadMsg: "5", unreadMsg: true),
-          ChatList(image: ImageAssets.circularimg1, name:"John Deo", lastMsg: "Hello", lastMsgTime: "Jan 12", No_of_unreadMsg: "5", unreadMsg: false)
+          const ChatList(image: ImageAssets.circularimg1, name:"John Deo", lastMsg: "How are you?", lastMsgTime: "16:04", No_of_unreadMsg: "5", unreadMsg: false),
+          const ChatList(image: ImageAssets.circularimg1, name:"John Deo", lastMsg: "Hello", lastMsgTime: "06:12", No_of_unreadMsg: "5", unreadMsg: false),
+          const ChatList(image: ImageAssets.circularimg1, name:"John Deo", lastMsg: "Hello", lastMsgTime: "Yesterday", No_of_unreadMsg: "5", unreadMsg: false),
+          const ChatList(image: ImageAssets.circularimg1, name:"John Deo", lastMsg: "Hello", lastMsgTime: "Yesterday", No_of_unreadMsg: "5", unreadMsg: false),
+          const ChatList(image: ImageAssets.circularimg1, name:"John Deo", lastMsg: "Hello", lastMsgTime: "Jan 23", No_of_unreadMsg: "5", unreadMsg: true),
+          const ChatList(image: ImageAssets.circularimg1, name:"John Deo", lastMsg: "Hello", lastMsgTime: "Jan 12", No_of_unreadMsg: "5", unreadMsg: false)
         ],
       ),
     );

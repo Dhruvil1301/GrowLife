@@ -9,17 +9,18 @@ import 'package:growlife/src/res/assets.dart';
 import 'package:growlife/src/res/color.dart';
 import 'package:http/http.dart' as http;
 import 'package:shimmer/shimmer.dart';
-class ForgotPassword extends StatefulWidget {
-  const ForgotPassword({Key? key}) : super(key: key);
+class ForgotPassword extends StatelessWidget {
 
-  @override
-  State<ForgotPassword> createState() => _ForgotPasswordState();
-}
 
-class _ForgotPasswordState extends State<ForgotPassword> {
+  ForgotPassword({Key? key}) : super(key: key);
+  static const routePath="/forgotpassword";
+
   TextEditingController textcontroller=TextEditingController();
+
   final _formKey= GlobalKey<FormState>();
+
   final String  success="You want to forget Your password";
+
   void showSuccessSnackbar(BuildContext context, String message) {
     final snackBar = SnackBar(
       behavior: SnackBarBehavior.floating, // Optional: You can choose how the snackbar behaves
@@ -32,51 +33,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  void showErrorSnackbar(BuildContext context, String errorMessage) {
-    final snackBar = SnackBar(
-      behavior: SnackBarBehavior.floating, // Optional: You can choose how the snackbar behaves
-      duration: Duration(seconds: 3),
-      content: Text(errorMessage,style: GoogleFonts.lato(fontSize: 15.sp,color: Colors.white,fontWeight: FontWeight.bold),),
-      backgroundColor: Colors.red,
-      padding: EdgeInsets.all(15.sp),
-    );
-
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
-  Future<void> Forget( String email) async {
-    final apiUrl = Uri.parse("https://uptight-shift-crow.cyclic.cloud/Users/v1/api/forget");
-    final Map<String, dynamic> data = {
-      "Email": email,
-    };
-    final Map<String, String> headers = {
-      'Content-Type': 'application/json', // Assuming 'Content-Type' is 'application/json'
-
-    };
-    // Other headers if required
-    final String jsonData = json.encode(data);
-
-    final response = await http.post(
-        apiUrl,
-        headers: headers,
-        body: jsonData
-    );
-
-    if (response.statusCode == 200) {
-      // Successful signup, you can handle the response here
-      final jsonResponse = json.decode(response.body);
-      final message = jsonResponse['message'];
-      if(message==success){
-        showSuccessSnackbar(context, message);
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>GoToVerification(text: textcontroller,)));
-        print("Verified");
-      }
-      else {
-        showErrorSnackbar(context, message);
-        Navigator.push(context,MaterialPageRoute(builder: (context)=>LoadingForgetPassword()));
-        print("Failed: $message");
-      }
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
@@ -113,7 +69,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                    InkWell(
                      onTap: (){
                        if(_formKey.currentState!.validate()){
-                         Forget(textcontroller.text);
+
                        }
                      },
                 child: Container(
@@ -141,6 +97,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     ),);
   }
 }
+
 class LoadingForgetPassword extends StatefulWidget {
   const LoadingForgetPassword({Key? key}) : super(key: key);
 

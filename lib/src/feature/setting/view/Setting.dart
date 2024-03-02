@@ -165,7 +165,7 @@ class _SettingState extends State<Setting> {
               SizedBox(height:MediaQuery.of(context).size.height*.05 ,),
               InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ShimmerScreenSuccessSignup()));
+
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

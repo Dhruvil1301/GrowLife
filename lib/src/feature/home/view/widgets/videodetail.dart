@@ -18,6 +18,8 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
   String selectedSpeed ="Normal";
   int _selectedDownloadQuality = 0;
   bool isFeatureEnabled = false;
+  bool isWatchlater=true;
+  bool isAddtoPlaylist=false;
   void _updateFeature(bool newValue) {
     setState(() {
       isFeatureEnabled = newValue;
@@ -29,7 +31,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
     });
 
     // Show a Snackbar when the feature is turned on/off
-    final snackBar = SnackBar(
+    final snackBarCaption = SnackBar(
       content:
          Text(
           isFeatureEnabled ? 'Captions turned ON' : 'Captions turned OFF',
@@ -38,7 +40,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
       duration: const Duration(seconds: 3), // Adjust the duration as needed
     );
 
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBarCaption);
   }
 
   @override
@@ -266,9 +268,8 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
               ),
             ),
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.height*.05,vertical:MediaQuery.of(context).size.height*.03  ),
-              child:  Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: const EdgeInsets.symmetric(vertical: 25.0,horizontal: 10),
+              child: Row(
                 children: [
                   Column(
                     children: [
@@ -276,268 +277,321 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                       Text("20k",style: GoogleFonts.roboto(fontSize: 12),),
                     ],
                   ),
-                  Column(
-                    children: [
-                      InkWell(
-                        onTap: (){
-                          showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(15))),// Enable scrolling in the bottom sheet
-                            builder: (BuildContext context) {
-                              return Commentbox();
-                            },
-                          );
-                        },
-                          child: const Icon(Icons.comment_outlined,color: Colors.black,size: 25)),
-                      Text("20k",style: GoogleFonts.roboto(fontSize: 12),),
-                    ],
-                  ),
-                  InkWell(
-                    onTap: (){
-                      showModalBottomSheet<void>(
-                        context: context,
-                        backgroundColor: Colors.white,
-                        elevation: 0,
-                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
-                        builder: (BuildContext context) {
-                          return Container(
-                            constraints: BoxConstraints(
-                              minHeight: MediaQuery.of(context).size.height*.2, // Minimum height of the bottom sheet
-                              maxHeight: MediaQuery.of(context).size.height*.35, // Maximum height of the bottom sheet
-                            ),
-                            child: Column(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*.01),
-                                  child: Container(
-                                    height: MediaQuery.of(context).size.height*.01,
-                                    width: MediaQuery.of(context).size.width*.2,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.13,),
-                                      color: Colors.grey
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:  EdgeInsets.only(left:MediaQuery.of(context).size.height*.03, ),
-                                  child: Container(
-                                      alignment: AlignmentDirectional.topStart,
-                                        child: Image.asset(ShareAssets.copylink,height: MediaQuery.of(context).size.height*.1,width: MediaQuery.of(context).size.height*.18,)),
-
-                                ),
-                              Container(
-                                height:MediaQuery.of(context).size.height*.0005 ,
-                                width: MediaQuery.of(context).size.width*1,
-                                color: Colors.black,
-                              ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*.03,horizontal:  MediaQuery.of(context).size.height*.04 ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Image.asset(ShareAssets.whatsapp,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
-                                      Image.asset(ShareAssets.tiwtter,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
-                                      Image.asset(ShareAssets.instagram,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
-                                      Image.asset(ShareAssets.facebook,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*.01,horizontal:  MediaQuery.of(context).size.height*.04 ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Image.asset(ShareAssets.drive,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
-                                      Image.asset(ShareAssets.mail,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
-                                      Image.asset(ShareAssets.bluetooth,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
-                                      Image.asset(ShareAssets.more,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      );
-
-                    },
-                      child: Column(
-                        children: [
-                          const Icon(Icons.share_rounded,color: Colors.black,size: 25),
-                          Text("Share",style: GoogleFonts.roboto(fontSize: 12),)
-                        ],
-                      )),
-
-                  InkWell(
-                    onTap: () {
-                      showModalBottomSheet<void>(
-                        context: context,
-                        backgroundColor: Colors.white,
-                        elevation: 0,
-                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
-                        builder: (BuildContext context) {
-                          return StatefulBuilder(
-                            builder: (BuildContext context, StateSetter setState) {
-                              return Container(
-                                constraints: BoxConstraints(
-                                  minHeight: MediaQuery.of(context).size.height * .2,
-                                  maxHeight: MediaQuery.of(context).size.height * .4,
-                                ),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * .01),
-                                      child: Container(
-                                        height: 5,
-                                        width: MediaQuery.of(context).size.width * .2,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
-                                          color: Colors.black26,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(12.0),
-                                            child: Text("Download Quality", style: GoogleFonts.poppins(fontSize: 16)),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Radio<int>(
-                                                activeColor: AppColor.greenColor,
-                                                value: 0,
-                                                groupValue: _selectedDownloadQuality,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    _selectedDownloadQuality = value!;
-                                                  });
-                                                },
-                                              ),
-                                              Text(
-                                                'Low (144p)',
-                                                style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Radio<int>(
-                                                activeColor: AppColor.greenColor,
-                                                value: 1,
-                                                groupValue: _selectedDownloadQuality,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    _selectedDownloadQuality = value!;
-                                                  });
-                                                },
-                                              ),
-                                              Text(
-                                                'Medium (360p)',
-                                                style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Radio<int>(
-                                                activeColor: AppColor.greenColor,
-                                                value: 2,
-                                                groupValue: _selectedDownloadQuality,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    _selectedDownloadQuality = value!;
-                                                  });
-                                                },
-                                              ),
-                                              Text(
-                                                'High (720p)',
-                                                style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Radio<int>(
-                                                activeColor: AppColor.greenColor,
-                                                value: 3,
-                                                groupValue: _selectedDownloadQuality,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    _selectedDownloadQuality = value!;
-                                                  });
-                                                },
-                                              ),
-                                              Text(
-                                                'Full HD (1080p)',
-                                                style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.circular(5),
-                                              border: Border.all(
-                                                color: AppColor.lightGreenColor,
-                                                width: 2
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 60),
-                                              child: Center(
-                                                child: Text("Cancel", style: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w500, color: AppColor.lightGreenColor)),
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: AppColor.lightGreenColor,
-                                              borderRadius: BorderRadius.circular(5),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 60),
-                                              child: Center(
-                                                child: Text("Download", style: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.white)),
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      );
-                    },
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20 ),
                     child: Column(
                       children: [
-                        const Icon(Icons.download_outlined, color: Colors.black, size: 25),
-                        Text("Download", style: GoogleFonts.roboto(fontSize: 12)),
+                        InkWell(
+                          onTap: (){
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(15))),// Enable scrolling in the bottom sheet
+                              builder: (BuildContext context) {
+                                return Commentbox();
+                              },
+                            );
+                          },
+                            child: const Icon(Icons.comment_outlined,color: Colors.black,size: 25)),
+                        Text("20k",style: GoogleFonts.roboto(fontSize: 12),),
                       ],
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20 ),
+                    child: InkWell(
+                      onTap: (){
+                        showModalBottomSheet<void>(
+                          context: context,
+                          backgroundColor: Colors.white,
+                          elevation: 0,
+                          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+                          builder: (BuildContext context) {
+                            return Container(
+                              constraints: BoxConstraints(
+                                minHeight: MediaQuery.of(context).size.height*.2, // Minimum height of the bottom sheet
+                                maxHeight: MediaQuery.of(context).size.height*.35, // Maximum height of the bottom sheet
+                              ),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*.01),
+                                    child: Container(
+                                      height: MediaQuery.of(context).size.height*.01,
+                                      width: MediaQuery.of(context).size.width*.2,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.13,),
+                                        color: Colors.grey
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:  EdgeInsets.only(left:MediaQuery.of(context).size.height*.03, ),
+                                    child: Container(
+                                        alignment: AlignmentDirectional.topStart,
+                                          child: Image.asset(ShareAssets.copylink,height: MediaQuery.of(context).size.height*.1,width: MediaQuery.of(context).size.height*.18,)),
 
+                                  ),
+                                Container(
+                                  height:MediaQuery.of(context).size.height*.0005 ,
+                                  width: MediaQuery.of(context).size.width*1,
+                                  color: Colors.black,
+                                ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*.03,horizontal:  MediaQuery.of(context).size.height*.04 ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Image.asset(ShareAssets.whatsapp,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
+                                        Image.asset(ShareAssets.tiwtter,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
+                                        Image.asset(ShareAssets.instagram,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
+                                        Image.asset(ShareAssets.facebook,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*.01,horizontal:  MediaQuery.of(context).size.height*.04 ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Image.asset(ShareAssets.drive,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
+                                        Image.asset(ShareAssets.mail,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
+                                        Image.asset(ShareAssets.bluetooth,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
+                                        Image.asset(ShareAssets.more,height: MediaQuery.of(context).size.height*.06,width: MediaQuery.of(context).size.height*.06,),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        );
 
+                      },
+                        child: Column(
+                          children: [
+                            const Icon(Icons.share_rounded,color: Colors.black,size: 25),
+                            Text("Share",style: GoogleFonts.roboto(fontSize: 12),)
+                          ],
+                        )),
+                  ),
 
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20 ),
+                    child: InkWell(
+                      onTap: () {
+                        showModalBottomSheet<void>(
+                          context: context,
+                          backgroundColor: Colors.white,
+                          elevation: 0,
+                          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+                          builder: (BuildContext context) {
+                            return StatefulBuilder(
+                              builder: (BuildContext context, StateSetter setState) {
+                                return Container(
+                                  constraints: BoxConstraints(
+                                    minHeight: MediaQuery.of(context).size.height * .2,
+                                    maxHeight: MediaQuery.of(context).size.height * .4,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * .01),
+                                        child: Container(
+                                          height: 5,
+                                          width: MediaQuery.of(context).size.width * .2,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(20),
+                                            color: Colors.black26,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(12.0),
+                                              child: Text("Download Quality", style: GoogleFonts.poppins(fontSize: 16)),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Radio<int>(
+                                                  activeColor: AppColor.greenColor,
+                                                  value: 0,
+                                                  groupValue: _selectedDownloadQuality,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _selectedDownloadQuality = value!;
+                                                    });
+                                                  },
+                                                ),
+                                                Text(
+                                                  'Low (144p)',
+                                                  style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Radio<int>(
+                                                  activeColor: AppColor.greenColor,
+                                                  value: 1,
+                                                  groupValue: _selectedDownloadQuality,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _selectedDownloadQuality = value!;
+                                                    });
+                                                  },
+                                                ),
+                                                Text(
+                                                  'Medium (360p)',
+                                                  style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Radio<int>(
+                                                  activeColor: AppColor.greenColor,
+                                                  value: 2,
+                                                  groupValue: _selectedDownloadQuality,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _selectedDownloadQuality = value!;
+                                                    });
+                                                  },
+                                                ),
+                                                Text(
+                                                  'High (720p)',
+                                                  style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Radio<int>(
+                                                  activeColor: AppColor.greenColor,
+                                                  value: 3,
+                                                  groupValue: _selectedDownloadQuality,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      _selectedDownloadQuality = value!;
+                                                    });
+                                                  },
+                                                ),
+                                                Text(
+                                                  'Full HD (1080p)',
+                                                  style: GoogleFonts.poppins(fontSize: 14, color: Colors.black),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(15.0),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(5),
+                                                border: Border.all(
+                                                  color: AppColor.lightGreenColor,
+                                                  width: 2
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 60),
+                                                child: Center(
+                                                  child: Text("Cancel", style: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w500, color: AppColor.lightGreenColor)),
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColor.lightGreenColor,
+                                                borderRadius: BorderRadius.circular(5),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 60),
+                                                child: Center(
+                                                  child: Text("Download", style: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w500, color: Colors.white)),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          const Icon(Icons.download_outlined, color: Colors.black, size: 25),
+                          Text("Download", style: GoogleFonts.roboto(fontSize: 12)),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20 ),
+                    child: InkWell(
+                        onTap: (){
+                         setState(() {
+                           isWatchlater=!isWatchlater;
+                         });
+                         final snackBarWatchLater = SnackBar(
+                           content: Text(
+                             isWatchlater ?'Removed from Watch Later': 'Added to Watch Later' ,
+                             style: GoogleFonts.lato(),
+                           ),
+                           duration: const Duration(seconds: 3),
+                         );
 
-                  const Icon(Icons.more_vert_sharp,color: Colors.black,size: 25),
+                         ScaffoldMessenger.of(context).showSnackBar(snackBarWatchLater);
+
+                        },
+                        child: Column(
+                          children: [
+                            const Icon(Icons.access_time_sharp,color: Colors.black,size: 25),
+                            isWatchlater?Text("Watch Later",style: GoogleFonts.roboto(fontSize: 12),):Text("Remove",style: GoogleFonts.roboto(fontSize: 12),)
+                          ],
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20 ),
+                    child: InkWell(
+                        onTap: (){
+                          setState(() {
+                            isAddtoPlaylist=true;
+                          });
+                          final snackBarWatchLater = SnackBar(
+                            content: Text(
+                              isAddtoPlaylist ?'Video Added In Playlist': 'Already Your Video is Added' ,
+                              style: GoogleFonts.lato(),
+                            ),
+                            duration: const Duration(seconds: 3),
+                          );
+
+                          ScaffoldMessenger.of(context).showSnackBar(snackBarWatchLater);
+                        },
+                        child: Column(
+                          children: [
+                           isAddtoPlaylist? const Icon(Icons.check,color: AppColor.greenColor,size: 25):const Icon(Icons.add,color: Colors.black,size: 25),
+                            Text("Add to Playlist",style: GoogleFonts.roboto(fontSize: 12),)
+                          ],
+                        )),
+                  ),
 
                 ],
               ),
