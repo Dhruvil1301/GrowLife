@@ -2,16 +2,16 @@ import 'package:growlife/src/res/string.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class AuthRepository {
-  static const String apiUrl = Api.SignIn;
+class ForgotVerificationRepository {
+  static const String apiUrl = Api.ForgotOtp;
 
-  Future<http.Response> signin(String key,  String password,) async {
+  Future<http.Response> otpVerification(String email, String otp,) async {
     try {
       final response = await http.post(
         Uri.parse(apiUrl),
         body: json.encode({
-          'key': key,
-          'password': password,
+          'email': email,
+          'otp':otp,
         }),
         headers: {'Content-Type': 'application/json'},
       );

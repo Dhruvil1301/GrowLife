@@ -2,39 +2,36 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:growlife/src/Common/Providers/providerall.dart';
 import 'package:growlife/src/feature/auth/view/widgets/verificationscreen.dart';
 import 'package:growlife/src/res/assets.dart';
 import 'package:growlife/src/res/color.dart';
 import 'package:http/http.dart' as http;
 import 'package:shimmer/shimmer.dart';
-class ForgotPassword extends StatelessWidget {
+class ForgotPassword extends ConsumerStatefulWidget {
 
 
   ForgotPassword({Key? key}) : super(key: key);
   static const routePath="/forgotpassword";
 
+  @override
+  ConsumerState<ForgotPassword> createState() => _ForgotPasswordState();
+}
+
+class _ForgotPasswordState extends ConsumerState<ForgotPassword> {
   TextEditingController textcontroller=TextEditingController();
 
   final _formKey= GlobalKey<FormState>();
 
   final String  success="You want to forget Your password";
-
-  void showSuccessSnackbar(BuildContext context, String message) {
-    final snackBar = SnackBar(
-      behavior: SnackBarBehavior.floating, // Optional: You can choose how the snackbar behaves
-      duration: Duration(seconds: 3),
-      padding: EdgeInsets.all(15.sp),
-      content: Text(message,style: GoogleFonts.lato(fontSize: 15.sp,color: Colors.white,fontWeight: FontWeight.bold),),
-      backgroundColor: Colors.green,
-    );
-
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
+  bool isLoading=false;
 
   @override
   Widget build(BuildContext context) {
+    final forgotProvider=ref.read(forgotControllerProvider);
     return SafeArea(child: Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -67,9 +64,18 @@ class ForgotPassword extends StatelessWidget {
               ),
              SizedBox( height:MediaQuery.of(context).size.height*.08),
                    InkWell(
-                     onTap: (){
-                       if(_formKey.currentState!.validate()){
 
+                     onTap: (){
+                       setState(() {
+                         isLoading=true;
+                       });
+                       Future.delayed(const Duration(seconds: 3), () {
+                         setState(() {
+                           isLoading = false;
+                         });
+                       });
+                       if(_formKey.currentState!.validate()){
+                         forgotProvider.forgot(context,textcontroller.text);
                        }
                      },
                 child: Container(
@@ -87,7 +93,7 @@ class ForgotPassword extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Center(child: Text("Get OTP",style: GoogleFonts.lato(color: Colors.black,fontWeight: FontWeight.bold,fontSize: MediaQuery.of(context).size.height*.03),)),
+                  child: Center(child: isLoading==true?CircularProgressIndicator(color: Colors.black,):Text("Get OTP",style: GoogleFonts.plusJakartaSans(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),)),
                 ),
               )
             ],
@@ -95,199 +101,6 @@ class ForgotPassword extends StatelessWidget {
         ),
       ),
     ),);
-  }
-}
-
-class LoadingForgetPassword extends StatefulWidget {
-  const LoadingForgetPassword({Key? key}) : super(key: key);
-
-  @override
-  State<LoadingForgetPassword> createState() => _LoadingForgetPasswordState();
-}
-
-class _LoadingForgetPasswordState extends State<LoadingForgetPassword> {
-  late Timer _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    // Set a timer for 3 seconds to pop the screen
-    _timer = Timer(Duration(seconds: 2), () {
-      Navigator.pop(context);
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel(); // Cancel the timer to avoid memory leaks
-    super.dispose();}
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Shimmer.fromColors(
-        baseColor: Colors.blue.withOpacity(.2),
-        highlightColor: Colors.blue.withOpacity(.1),
-        child: Center(
-          child: Container(
-           child: Padding(
-              padding:  EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*.06 ),
-              child: Column(
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height*.07 ,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.height*.02,),
-                      Container(
-                        height: MediaQuery.of(context).size.height*.07 ,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.grey.shade100,
-                        ),
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.height*.03,),
-                      Container(
-                        height: MediaQuery.of(context).size.height*.07 ,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.grey.shade100,
-                        ),
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.height*.02,),
-                      Container(
-                        height: MediaQuery.of(context).size.height*.07 ,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.grey.shade100,
-                        ),
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.height*.03,),
-                      Container(
-                        height: MediaQuery.of(context).size.height*.02 ,
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Colors.grey.shade100,
-                        ),
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.height*.01,),
-                    ],
-                  ),
-
-
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class GoToVerification extends StatefulWidget {
-  final TextEditingController text;
-  const GoToVerification({Key? key, required this.text}) : super(key: key);
-
-  @override
-  State<GoToVerification> createState() => _GoToVerificationState();
-}
-
-class _GoToVerificationState extends State<GoToVerification> {
-  late Timer _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    // Set a timer for 3 seconds to pop the screen
-    _timer = Timer(Duration(seconds: 2), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>VerificationScreen(textToShow: widget.text)));
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel(); // Cancel the timer to avoid memory leaks
-    super.dispose();}
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Shimmer.fromColors(
-        baseColor: Colors.blue.withOpacity(.2),
-        highlightColor: Colors.blue.withOpacity(.1),
-        child: Container(
-          child: Padding(
-            padding:  EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height*.06 ),
-            child: Column(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height*.07 ,
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height*.02,),
-                    Container(
-                      height: MediaQuery.of(context).size.height*.07 ,
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.grey.shade100,
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height*.03,),
-                    Container(
-                      height: MediaQuery.of(context).size.height*.07 ,
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.grey.shade100,
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height*.02,),
-                    Container(
-                      height: MediaQuery.of(context).size.height*.07 ,
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.grey.shade100,
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height*.03,),
-                    Container(
-                      height: MediaQuery.of(context).size.height*.02 ,
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.grey.shade100,
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height*.01,),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
 

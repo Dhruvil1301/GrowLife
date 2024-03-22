@@ -1,8 +1,9 @@
+import 'package:growlife/src/res/string.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class EmailVerificationRepository {
-  static const String apiUrl = 'https://growlife-whel.onrender.com/api/v1/auth/saveuser';
+  static const String apiUrl = Api.SaveUser;
 
   Future<http.Response> signUpVerification(String email, String otp,) async {
     try {

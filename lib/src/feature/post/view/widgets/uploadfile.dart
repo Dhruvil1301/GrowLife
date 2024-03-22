@@ -10,8 +10,8 @@ import 'package:growlife/src/utils/route.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoGridView extends StatefulWidget {
-
-  const VideoGridView({Key? key}) : super(key: key);
+  final File? videoFile;
+  const VideoGridView({Key? key, this.videoFile}) : super(key: key);
   static const routePath="/videogridview";
   @override
   _VideoGridViewState createState() => _VideoGridViewState();
@@ -19,11 +19,16 @@ class VideoGridView extends StatefulWidget {
 
 class _VideoGridViewState extends State<VideoGridView> {
   List<File>? videoFiles;
-
   @override
   void initState() {
     super.initState();
-    loadVideoFiles();
+    if (widget.videoFile != null) {
+      // Video recorded from camera
+      videoFiles = [widget.videoFile!];
+    } else {
+      // Video picked from gallery
+      loadVideoFiles();
+    }
   }
 
   Future<void> loadVideoFiles() async {
@@ -43,7 +48,7 @@ class _VideoGridViewState extends State<VideoGridView> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async{
-        router.pushReplacement(HomeScreen.routePath);
+        router.pop();
         return true;
       },
       child: Scaffold(
@@ -138,7 +143,7 @@ class _VideoGridViewState extends State<VideoGridView> {
 class VideoThumbnail extends StatefulWidget {
   final VideoPlayerController videoController;
 
-  VideoThumbnail({required this.videoController});
+  VideoThumbnail({Key? key, required this.videoController}) : super(key: key);
 
   @override
   _VideoThumbnailState createState() => _VideoThumbnailState();
@@ -188,14 +193,19 @@ class _VideoThumbnailState extends State<VideoThumbnail> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * .06,
-                  width: MediaQuery.of(context).size.width * .28,
-                  decoration: BoxDecoration(
-                    color: Colors.black54,
-                    borderRadius: BorderRadius.circular(15),
+                InkWell(
+                  onTap: (){
+                    router.pop();
+                  },
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * .06,
+                    width: MediaQuery.of(context).size.width * .28,
+                    decoration: BoxDecoration(
+                      color: Colors.black54,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Center(child: Text("Edit Video", style: GoogleFonts.plusJakartaSans(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600))),
                   ),
-                  child: Center(child: Text("Edit Video", style: GoogleFonts.plusJakartaSans(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600))),
                 ),
                 Container(
                   height: MediaQuery.of(context).size.height * .06,

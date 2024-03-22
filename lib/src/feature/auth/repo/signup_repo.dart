@@ -1,8 +1,9 @@
+import 'package:growlife/src/res/string.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class SignUpRepository {
-  static const String apiUrl = 'https://growlife-whel.onrender.com/api/v1/auth/signup';
+  static const String apiUrl = Api.SignUp;
 
   Future<http.Response> signUp(String username, String email, String password, String confirmPassword) async {
     try {

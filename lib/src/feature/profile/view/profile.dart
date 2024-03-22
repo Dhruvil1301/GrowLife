@@ -1,12 +1,16 @@
 import 'dart:io';
 import "package:flutter/material.dart";
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:growlife/src/Common/view/widgets/commonappbar.dart';
 import 'package:growlife/src/feature/editprofile/view/edituserdetails.dart';
 import 'package:growlife/src/feature/account/view/follwers_following.dart';
+import 'package:growlife/src/feature/profile/controller/getallvideo_controller.dart';
+import 'package:growlife/src/feature/profile/view/widgets/myvideo.dart';
 import 'package:growlife/src/feature/setting/view/Setting.dart';
 import 'package:growlife/src/res/color.dart';
 import 'package:growlife/src/utils/route.dart';
+import 'package:video_player/video_player.dart';
 class Profile extends StatefulWidget {
   final File? image;
 
@@ -56,7 +60,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
 
 
                     Container(
-                      height:  MediaQuery.of(context).size.height*1.7,
+                      height:  MediaQuery.of(context).size.height*.8,
                       width:MediaQuery.of(context).size.width*1,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -163,29 +167,17 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                     color: Colors.black,
                                   ),
                                   Expanded(
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      child: TabBarView(
+                                    child:  TabBarView(
                                         controller: _tabController,
                                         children: [
                                           // Widgets for Tab 1 content
-                                         Column(
-                                           children: [
-                                             for(int i=0;i<4;i++)
-                                             Padding(
-                                               padding:  EdgeInsets.symmetric(horizontal:MediaQuery.of(context).size.height*.01,vertical: MediaQuery.of(context).size.height*.01 ),
-                                               child: i==0||i==3?Image.asset("assets/images/tbvideo.png"):i==1||i==4?Image.asset("assets/images/tbvideo2.png"):Image.asset("assets/images/tbvideo3.png")
-                                             ),
-                                           ],
-                                         ),
+                                           VideoListWidget(),
 
                                           // Widgets for Tab 2 content
                                           const Center(child: Text('Tab 2 Content')),
                                         ],
                                       ),
                                     ),
-                                  ),
                                 ],
                               ),
 

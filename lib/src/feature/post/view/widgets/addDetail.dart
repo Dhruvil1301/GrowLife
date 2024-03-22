@@ -1,30 +1,35 @@
 import 'dart:io';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:growlife/src/Common/Providers/providerall.dart';
 import 'package:growlife/src/Common/view/widgets/commonappbar.dart';
+import 'package:growlife/src/feature/home/view/homescreen.dart';
 import 'package:growlife/src/feature/home/view/widgets/Home.dart';
+import 'package:growlife/src/feature/post/controller/uploadvideo_controller.dart';
 import 'package:growlife/src/feature/post/view/widgets/location.dart';
 import 'package:growlife/src/feature/post/view/widgets/uploadfile.dart';
 import 'package:growlife/src/res/color.dart';
 import 'package:growlife/src/utils/route.dart';
 import 'package:video_player/video_player.dart';
-class VideoPlayerScreen extends StatefulWidget {
+class VideoPlayerScreen extends ConsumerStatefulWidget {
   final File videoFile;
 
-  const VideoPlayerScreen({required this.videoFile});
+  const VideoPlayerScreen({Key? key, required this.videoFile}) : super(key: key);
 
   @override
-  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
+  ConsumerState<VideoPlayerScreen> createState() => _VideoPlayerScreenState();
 }
 
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> {
   late VideoPlayerController _controller;
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
   final TextEditingController addDiscriptionController = TextEditingController();
   int maxLength = 100;
   int addDisLength=5000;
+  bool isLoading=false;
 
   @override
   void initState() {
@@ -39,6 +44,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final videoUpload=ref.read(uploadVideoFileRepositoryProvider);
+
     return Scaffold(
       appBar: CommonAppBar(title: 'Add Details',),
       body: SingleChildScrollView(
@@ -85,13 +92,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         children: <Widget>[
 
                           TextFormField(
-                            controller: _textEditingController,
+                            controller: titleController,
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Write a Caption",
                                 hintStyle:GoogleFonts.plusJakartaSans(fontSize: 16, color: Colors.black, fontWeight: FontWeight.w500),
                                 counterText:
-                                '${_textEditingController.text.length}/$maxLength',
+                                '${titleController.text.length}/$maxLength',
                                 counterStyle: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height * 0.018)
                             ),
                             style: GoogleFonts.lato(),
@@ -141,15 +148,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         )
                     ),
                     child: TextFormField(
+                      controller: addDiscriptionController,
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.all(10),
                           border: InputBorder.none,
                           counterText:
                           '${addDiscriptionController.text.length}/$addDisLength',
                           counterStyle: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.height * 0.018)
-
-
-
                       ),
                       maxLines: 7,
                       style: GoogleFonts.lato(),
@@ -227,8 +232,28 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         ),
 
                         InkWell(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const Home()));
+                          onTap: ()async {
+                            setState(() {
+                              isLoading=true;
+                            });
+                            Future.delayed(const Duration(seconds: 3), () {
+                              setState(() {
+                                isLoading = false;
+                              });
+                            });
+                            final authController = ref.read(signInControllerProvider);
+                            final userId = authController.userId;
+                                 if (!videoUpload.isUploading) {
+                                       final uploaded =
+                                     await videoUpload.uploadVideo(widget.videoFile,titleController.text,addDiscriptionController.text,userId.toString(),);
+                                             if (uploaded) {
+                                                  router.push(HomeScreen.routePath);
+                                                   } else {
+                                                    // Handle failed image upload.
+                                                            }
+                                                       } else {
+                                                       // Show a message indicating that an upload is already in progress.
+                                                            }
                           },
                           child: Container(
                             height: MediaQuery.of(context).size.height*.06,
@@ -237,7 +262,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                               color:AppColor.primary,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: Center(child: Text("Post",style:  GoogleFonts.plusJakartaSans(fontSize:18,color: Colors.white,fontWeight: FontWeight.w600),)),
+                            child: Center(child: isLoading?const CircularProgressIndicator(color: Colors.white,):Text("Post",style:  GoogleFonts.plusJakartaSans(fontSize:18,color: Colors.white,fontWeight: FontWeight.w600),)),
                           ),
                         ),
                       ],

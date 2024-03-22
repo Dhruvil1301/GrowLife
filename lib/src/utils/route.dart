@@ -5,6 +5,7 @@ import 'package:growlife/src/feature/aboutus/view/aboutus.dart';
 import 'package:growlife/src/feature/auth/view/signin.dart';
 import 'package:growlife/src/feature/auth/view/signupscreen.dart';
 import 'package:growlife/src/feature/auth/view/widgets/forgotpasswordscreen.dart';
+import 'package:growlife/src/feature/auth/view/widgets/newPassword.dart';
 import 'package:growlife/src/feature/chat/view/chat.dart';
 import 'package:growlife/src/feature/chat/view/widgets/calling.dart';
 import 'package:growlife/src/feature/chat/view/widgets/chatscreen.dart';
@@ -41,12 +42,18 @@ import 'package:growlife/src/feature/term_condition/view/term&condition.dart';
 import 'package:growlife/src/feature/timespent/view/appactivity.dart';
 import 'package:growlife/src/feature/welcome/view/welcomescreen.dart';
 final GoRouter router=GoRouter(
-    initialLocation:SignUpScreen.routePath,
+    initialLocation:SignInScreen.routePath,
     routes: [
       GoRoute(
         path: SignUpScreen.routePath,
         builder: (BuildContext context, GoRouterState state) {
           return const SignUpScreen();
+        },
+      ),
+      GoRoute(
+        path: NewPassword.routePath,
+        builder: (BuildContext context, GoRouterState state) {
+          return const NewPassword();
         },
       ),
       GoRoute(
@@ -261,6 +268,7 @@ final GoRouter router=GoRouter(
       GoRoute(
         path: VideoGridView.routePath,
         builder: (BuildContext context, GoRouterState state) {
+
           return  const VideoGridView();
         },
       ),

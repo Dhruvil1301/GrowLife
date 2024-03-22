@@ -299,7 +299,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           children: [
                                Image.asset(ImageAssets.googlelogo,height:25.h ,),
                                SizedBox(width:18.w ,),
-                               Text("Sign up with Google",style: GoogleFonts.poppins(fontSize:20,fontWeight: FontWeight.w400 ),)
+                               Text("Sign up with Google",style: GoogleFonts.poppins(fontSize:18,fontWeight: FontWeight.w400 ),)
                           ],
                         ),
                       ),
@@ -326,7 +326,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           children: [
                             Image.asset(ImageAssets.facebooklogo,height:25.h ,),
                             SizedBox(width:18.w  ,),
-                            Text("Sign up with Facebook",style:  GoogleFonts.poppins(fontSize:20,fontWeight: FontWeight.w400 ),)
+                            Text("Sign up with Facebook",style:  GoogleFonts.poppins(fontSize:18,fontWeight: FontWeight.w400 ),)
                           ],
                         ),
                       ),
@@ -354,7 +354,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           children: [
                             Image.asset(ImageAssets.applelogo,height:25.h ,),
                             SizedBox(width:18.w  ,),
-                            Text("Sign up with Apple",style:  GoogleFonts.poppins(fontSize:20,fontWeight: FontWeight.w400 ),)
+                            Text("Sign up with Apple",style:  GoogleFonts.poppins(fontSize:18,fontWeight: FontWeight.w400 ),)
                           ],
                         ),
                       ),
