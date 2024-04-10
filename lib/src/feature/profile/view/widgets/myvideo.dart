@@ -1,153 +1,179 @@
-
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import "package:google_fonts/google_fonts.dart";
-import 'package:growlife/src/Common/view/widgets/commonappbar.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:growlife/src/Common/Providers/providerall.dart';
+import 'package:growlife/src/Models/video_model.dart';
 import 'package:growlife/src/feature/profile/controller/getallvideo_controller.dart';
-import 'package:growlife/src/res/color.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoListWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // This provider will help to trigger the refresh action
+    ref.watch(videoControllerProvider.notifier).fetchData(); // Call fetch data here
 
     return RefreshIndicator(
-      // onRefresh callback triggers when the user pulls down the list to refresh
       onRefresh: () async {
-        // Trigger your refresh action here, for example:
-        ref.refresh(videoControllerProvider); // Refresh the video list
+        ref.refresh(videoControllerProvider);
       },
-      child: Container(
-        child: ref.watch(videoControllerProvider).when(
-          loading: () => const Center(child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 35),
-            child: LinearProgressIndicator(),
-          )),
-          error: (error, stackTrace) => Text('Error: $error'),
-          data: (videos) {
-            return ListView.builder(
-              scrollDirection: Axis.vertical,
-              physics: const AlwaysScrollableScrollPhysics(), // Allow scrolling
-              itemCount: videos.length,
+      child:
+       Consumer(
+          builder: (context, ref, _) {
+            final videos = ref.watch(videoControllerProvider);
+
+            return videos.isEmpty
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemCount: videos.length+1, // Add one for loading indicator
               itemBuilder: (context, index) {
-                final video = videos[index];
-                return ListTile(
-                  title: Text(video.title),
-                  subtitle: Text(video.description),
-                  onTap: () {
-                    // Play the video when tapped
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => VideoPlayerScreen(
-                          videoUrl: video.videoUrl,
-                          title: video.title,
-                          description: video.description,
-                        ),
-                      ),
-                    );
-                  },
-                );
+                if (index < videos.length) {
+                  final video = videos[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: VideoListItem(video: video),
+                  );
+                } else {
+                  if (ref.read(videoControllerProvider.notifier).hasMoreData) {
+                    ref.read(videoControllerProvider.notifier).fetchData();
+                    return _buildLoadingIndicator();
+                  } else {
+                    return _buildNoMoreDataIndicator();
+                  }
+                }
               },
             );
           },
         ),
+
+    );
+  }
+
+  Widget _buildLoadingIndicator() {
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Center(
+        child: CircularProgressIndicator(),
       ),
+    );
+  }
+
+  Widget _buildNoMoreDataIndicator() {
+    // Optionally, you can display a message when no more data is available
+    return  Padding(
+      padding: const EdgeInsets.all(40.0),
+      child: Center(child: Text("Thank you!! You Post End",style: GoogleFonts.lato(fontWeight: FontWeight.w500,fontSize: 15),)),
     );
   }
 }
 
-class VideoPlayerScreen extends StatefulWidget {
-  final String videoUrl;
-  final String title;
-  final String description;
 
+class VideoListItem extends StatefulWidget {
+  final MyVideo video;
 
-  const VideoPlayerScreen({Key? key, required this.videoUrl, required this.title, required this.description,}) : super(key: key);
+  const VideoListItem({Key? key, required this.video}) : super(key: key);
 
   @override
-  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
+  _VideoListItemState createState() => _VideoListItemState();
 }
 
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+class _VideoListItemState extends State<VideoListItem> {
   late VideoPlayerController _controller;
+  late Future<void> _initializeVideoPlayerFuture;
+  bool play = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(widget.videoUrl)
-      ..initialize().then((_) {
-        setState(() {});
-      });
+    _controller = VideoPlayerController.network(widget.video.videoUrl);
+    _initializeVideoPlayerFuture = _controller.initialize().then((_) {
+      setState(() {});
+    });
   }
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CommonAppBar(
-        title: "Videos",
-      ),
-      body: _controller.value.isInitialized
-          ? Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: AspectRatio(
-                  aspectRatio: 6/9,
-                  child: VideoPlayer(_controller),
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: FutureBuilder(
+                  future: _initializeVideoPlayerFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return VideoPlayer(_controller);
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  },
                 ),
               ),
-              Positioned(
-
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        color: AppColor.greenColor,
-                        shape: BoxShape.circle
+            ),
+            Positioned(
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.green,
+                  shape: BoxShape.circle,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        play = !play;
+                      });
+                      if (_controller.value.isPlaying) {
+                        _controller.pause();
+                      } else {
+                        _controller.play();
+                      }
+                    },
+                    icon: Icon(
+                      play ? Icons.pause : Icons.play_arrow,
+                      color: Colors.white,
+                      size: 30,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            if (_controller.value.isPlaying) {
-                              _controller.pause();
-                            } else {
-                              _controller.play();
-                            }
-                          });
-                        },
-                        icon: Icon(
-                          _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,color: Colors.white,size: 25,
-                        ),
-                      ),
-                    ),
-                  ))
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                widget.video.title,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 17,
+                ),
+              ),
+              Text(
+               widget.video.formattedTimeDifference,
+                style: GoogleFonts.poppins(
+                  fontSize: 15,
+                  color: Colors.black54,
+                ),
+              ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 5),
-            child: Text(widget.title,style: GoogleFonts.poppins(fontSize: 20,fontWeight: FontWeight.w500),),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Text(widget.description,style: GoogleFonts.poppins(),),
-          ),
-        ],
-      )
-          : const Center(child: CircularProgressIndicator()),
-
+        )
+      ],
     );
   }
 }

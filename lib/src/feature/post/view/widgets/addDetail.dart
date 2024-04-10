@@ -3,6 +3,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:growlife/src/Common/Controller/shared_prefrenced.dart';
 import 'package:growlife/src/Common/Providers/providerall.dart';
 import 'package:growlife/src/Common/view/widgets/commonappbar.dart';
 import 'package:growlife/src/feature/home/view/homescreen.dart';
@@ -242,7 +243,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> {
                               });
                             });
                             final authController = ref.read(signInControllerProvider);
-                            final userId = authController.userId;
+                            final userId = await SharedPreferencesServiceUser.getUser();
                                  if (!videoUpload.isUploading) {
                                        final uploaded =
                                      await videoUpload.uploadVideo(widget.videoFile,titleController.text,addDiscriptionController.text,userId.toString(),);

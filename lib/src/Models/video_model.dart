@@ -1,55 +1,72 @@
-class Video {
+class MyVideo {
   final String id;
-  final String key;
   final String title;
   final String description;
-  final String uploader;
   final int views;
-  final int likes;
+  final List<dynamic> likes;
   final int dislikes;
   final List<String> tags;
-  final DateTime uploadDate;
   final String thumbnailUrl;
   final bool isPrivate;
   final DateTime createdAt;
-  final DateTime updatedAt;
   final String videoUrl;
+  final int commentsCount;
+  final UploaderDetails uploaderDetails;
+  final String formattedTimeDifference;
 
-  Video({
+  MyVideo({
     required this.id,
-    required this.key,
     required this.title,
     required this.description,
-    required this.uploader,
     required this.views,
     required this.likes,
     required this.dislikes,
     required this.tags,
-    required this.uploadDate,
     required this.thumbnailUrl,
     required this.isPrivate,
     required this.createdAt,
-    required this.updatedAt,
     required this.videoUrl,
+    required this.commentsCount,
+    required this.uploaderDetails,
+    required this.formattedTimeDifference,
   });
 
-  factory Video.fromJson(Map<String, dynamic> json) {
-    return Video(
+  factory MyVideo.fromJson(Map<String, dynamic> json) {
+    return MyVideo(
       id: json['_id'],
-      key: json['key'],
       title: json['title'],
       description: json['description'],
-      uploader: json['uploader'],
       views: json['views'],
       likes: json['likes'],
       dislikes: json['dislikes'],
-      tags: List<String>.from(json['tags'] ?? []),
-      uploadDate: DateTime.parse(json['uploadDate']),
+      tags: List<String>.from(json['tags']),
       thumbnailUrl: json['thumbnailUrl'],
       isPrivate: json['isPrivate'],
       createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
       videoUrl: json['videoUrl'],
+      commentsCount: json['commentsCount'],
+      uploaderDetails: UploaderDetails.fromJson(json['uploaderDetails']),
+      formattedTimeDifference: json['formattedTimeDifference'],
+    );
+  }
+}
+
+class UploaderDetails {
+  final String id;
+  final String username;
+  final String profilePic;
+
+  UploaderDetails({
+    required this.id,
+    required this.username,
+    required this.profilePic,
+  });
+
+  factory UploaderDetails.fromJson(Map<String, dynamic> json) {
+    return UploaderDetails(
+      id: json['_id'],
+      username: json['username'],
+      profilePic: json['profilePic'],
     );
   }
 }

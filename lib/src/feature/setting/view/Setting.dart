@@ -1,6 +1,8 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:growlife/src/Common/Providers/providerall.dart';
 import 'package:growlife/src/Common/view/widgets/commonappbar.dart';
 import 'package:growlife/src/feature/order/view/myorder.dart';
 import 'package:growlife/src/feature/profile/view/profile.dart';
@@ -11,17 +13,18 @@ import 'package:growlife/src/feature/privacypolicy/view/privacypolicy.dart';
 import 'package:growlife/src/feature/auth/view/signupscreen.dart';
 import 'package:growlife/src/feature/timespent/view/appactivity.dart';
 import 'package:growlife/src/utils/route.dart';
-class Setting extends StatefulWidget {
+class Setting extends ConsumerStatefulWidget {
 
   const Setting({Key? key}) : super(key: key);
   static const routePath="/setting";
   @override
-  State<Setting> createState() => _SettingState();
+  ConsumerState<Setting> createState() => _SettingState();
 }
 
-class _SettingState extends State<Setting> {
+class _SettingState extends ConsumerState<Setting> {
   @override
   Widget build(BuildContext context) {
+    final signInController = ref.read(signInControllerProvider);
     return  Scaffold(
       backgroundColor: Colors.white,
         appBar:  CommonAppBar(title: "Setting"),
@@ -165,7 +168,7 @@ class _SettingState extends State<Setting> {
               SizedBox(height:MediaQuery.of(context).size.height*.05 ,),
               InkWell(
                 onTap: (){
-
+                    signInController.logout();
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

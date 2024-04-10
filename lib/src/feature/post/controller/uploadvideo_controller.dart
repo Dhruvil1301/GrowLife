@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:growlife/src/Common/view/widgets/snackbar.dart';
+import 'package:growlife/src/feature/auth/controller/login_controller.dart';
 import 'package:growlife/src/res/string.dart';
 import 'package:http/http.dart' as http;
 import 'package:growlife/src/Common/Controller/shared_prefrenced.dart';
@@ -18,6 +19,12 @@ class VideoUploadController extends ChangeNotifier {
     _isUploading = true;
     notifyListeners();
     try {
+      final authController = AuthController();
+      final isTokenExpired = await authController.isTokenExpired();
+
+      if (isTokenExpired) {
+        await authController.refreshAccessToken();
+      }
       final token = await SharedPreferencesService.getToken();
       if (token != null) {
         final response = await UploadVideoFileRepository.getVideoUploadUrl( title, description, uploader);

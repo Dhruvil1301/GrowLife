@@ -11,21 +11,25 @@ import 'package:growlife/src/feature/setting/view/Setting.dart';
 import 'package:growlife/src/res/color.dart';
 import 'package:growlife/src/utils/route.dart';
 import 'package:video_player/video_player.dart';
-class Profile extends StatefulWidget {
-  final File? image;
 
-  const Profile({Key? key, this.image}) : super(key: key);
+import '../../../Common/Providers/providerall.dart';
+class Profile extends ConsumerStatefulWidget {
+
+  const Profile({Key? key}) : super(key: key);
   static const routePath="/profile";
 
   @override
-  State<Profile> createState() => _ProfileState();
+  ConsumerState<Profile> createState() => _ProfileState();
 }
 
-class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
+class _ProfileState extends ConsumerState<Profile> with SingleTickerProviderStateMixin {
 
   late final PageController pagecontroller;
 
   late TabController _tabController;
+  String? name;
+  String? email;
+  String profile="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
 
   @override
   void initState() {
@@ -43,6 +47,17 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final userDetailsState = ref.watch(userControllerProvider);
+
+    userDetailsState.when(
+      data: (data) {
+        name= data['username'] != null ? data['username'] as String : "";
+        profile=data['profilePic']!= null ? data['profilePic'] as String : profile;
+        email=data['email']!=null?data['email'] as String:"";
+      },
+      error: (error, stackTrace) => Text('Error: $error'),
+      loading: () => const CircularProgressIndicator(),
+    );
     return Scaffold(
       backgroundColor: const Color(0xFFDCE9F8),
       appBar: CommonAppBar(title: "Profile",action: [
@@ -52,6 +67,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
       ],),
       body: SingleChildScrollView(
         child: Stack(
+          alignment: Alignment.topCenter,
           children: [
 
             Column(
@@ -91,7 +107,7 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                         padding: EdgeInsets.only(right:MediaQuery.of(context).size.height*.06,top: MediaQuery.of(context).size.height*.03),
                                         child: InkWell(
                                            onTap:(){
-                                             Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile(image: widget.image,)));
+                                             Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfile()));
                                              },
                                           child: Row(
                                             children: [
@@ -105,9 +121,9 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height:MediaQuery.of(context).size.height*.03 ,),
-                                  Text("Tara Choudhary",style: GoogleFonts.plusJakartaSans(fontSize:16 ,fontWeight: FontWeight.w600),),
-                                  Text("@tara_choudhary",style: GoogleFonts.plusJakartaSans(fontSize:12 ,fontWeight: FontWeight.w500), ),
+                                  SizedBox(height:MediaQuery.of(context).size.height*.02 ,),
+                                  Text(name!,style: GoogleFonts.plusJakartaSans(fontSize:16 ,fontWeight: FontWeight.w600),),
+                                  Text(email!,style: GoogleFonts.plusJakartaSans(fontSize:12 ,fontWeight: FontWeight.w500), ),
                                   Padding(
                                     padding:  EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.height*.03,vertical: MediaQuery.of(context).size.height*.03),
                                     child: Row(
@@ -188,21 +204,11 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
               ],
             ),
             Positioned(
-              top: MediaQuery.of(context).size.height*.12,
-              left: MediaQuery.of(context).size.height*.182,
-              child: Container(
-                width: MediaQuery.of(context).size.width*.25,
-                height: MediaQuery.of(context).size.height*.11,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.034),
-                  image:widget.image != null
-                      ? DecorationImage(
-                    image: FileImage(widget.image!),
-                    fit: BoxFit.cover,
-                  )
-                      : null,
-                ),
-              ),
+             top: 110,
+              child: CircleAvatar(
+                radius: 40,
+                backgroundImage: NetworkImage(profile),
+              )
             ),
           ],
         ),

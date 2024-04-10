@@ -1,30 +1,33 @@
 import 'dart:io';
 
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/src/Common/Providers/providerall.dart';
+import 'package:growlife/src/feature/alluser/view/allUser.dart';
 import 'package:growlife/src/feature/chat/view/chat.dart';
 import 'package:growlife/src/feature/home/view/widgets/videoList.dart';
 import 'package:growlife/src/feature/notification/view/notification.dart';
 import 'package:growlife/src/feature/profile/view/profile.dart';
 import 'package:growlife/src/res/assets.dart';
 import 'package:growlife/src/utils/route.dart';
-import 'package:provider/provider.dart';
 
 import '../../../shopping/view/widgets/product_detail.dart';
 import 'videodetail.dart';
-class Home extends StatefulWidget {
-  final File? image;
-
-  const Home({Key? key, this.image}) : super(key: key);
+class Home extends ConsumerStatefulWidget {
+  const Home({Key? key,}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  ConsumerState<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends ConsumerState<Home> {
   late final PageController pagecontroller;
+  String? name;
+  String profile="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
+  Size get preferredSize => const Size.fromHeight(90);
   @override
   void initState(){
     pagecontroller=PageController();
@@ -33,128 +36,137 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final userDetailsState = ref.watch(userControllerProvider);
+
+    userDetailsState.when(
+      data: (data) {
+       name= data['username'] != null ? data['username'] as String : "";
+       profile=data['profilePic']!= null ? data['profilePic'] as String : profile;
+      },
+      error: (error, stackTrace) => Text('Error: $error'),
+      loading: () => const CircularProgressIndicator(),
+    );
     return SafeArea(child:
           Scaffold(
             backgroundColor: Colors.white,
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              toolbarHeight: preferredSize.height ,
+              title: Padding(
+                padding:  EdgeInsets.only(top:MediaQuery.of(context).size.height*.01 ,left:  MediaQuery.of(context).size.height*.01,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:  EdgeInsets.only( bottom: MediaQuery.of(context).size.height*.01
+                      ),
+                      child: InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Profile()));
+                        },
+                        child: Stack(
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundImage: NetworkImage(profile),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                  child: Padding(
+                                    padding:  const EdgeInsets.all(2.0),
+                                    child: Container( height:MediaQuery.of(context).size.height*.013,
+                                      width: MediaQuery.of(context).size.width*.03,
+                                      decoration: const BoxDecoration(
+                                          color: Color(0xFF20C968),
+                                          shape: BoxShape.circle
+                                      ),),
+                                  )
+                              ),
+
+                            ),
+                          ],
+                        ),
+                      ),
+
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Hello,",style: GoogleFonts.montserrat(fontSize: 14,fontWeight: FontWeight.w500),),
+                          Text(name!,style: GoogleFonts.montserrat(fontSize: 14,fontWeight: FontWeight.w700),),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                IconButton(onPressed: (){
+                  router.push(AllUser.routePath);
+                }, icon: Icon(EvaIcons.search,size: 25,)),
+                InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const Notifications()));
+                    },
+                    child: IconButton(onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const Notifications()));
+                      },
+                        icon: Stack(
+                          children: [
+                            const Icon(EvaIcons.bell,size: 25,),
+                            Positioned(
+                              right: 0,
+                              top: 0,
+                              child:
+                              Container(
+                                height: 8,
+                                width: 8,
+                                decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color(0xFF20C968)
+                                ),
+                              ),
+                            )
+                          ],
+                        ))),
+                IconButton(onPressed: (){
+                  router.push(ChatView.routePath);
+                  },
+                    icon: Stack(
+                      children: [
+                        const Icon(EvaIcons.messageCircle,size: 25,),
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          child:
+                          Container(
+                            height: 8,
+                            width: 8,
+                            decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xFF20C968)
+                            ),
+                          ),
+                        )
+                      ],
+                    )),
+              ],
+
+            ),
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height*.03,left:  MediaQuery.of(context).size.height*.02,
-                        ),
-                        child: InkWell(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> Profile(image: widget.image,)));
-                          },
-                          child: Stack(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width*.165,
-                                height: MediaQuery.of(context).size.height*.075,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.034),
-                                  image:widget.image != null
-                                      ? DecorationImage(
-                                    image: FileImage(widget.image!),
-                                    fit: BoxFit.cover,
-                                  )
-                                      : null,
-                                ),
-                              ),
-                              Positioned(
-                                left: MediaQuery.of(context).size.width*.12,
-                                top: MediaQuery.of(context).size.height*.058,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10)
-                                    ),
-                                   child: Padding(
-                                     padding:  const EdgeInsets.all(2.0),
-                                     child: Container( height:MediaQuery.of(context).size.height*.013,
-                                  width: MediaQuery.of(context).size.width*.03,
-                                  decoration: const BoxDecoration(
-                                      color: Color(0xFF20C968),
-                                      shape: BoxShape.circle
-                                  ),),
-                                   )
-                                  ),
-
-                              ),
-                            ],
-                          ),
-                        ),
-
-                      ),
-                      SizedBox(width:MediaQuery.of(context).size.height*.011,),
-                      Padding(
-                        padding:  EdgeInsets.only(top:MediaQuery.of(context).size.height*.04 ),
-                        child:
-                            Column(
-                              children: [
-                                Text("Hello,",style: GoogleFonts.montserrat(fontSize: 14,fontWeight: FontWeight.w500),),
-                                Text("User",style: GoogleFonts.montserrat(fontSize: 14,fontWeight: FontWeight.w700),),
-                              ],
-                            ),
-
-                      ),
-                      SizedBox(width: MediaQuery.of(context).size.height*.18 ,),
-                      Padding(
-                        padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height*.035,left: MediaQuery.of(context).size.height*.02 ),
-                        child: InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>const Notifications()));
-                            },
-                            child: Stack(
-                              children: [
-                                const Icon(Icons.notifications,color: Colors.black,size:25,),
-                                Positioned(
-                                    right: 0,
-                                    top: 0,
-                                    child:
-                                    Container(
-                                      height: 8,
-                                      width: 8,
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Color(0xFF20C968)
-                                      ),
-                                    ),
-                                )
-                              ],
-                            )),
-                      ),
-                      Padding(
-                        padding:  EdgeInsets.only(top: MediaQuery.of(context).size.height*.035,left: MediaQuery.of(context).size.height*.02 ),
-                        child: InkWell(
-                            onTap: (){
-                             router.push(ChatView.routePath);
-                            },
-                            child: Stack(
-                              children: [
-                                const Icon(Icons.chat_bubble_outline,color: Colors.black,size:25,),
-                                Positioned(
-                                  right: 0,
-                                  top: 0,
-                                  child:
-                                  Container(
-                                    height: 8,
-                                    width: 8,
-                                    decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Color(0xFF20C968)
-                                    ),
-                                  ),
-                                )
-                              ],
-                            )),
-                      ),
-                    ],
-                  ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,

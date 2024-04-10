@@ -25,10 +25,10 @@ class _UserDetailScreenState extends ConsumerState<UserDetailScreen> {
   final _formKey = GlobalKey<FormState>();
   final ImagePicker _imagePicker = ImagePicker();
   File? _image;
-  TextEditingController ?usernameController;
-  TextEditingController ?emailController;
-  TextEditingController ?locationController;
-  TextEditingController ?phoneNumberController;
+  TextEditingController? usernameController;
+  TextEditingController? emailController;
+  TextEditingController? locationController;
+  TextEditingController? phoneNumberController;
   String profile =
       "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
   bool _isUsernameValid = false;
@@ -37,31 +37,22 @@ class _UserDetailScreenState extends ConsumerState<UserDetailScreen> {
   bool _isPhoneNumberValid = false;
   late ImageUploadController _imageUploadController;
 
-  late String fetchedUsername;
-  late String fetchedEmail;
-  late String fetchedLocation;
-  late String fetchedPhoneNumber;
-
   @override
   void initState() {
     super.initState();
     _imageUploadController = ImageUploadController();
-    super.initState();
-    _imageUploadController = ImageUploadController();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     final userDetailsState = ref.watch(userControllerProvider);
     userDetailsState.when(
       data: (data) {
-        usernameController ??= TextEditingController(text: data['username'] ?? "");
-        emailController ??= TextEditingController(text: data['email'] ?? "");
-        locationController ??= TextEditingController(text: data['location'] ?? "");
-        phoneNumberController ??= TextEditingController(text: data['phone']?.toString() ?? "");
-        profile = data['profilePic'];
+        usernameController ??= TextEditingController(text: data['username'] != null ? data['username'] as String : "");
+        emailController ??= TextEditingController(text: data['email'] != null ? data['email'] as String : "");
+        locationController ??= TextEditingController(text: data['location']!= null ? data['location'] as String : "" );
+        phoneNumberController ??= TextEditingController(text: data['phone']!= null ? data['phone'].toString() : "");
+        profile = data['profilePic']!= null ? data['profilePic'] as String : profile;
       },
       error: (error, stackTrace) => Text('Error: $error'),
       loading: () => const CircularProgressIndicator(),
@@ -177,7 +168,8 @@ class _UserDetailScreenState extends ConsumerState<UserDetailScreen> {
                     ],
                   ),
                   SizedBox(
-                      height: MediaQuery.of(context).size.height * .032),
+                    height: MediaQuery.of(context).size.height * .032,
+                  ),
                   _buildFormField(
                     "Username",
                     usernameController!,
@@ -185,24 +177,9 @@ class _UserDetailScreenState extends ConsumerState<UserDetailScreen> {
                         (value) {
                       setState(() {
                         _isUsernameValid = value.isNotEmpty;
-                        fetchedUsername=value;
                       });
                     },
                     _isUsernameValid
-                        ? const Icon(Icons.done, color: Colors.green)
-                        : null,
-                  ),
-                  _buildFormField(
-                    "Email",
-                    emailController!,
-                    TextInputType.emailAddress,
-                        (value) {
-                      setState(() {
-                        _isEmailValid = value.isNotEmpty;
-                        fetchedEmail=value;
-                      });
-                    },
-                    _isEmailValid
                         ? const Icon(Icons.done, color: Colors.green)
                         : null,
                   ),
@@ -213,7 +190,6 @@ class _UserDetailScreenState extends ConsumerState<UserDetailScreen> {
                         (value) {
                       setState(() {
                         _isLocationValid = value.isNotEmpty;
-                        fetchedPhoneNumber = value;
                       });
                     },
                     _isLocationValid
@@ -227,7 +203,6 @@ class _UserDetailScreenState extends ConsumerState<UserDetailScreen> {
                         (value) {
                       setState(() {
                         _isPhoneNumberValid = value.isNotEmpty;
-                        fetchedPhoneNumber=value;
                       });
                     },
                     _isPhoneNumberValid
@@ -235,7 +210,8 @@ class _UserDetailScreenState extends ConsumerState<UserDetailScreen> {
                         : null,
                   ),
                   SizedBox(
-                      height: MediaQuery.of(context).size.height * .05),
+                    height: MediaQuery.of(context).size.height * .05,
+                  ),
                   Consumer(
                     builder: (context, ref, child) {
                       final imageUploadState =
@@ -245,12 +221,12 @@ class _UserDetailScreenState extends ConsumerState<UserDetailScreen> {
                           if (_formKey.currentState!.validate()) {
                             final userDetails = {
                               'username': usernameController!.text,
-                              'email': emailController!.text,
+                              'email': emailController != null ? emailController!.text : '', // Check if emailController is not null
                               'phone': phoneNumberController!.text,
                               'location': locationController!.text,
                             };
                             ref.read(userDetailsProvider.notifier)
-                                .updateUserDetails(emailController!.text,userDetails);
+                                .updateUserDetails(emailController != null ? emailController!.text: '', userDetails);
                             if (!imageUploadState.isUploading) {
                               bool uploaded =
                               await _imageUploadController.uploadImage(
@@ -272,7 +248,6 @@ class _UserDetailScreenState extends ConsumerState<UserDetailScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
                             color: (_isUsernameValid &&
-                                _isEmailValid &&
                                 _isLocationValid &&
                                 _isPhoneNumberValid &&
                                 !imageUploadState.isUploading)
@@ -338,7 +313,7 @@ class _UserDetailScreenState extends ConsumerState<UserDetailScreen> {
               suffixIcon: suffixIcon,
             ),
             validator: (value) {
-              if (value!.isEmpty) {
+              if (value == null || value.isEmpty) {
                 return "$labelText is required";
               }
               return null;

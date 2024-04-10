@@ -15,6 +15,7 @@ class ImageUploadController extends ChangeNotifier {
 
     try {
       final token = await SharedPreferencesService.getToken();
+
       if (token != null) {
         final uploadUrl = await UploadFileRepository.getUploadUrl(token);
         if (uploadUrl != null) {

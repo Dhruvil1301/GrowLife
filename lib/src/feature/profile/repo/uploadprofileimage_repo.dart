@@ -1,12 +1,13 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:growlife/src/res/string.dart';
 import 'package:http/http.dart' as http;
 import 'package:growlife/src/Common/Controller/shared_prefrenced.dart';
 
 class UploadFileRepository {
   static const String uploadUrlApiUrl = Api.GetUrl;
+  String? _key;
 
+  String? get key => _key;
   static Future<String?> getUploadUrl(String token) async {
     try {
       final response = await http.get(
@@ -20,6 +21,7 @@ class UploadFileRepository {
         final responseBody = json.decode(response.body);
         final url = responseBody['url'];
         final key=responseBody['key'];
+
         await SharedPreferencesServiceKeyForProfile.saveKey(key);// Assuming the URL key in the response JSON is 'url'
         print(key);
         return url;

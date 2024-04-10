@@ -11,9 +11,9 @@ import 'package:growlife/src/res/color.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routePath = "/homescreen";
-  final File? image;
 
-  const HomeScreen({Key? key, this.image}) : super(key: key);
+
+  const HomeScreen({Key? key,}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _widgetOptions = <Widget>[
-      Home(image: widget.image),
+      Home(),
       const Shopping(),
       Camera(),
       const Events(),
