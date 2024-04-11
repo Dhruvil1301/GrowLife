@@ -14,4 +14,9 @@ class Api{
    static const UpdateProfile="$_base/user/updateuser";
    static const GetVideoUrl="$_base/video/uploadurl";
   static const SaveVideoApi="$_base/video/getvideo";
+  static const GetMyAllVideos="$_base/video/getallvideo";
+  static const GetAllUser="$_base/user/get-all-users/";
+  static const FollowApi="$_base/user/follow";
+   static const UnFollowApi="$_base/user/unfollow";
+
 }

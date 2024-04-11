@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:growlife/src/Models/all_user_model.dart';
 import 'package:growlife/src/Models/video_model.dart';
 import 'package:growlife/src/feature/alluser/controller/all_user_controller.dart';
+import 'package:growlife/src/res/string.dart';
 import 'package:http/http.dart' as http;
 import 'package:growlife/src/Common/Controller/shared_prefrenced.dart';
 
@@ -10,6 +11,7 @@ class VideoDataRepository {
   Future<List<MyVideo>> fetchVideoData(int page) async {
     final token = await SharedPreferencesService.getToken();
     final userId = await SharedPreferencesServiceUser.getUser();
+    const myAllVideo=Api.GetMyAllVideos;
 
     // Add null checks for token and userId
     if (token == null || userId == null) {
@@ -17,7 +19,7 @@ class VideoDataRepository {
     }
 
     final response = await http.post(
-      Uri.parse('https://growlife-whel.onrender.com/api/v1/video/getallvideo'),
+      Uri.parse(myAllVideo),
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token'

@@ -1,14 +1,18 @@
 import 'dart:convert';
 import 'package:growlife/src/Models/all_user_model.dart';
 import 'package:growlife/src/feature/alluser/controller/all_user_controller.dart';
+import 'package:growlife/src/res/string.dart';
 import 'package:http/http.dart' as http;
 import 'package:growlife/src/Common/Controller/shared_prefrenced.dart';
 
 class AllUserDataRepository {
   Future<List<AllUserData>> fetchUserData(int page) async {
     final token = await SharedPreferencesService.getToken();
+
+    const String getAllUser=Api.GetAllUser;
+
     final response = await http.get(
-      Uri.parse('https://growlife-whel.onrender.com/api/v1/user/get-all-users/$page'),
+      Uri.parse(getAllUser+"$page"),
       headers: {'Authorization': 'Bearer $token'}, // Include token in the header
     );
     if (response.statusCode == 200) {

@@ -39,7 +39,7 @@ class AllUser extends ConsumerWidget {
         itemBuilder: (context, index) {
           if (index < userData.length) {
             final userDataItem = userData[index];
-            return SuggestedList(image: userDataItem.profilePic, name: userDataItem.username);
+            return SuggestedList(image: userDataItem.profilePic, name: userDataItem.username,id: userDataItem.id,);
           } else {
             if (ref.read(allUserDataProvider.notifier).hasMoreData) {
               ref.read(allUserDataProvider.notifier).fetchData();
