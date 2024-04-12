@@ -34,21 +34,26 @@ class AllUser extends ConsumerWidget {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemCount: userData.length + 1, // Add one for loading indicator
-        itemBuilder: (context, index) {
-          if (index < userData.length) {
-            final userDataItem = userData[index];
-            return SuggestedList(image: userDataItem.profilePic, name: userDataItem.username,id: userDataItem.id,);
-          } else {
-            if (ref.read(allUserDataProvider.notifier).hasMoreData) {
-              ref.read(allUserDataProvider.notifier).fetchData();
-              return _buildLoadingIndicator();
-            } else {
-              return _buildNoMoreDataIndicator(context);
-            }
-          }
+      body: RefreshIndicator(
+        onRefresh: () async{
+          ref.refresh(allUserDataProvider);
         },
+        child: ListView.builder(
+          itemCount: userData.length + 1, // Add one for loading indicator
+          itemBuilder: (context, index) {
+            if (index < userData.length) {
+              final userDataItem = userData[index];
+              return SuggestedList(image: userDataItem.profilePic, name: userDataItem.username,id: userDataItem.id,isFollowing: userDataItem.isFollowedByMe,);
+            } else {
+              if (ref.read(allUserDataProvider.notifier).hasMoreData) {
+                ref.read(allUserDataProvider.notifier).fetchData();
+                return _buildLoadingIndicator();
+              } else {
+                return _buildNoMoreDataIndicator(context);
+              }
+            }
+          },
+        ),
       ),
     );
   }
