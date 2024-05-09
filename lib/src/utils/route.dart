@@ -122,13 +122,7 @@ final GoRouter router=GoRouter(
         },
 
       ),
-      GoRoute(
-        path: VideoDetailScreen.routePath,
-        builder: (BuildContext context, GoRouterState state) {
-          return const VideoDetailScreen();
-        },
 
-      ),
       GoRoute(
         path: Library.routePath,
         builder: (BuildContext context, GoRouterState state) {

@@ -18,5 +18,7 @@ class Api{
   static const GetAllUser="$_base/user/get-all-users/";
   static const FollowApi="$_base/user/follow";
    static const UnFollowApi="$_base/user/unfollow";
+   static const feedApi="$_base/video/feeds";
+   static const likeApi="$_base/video/like-video";
 
 }

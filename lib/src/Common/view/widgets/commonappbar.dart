@@ -24,10 +24,10 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       title: Text(
         title,
-        style: GoogleFonts.plusJakartaSans(fontSize: 18,fontWeight: FontWeight.w600),),
+        style: GoogleFonts.plusJakartaSans(fontSize: 18,fontWeight: FontWeight.w600,color: Colors.black),),
       leading: IconButton(onPressed: (){
         router.pop();
-      }, icon:Icon(Icons.arrow_back,size: 25,)),
+      }, icon:Icon(Icons.arrow_back,size: 25,color: Colors.black,)),
       actions: action ?? [],
       bottom:  bottom != null ? PreferredSize(child: bottom!, preferredSize: Size.zero) : null,
     );

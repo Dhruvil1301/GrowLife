@@ -131,17 +131,18 @@ class _VideoListItemState extends State<VideoListItem> {
                   padding: const EdgeInsets.all(8.0),
                   child: IconButton(
                     onPressed: () {
-                      setState(() {
-                        play = !play;
-                      });
+
                       if (_controller.value.isPlaying) {
                         _controller.pause();
                       } else {
                         _controller.play();
                       }
+                      setState(() {
+
+                      });
                     },
                     icon: Icon(
-                      play ? Icons.pause : Icons.play_arrow,
+                      _controller.value.isPlaying? Icons.pause : Icons.play_arrow,
                       color: Colors.white,
                       size: 30,
                     ),

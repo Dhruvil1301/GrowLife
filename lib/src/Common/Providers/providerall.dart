@@ -10,6 +10,7 @@ import 'package:growlife/src/feature/auth/controller/login_controller.dart';
 import 'package:growlife/src/feature/auth/controller/newPassword_controller.dart';
 import 'package:growlife/src/feature/auth/controller/otpverificationForgot_controller.dart';
 import 'package:growlife/src/feature/auth/controller/signup_controller.dart';
+import 'package:growlife/src/feature/home/controller/feed_controller.dart';
 import 'package:growlife/src/feature/post/controller/uploadvideo_controller.dart';
 import 'package:growlife/src/feature/profile/controller/getallvideo_controller.dart';
 import 'package:growlife/src/feature/profile/controller/uploadprofileimage_controller.dart';
@@ -69,7 +70,11 @@ final videoControllerProvider = StateNotifierProvider<VideoDataController, List<
   ref.onDispose(notifier.dispose);
   return notifier;
 });
-
+final feedControllerProvider = StateNotifierProvider<FeedDataController, List<Feed>>((ref) {
+  final notifier = FeedDataController();
+  ref.onDispose(notifier.dispose);
+  return notifier;
+});
 
 
 

@@ -1,19 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:growlife/src/Common/Providers/providerall.dart';
+import 'package:growlife/src/feature/home/controller/like_controller.dart';
 import 'package:growlife/src/feature/home/view/homescreen.dart';
 import 'package:growlife/src/feature/home/view/widgets/commentbox.dart';
 import 'package:growlife/src/feature/home/view/widgets/videoList.dart';
 import 'package:growlife/src/res/assets.dart';
 import 'package:growlife/src/res/color.dart';
-class VideoDetailScreen extends StatefulWidget {
-
-  const VideoDetailScreen({Key? key}) : super(key: key);
+import 'package:video_player/video_player.dart';
+class VideoDetailScreen extends ConsumerStatefulWidget {
+  final String ownerName;
+  final String ownerImg;
+  final String views;
+  final String timeofUploading;
+  final String video;
+  final String videoTitle;
+  final String Id;
+  final bool isLiked;
+  const VideoDetailScreen({Key? key, required this.ownerName, required this.ownerImg, required this.views, required this.timeofUploading, required this.video, required this.videoTitle, required this.Id,required this.isLiked}) : super(key: key);
   static const routePath="/videodetail";
   @override
-  State<VideoDetailScreen> createState() => _VideoDetailScreenState();
+  ConsumerState<VideoDetailScreen> createState() => _VideoDetailScreenState();
 }
 
-class _VideoDetailScreenState extends State<VideoDetailScreen> {
+class _VideoDetailScreenState extends ConsumerState<VideoDetailScreen> {
+  late VideoPlayerController _controller;
+  late Future<void> _initializeVideoPlayerFuture;
+  String _formatDuration(Duration duration) {
+    String twoDigits(int n) => n.toString().padLeft(2, '0');
+    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    String twoDigitHours = twoDigits(duration.inHours);
+    return "$twoDigitHours:$twoDigitMinutes:$twoDigitSeconds";
+  }
+
+  String _getDurationString() {
+    if (_controller.value.duration == null) return "0:00 / 0:00";
+    String currentDuration = _formatDuration(_controller.value.position);
+    String totalDuration = _formatDuration(_controller.value.duration!);
+    return "$currentDuration / $totalDuration";
+  }
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.network(widget.video);
+    _initializeVideoPlayerFuture = _controller.initialize().then((_) {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
   String selectedQuality = 'Auto';
   String selectedSpeed ="Normal";
   int _selectedDownloadQuality = 0;
@@ -45,20 +86,58 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final likeController = ref.read(likeControllerProvider);
     return SafeArea(child: Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             Stack(
+              alignment: Alignment.center,
               children: [
-                Image.asset("assets/images/video1.1.png"),
+                AspectRatio(
+                  aspectRatio:16/9,
+                  child: FutureBuilder(
+                    future: _initializeVideoPlayerFuture,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return VideoPlayer(_controller);
+                      } else {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                    },
+                  ),
+                ),
                 Positioned(
-                    top:  MediaQuery.of(context).size.height*.1,
-                    left:MediaQuery.of(context).size.height*.2 ,
-                    child: Image.asset("assets/images/Pause.png",height: MediaQuery.of(context).size.height*.08 ,width:  MediaQuery.of(context).size.height*.08,)),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.green,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: IconButton(
+                        onPressed: () {
+                          if (_controller.value.isPlaying) {
+                            _controller.pause();
+                          } else {
+                            _controller.play();
+                          }
+                          setState(() {
+
+                          });
+                        },
+                        icon: Icon(
+                          _controller.value.isPlaying? Icons.pause : Icons.play_arrow,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 Positioned(
-                  top:  MediaQuery.of(context).size.height*.01,
-                  left:MediaQuery.of(context).size.height*.01 ,
+                  top:  2,
+                  left:3 ,
                     child: InkWell(
                       onTap: (){
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
@@ -66,13 +145,13 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                         child: Icon(Icons.arrow_back,color: Colors.white,size: MediaQuery.of(context).size.height*.035,)),
                 ),
                 Positioned(
-                  top:  MediaQuery.of(context).size.height*.01,
-                  left:MediaQuery.of(context).size.height*.36 ,
-                  child: Icon(Icons.closed_caption_off,color: Colors.white,size: MediaQuery.of(context).size.height*.035,),
+                  top:  2,
+                  right: 40 ,
+                  child: Icon(Icons.closed_caption_off,color: Colors.white,size: 25,),
                 ),
                 Positioned(
-                  top:  MediaQuery.of(context).size.height*.01,
-                  left:MediaQuery.of(context).size.height*.41 ,
+                  top:  2,
+                 right: 5,
                   child: InkWell(
                      onTap: (){
 
@@ -106,7 +185,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
 
                                        children: [
                                          ListTile(
-                                           leading: const Icon(Icons.settings),
+                                           leading: const Icon(Icons.settings,size: 25,),
                                            title: Row(
                                              children: [
                                                Text('Quality:',style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.width*.04 ),),
@@ -199,17 +278,17 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                            },
                          );
                        },
-                      child: Icon(Icons.settings,color: Colors.white,size: MediaQuery.of(context).size.height*.035,)),
+                      child: Icon(Icons.settings,color: Colors.white,size: 25,)),
                 ),
                 Positioned(
-                  top:  MediaQuery.of(context).size.height*.25,
-                  left:MediaQuery.of(context).size.height*.01 ,
-                  child: Text("0:00 / 1:20:42",style: GoogleFonts.montserrat(color: Colors.white,fontSize: 14,fontWeight: FontWeight.w600),)
+                  bottom:  2,
+                  left:3 ,
+                  child: Text(_getDurationString(),style: GoogleFonts.montserrat(color: Colors.white,fontSize: 14,fontWeight: FontWeight.w600),)
                 ),
                 Positioned(
-                    top:  MediaQuery.of(context).size.height*.24,
-                    left:MediaQuery.of(context).size.height*.42 ,
-                    child: Icon(Icons.fullscreen,color: Colors.white,size:MediaQuery.of(context).size.height*.035 ,)
+                    bottom:  2,
+                    right:3 ,
+                    child: Icon(Icons.fullscreen,color: Colors.white,size:25 ,)
                 ),
               ],
 
@@ -219,7 +298,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
               alignment: AlignmentDirectional.topStart,
                 child: Padding(
                   padding:  EdgeInsets.only(left:MediaQuery.of(context).size.width*.04 ),
-                  child: Text("Nurturing Nature - A Growing Plants Event",style: GoogleFonts.poppins(fontWeight: FontWeight.w500,fontSize:  16),),
+                  child: Text(widget.videoTitle,style: GoogleFonts.poppins(fontWeight: FontWeight.w500,fontSize:  16),),
                 )),
             Padding(
               padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*.01),
@@ -227,7 +306,10 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                 children: [
                   Padding(
                     padding:  EdgeInsets.only(left:MediaQuery.of(context).size.height*.02 ),
-                    child: Image.asset(ImageAssets.circularimg1,height:MediaQuery.of(context).size.height*.06 ,),
+                    child:CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(widget.ownerImg),
+                    )
                   ),
                   Padding(
                     padding:  EdgeInsets.only(left: MediaQuery.of(context).size.height*.01),
@@ -235,10 +317,10 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Isabella",style: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w600,fontSize: 16),),
+                        Text(widget.ownerName,style: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w600,fontSize: 16),),
                         Row(
                           children: [
-                            Text("1.0M Views",style: GoogleFonts.poppins(fontSize:  14,fontWeight: FontWeight.w500),),
+                            Text(widget.views.toString()+" Views",style: GoogleFonts.poppins(fontSize:  14,fontWeight: FontWeight.w500),),
                           ],
                         ),
                       ],
@@ -255,7 +337,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                             children: [
                               Padding(
                                 padding:  EdgeInsets.only(left:  MediaQuery.of(context).size.height*.022),
-                                child: Text("1 hr ago",style: GoogleFonts.poppins(fontSize:  14,fontWeight: FontWeight.w400),),
+                                child: Text(widget.timeofUploading,style: GoogleFonts.poppins(fontSize:  14,fontWeight: FontWeight.w400),),
                               ),
                             ],
                           ),
@@ -273,7 +355,19 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                 children: [
                   Column(
                     children: [
-                      const Icon(Icons.favorite,color: Colors.red,size: 25,),
+                      IconButton(onPressed: () async {
+                        try {
+                          if (widget.isLiked) {
+                            await likeController.likeUser(widget.Id);
+                          } else {
+                            await likeController.likeUser(widget.Id);
+                          }
+                          // Refresh the user data after follow/unfollow action
+                          ref.refresh(feedControllerProvider);
+                        } catch (error) {
+                          print('Error: $error');
+                        }
+                      }, icon: widget.isLiked?Icon(Icons.favorite,color: Colors.red,size: 20,):Icon(Icons.favorite_border,size: 20,color: Colors.black38,)),
                       Text("20k",style: GoogleFonts.roboto(fontSize: 12),),
                     ],
                   ),
@@ -609,11 +703,7 @@ class _VideoDetailScreenState extends State<VideoDetailScreen> {
                   child: Text("Recommended videos",style: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w500,fontSize: 20),)),
             ),
             SizedBox(height: MediaQuery.of(context).size.height*.01 ,),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: VideoList(ownerName:"Roy" , ownerImg: ImageAssets.circularimg2, views: "20k Views", timeofUploading:"2 days ago" , video: ImageAssets.video2, videoTitle: "Nurturing Nature - A Growing Plants Event", onTap: (){
-              }),
-            ),
+          
           ],
         ),
       ),
