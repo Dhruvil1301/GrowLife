@@ -393,7 +393,6 @@ class _VideoDetailScreenState extends ConsumerState<VideoDetailScreen> {
                         )
 
 
-
                       ],
                     ),
                   ),
@@ -432,7 +431,7 @@ class _VideoDetailScreenState extends ConsumerState<VideoDetailScreen> {
                                         isScrollControlled: true,
                                         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(15))),// Enable scrolling in the bottom sheet
                                         builder: (BuildContext context) {
-                                          return Commentbox();
+                                          return Commentbox(videoId: response.video.id,totalComments: response.video.comments.length.toString(),);
                                         },
                                       );
                                     },

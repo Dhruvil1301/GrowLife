@@ -21,5 +21,6 @@ class Api{
    static const feedApi="$_base/video/feeds";
    static const likeApi="$_base/video/like-video";
    static const singleVideoApi="$_base/video/single-video";
+   static const addCpmmentApi="$_base/video/comment/add-comment";
 
 }
