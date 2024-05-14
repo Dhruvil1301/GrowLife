@@ -20,5 +20,6 @@ class Api{
    static const UnFollowApi="$_base/user/unfollow";
    static const feedApi="$_base/video/feeds";
    static const likeApi="$_base/video/like-video";
+   static const singleVideoApi="$_base/video/single-video";
 
 }

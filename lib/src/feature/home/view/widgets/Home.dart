@@ -41,6 +41,7 @@ class _HomeState extends ConsumerState<Home> {
     final userDetailsState = ref.watch(userControllerProvider);
     final feeds=ref.watch(feedControllerProvider);
 
+
     userDetailsState.when(
       data: (data) {
         name= data['username'] != null ? data['username'] as String : "";

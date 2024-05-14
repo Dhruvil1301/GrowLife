@@ -36,7 +36,6 @@ class UserDetailController extends ChangeNotifier {
       return false;
     }
   }
-
 }
 
 class UserController extends StateNotifier<AsyncValue<Map<String, dynamic>>> {

@@ -145,3 +145,78 @@ class UploaderFeedDetails {
     );
   }
 }
+class SingleVideo {
+  final String id;
+  final String key;
+  final String title;
+  final String description;
+  final String uploader;
+  final int views;
+  final List<String> likes;
+  final List<String> comments;
+  final List<String> tags;
+  final String uploadDate;
+  final String thumbnailUrl;
+  final bool isPrivate;
+  final String videoUrl;
+
+  SingleVideo( {
+    required this.id,
+    required this.key,
+    required this.title,
+    required this.description,
+    required this.uploader,
+    required this.views,
+    required this.likes,
+    required this.comments,
+    required this.tags,
+    required this.uploadDate,
+    required this.thumbnailUrl,
+    required this.isPrivate,
+    required this.videoUrl,
+  });
+
+  factory SingleVideo.fromJson(Map<String, dynamic> json) {
+    return SingleVideo(
+      id: json['_id'],
+      key: json['key'],
+      title: json['title'],
+      description: json['description'],
+      uploader: json['uploader'],
+      views: json['views'],
+      tags: List<String>.from(json['tags']),
+      uploadDate: json['uploadDate'],
+      thumbnailUrl: json['thumbnailUrl'],
+      isPrivate: json['isPrivate'],
+      videoUrl: json['videoUrl'],
+      likes: ['likes'],
+      comments: ['comments'],
+    );
+  }
+}
+
+class ApiResponse {
+  final bool success;
+  final String message;
+  final SingleVideo video;
+  final String formattedTimeDifference;
+  final bool isLikedByMe;
+
+  ApiResponse({
+    required this.success,
+    required this.message,
+    required this.video,
+    required this.formattedTimeDifference,
+    required this.isLikedByMe,
+  });
+
+  factory ApiResponse.fromJson(Map<String, dynamic> json) {
+    return ApiResponse(
+      success: json['success'],
+      message: json['message'],
+      video: SingleVideo.fromJson(json['video']),
+      formattedTimeDifference: json['formattedTimeDifference'],
+      isLikedByMe: json['isLikedByMe'],
+    );
+  }
+}
