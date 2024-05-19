@@ -287,7 +287,9 @@ class _HomeState extends ConsumerState<Home> {
                                                 videoTitle: feed.title,
                                                 onTap: () {
                                                   router.push(VideoDetailScreen.routePath);
-                                                }, Id: feed.id, IsLiked: feed.isLikedByMe,
+                                                },
+                                                Id: feed.id, IsLiked: feed.isLikedByMe,
+                                                commentCount: feed.commentsCount.toString(),
                                               ),
                                             ),
                                           ),

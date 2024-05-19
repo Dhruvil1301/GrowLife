@@ -16,7 +16,8 @@ class VideoList extends ConsumerStatefulWidget {
    final VoidCallback? onTap;
    final String Id;
    final bool IsLiked;
-  const VideoList({Key? key, required this.ownerName, required this.ownerImg, required this.views, required this.timeofUploading, required this.video, required this.videoTitle, required this.onTap, required this.Id, required this.IsLiked}) : super(key: key);
+   final String commentCount;
+  const VideoList( {Key? key, required this.ownerName, required this.ownerImg, required this.views, required this.timeofUploading, required this.video, required this.videoTitle, required this.onTap, required this.Id, required this.IsLiked,required this.commentCount,}) : super(key: key);
 
   @override
   ConsumerState<VideoList> createState() => _VideoListState();
@@ -65,7 +66,7 @@ class _VideoListState extends ConsumerState<VideoList> {
           padding: const EdgeInsets.only(right: 20),
           child: InkWell(
             onTap: (){
-              Navigator.push(context,MaterialPageRoute(builder: (context)=>VideoDetailScreen(video:widget.video,ownerName: widget.ownerName, ownerImg: widget.ownerImg,Id: widget.Id,)));
+              Navigator.push(context,MaterialPageRoute(builder: (context)=>VideoDetailScreen(video:widget.video,ownerName: widget.ownerName, ownerImg: widget.ownerImg,Id: widget.Id, commentCount:widget.commentCount ,)));
                 ref.refresh(feedControllerProvider);
               },
             child: ClipRRect(

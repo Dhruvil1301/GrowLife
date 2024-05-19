@@ -27,15 +27,9 @@ class UploadVideoFileRepository {
         'title':title,
         'description':description,
         'uploader':uploader,
-        'views':0,
-        'likes':[
-          0
-        ],
-        'dislikes':0,
         'tags': [
           ""
         ],
-        'comments': [],
         'uploadDate': DateTime.now().toString(),
         'thumbnailUrl':"https://hello.com",
         'isPrivate':false,

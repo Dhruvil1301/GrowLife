@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,7 +18,8 @@ class VideoDetailScreen extends ConsumerStatefulWidget {
   final String ownerImg;
   final String video;
   final String Id;
-  const VideoDetailScreen({Key? key, required this.ownerName, required this.ownerImg,  required this.video,  required this.Id,}) : super(key: key);
+  final String commentCount;
+  const VideoDetailScreen( {Key? key, required this.ownerName, required this.ownerImg,  required this.video,  required this.Id,required this.commentCount,}) : super(key: key);
   static const routePath="/videodetail";
   @override
   ConsumerState<VideoDetailScreen> createState() => _VideoDetailScreenState();
@@ -426,17 +428,18 @@ class _VideoDetailScreenState extends ConsumerState<VideoDetailScreen> {
                               children: [
                                 InkWell(
                                     onTap: (){
+
                                       showModalBottomSheet(
                                         context: context,
                                         isScrollControlled: true,
                                         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(15))),// Enable scrolling in the bottom sheet
                                         builder: (BuildContext context) {
-                                          return Commentbox(videoId: response.video.id,totalComments: response.video.comments.length.toString(),);
+                                          return Commentbox(videoId: response.video.id,totalComments: widget.commentCount);
                                         },
                                       );
                                     },
-                                    child: const Icon(Icons.comment_outlined,color: Colors.black,size: 25)),
-                                Text(response.video.comments.length.toString(),style: GoogleFonts.roboto(fontSize: 12),),
+                                    child: const Icon(EvaIcons.messageSquareOutline,color: Colors.black,size: 25)),
+                                Text(widget.commentCount,style: GoogleFonts.roboto(fontSize: 12),),
                               ],
                             ),
                           ),
