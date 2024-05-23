@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:growlife/src/Common/Providers/providerall.dart';
@@ -19,7 +21,9 @@ class VideoDetailScreen extends ConsumerStatefulWidget {
   final String video;
   final String Id;
   final String commentCount;
-  const VideoDetailScreen( {Key? key, required this.ownerName, required this.ownerImg,  required this.video,  required this.Id,required this.commentCount,}) : super(key: key);
+  final bool onLiked;
+
+  const VideoDetailScreen(  {Key? key, required this.onLiked,required this.ownerName, required this.ownerImg,  required this.video,  required this.Id,required this.commentCount,}) : super(key: key);
   static const routePath="/videodetail";
   @override
   ConsumerState<VideoDetailScreen> createState() => _VideoDetailScreenState();
@@ -30,6 +34,10 @@ class _VideoDetailScreenState extends ConsumerState<VideoDetailScreen> {
   late Future<void> _initializeVideoPlayerFuture;
   late Timer _timer;
   late Duration _currentPosition;
+  bool _showControls = true; // Flag to control visibility of UI elements
+  late bool isLiked=widget.onLiked;
+
+
 
   @override
   void initState() {
@@ -40,7 +48,9 @@ class _VideoDetailScreenState extends ConsumerState<VideoDetailScreen> {
     });
     _currentPosition = Duration.zero;
     _timer = Timer.periodic(Duration(seconds: 1), _updatePosition);
+    isLiked=widget.onLiked;
   }
+
 
   void _updatePosition(Timer timer) {
     if (_controller.value.isPlaying) {
@@ -49,6 +59,8 @@ class _VideoDetailScreenState extends ConsumerState<VideoDetailScreen> {
       });
     }
   }
+
+
   String _formatDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
@@ -63,6 +75,7 @@ class _VideoDetailScreenState extends ConsumerState<VideoDetailScreen> {
     String totalDuration = _formatDuration(_controller.value.duration!);
     return "$currentDuration / $totalDuration";
   }
+
   @override
   void dispose() {
     _controller.dispose();
@@ -71,16 +84,19 @@ class _VideoDetailScreenState extends ConsumerState<VideoDetailScreen> {
   }
 
   String selectedQuality = 'Auto';
-  String selectedSpeed ="Normal";
+  String selectedSpeed = "Normal";
   int _selectedDownloadQuality = 0;
   bool isFeatureEnabled = false;
-  bool isWatchlater=true;
-  bool isAddtoPlaylist=false;
+  bool isWatchlater = true;
+  bool isAddtoPlaylist = false;
+
+
   void _updateFeature(bool newValue) {
     setState(() {
       isFeatureEnabled = newValue;
     });
   }
+
   void _toggleFeature() {
     setState(() {
       isFeatureEnabled = !isFeatureEnabled;
@@ -88,20 +104,23 @@ class _VideoDetailScreenState extends ConsumerState<VideoDetailScreen> {
 
     // Show a Snackbar when the feature is turned on/off
     final snackBarCaption = SnackBar(
-      content:
-         Text(
-          isFeatureEnabled ? 'Captions turned ON' : 'Captions turned OFF',
-        style: GoogleFonts.lato(),),
-
+      content: Text(
+        isFeatureEnabled ? 'Captions turned ON' : 'Captions turned OFF',
+        style: GoogleFonts.lato(),
+      ),
       duration: const Duration(seconds: 3), // Adjust the duration as needed
     );
 
     ScaffoldMessenger.of(context).showSnackBar(snackBarCaption);
   }
-
-
+  void _toggleControls() {
+    setState(() {
+      _showControls = !_showControls;
+    });
+  }
   @override
   Widget build(BuildContext context) {
+
     final likeController = ref.read(likeControllerProvider);
     final singleVideoState = ref.watch(singleVideoProvider(widget.Id));
     return  singleVideoState.when(
@@ -116,233 +135,265 @@ class _VideoDetailScreenState extends ConsumerState<VideoDetailScreen> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      AspectRatio(
-                        aspectRatio:16/9,
-                        child: FutureBuilder(
-                          future: _initializeVideoPlayerFuture,
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState == ConnectionState.done) {
-                              return VideoPlayer(_controller);
-                            } else {
-                              return const Center(child: CircularProgressIndicator());
-                            }
-                          },
-                        ),
-                      ),
-                      Positioned(
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.green,
-                            shape: BoxShape.circle,
+                FutureBuilder(
+                future: _initializeVideoPlayerFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return GestureDetector(
+                      onTap: _toggleControls,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          AspectRatio(
+                            aspectRatio: 12 / 8,
+                            child: VideoPlayer(_controller),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: IconButton(
-                              onPressed: () {
-                                if (_controller.value.isPlaying) {
-                                  _controller.pause();
-                                } else {
-                                  _controller.play();
-                                }
-                                setState(() {
-
-                                });
-                              },
-                              icon: Icon(
-                                _controller.value.isPlaying? Icons.pause : Icons.play_arrow,
-                                color: Colors.white,
-                                size: 30,
+                          if (_showControls)
+                            Positioned(
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.green,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      if (_controller.value.isPlaying) {
+                                        _controller.pause();
+                                      } else {
+                                        _controller.play();
+                                      }
+                                      setState(() {});
+                                    },
+                                    icon: Icon(
+                                      _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                                      color: Colors.white,
+                                      size: 30,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top:  2,
-                        left:3 ,
-                        child: InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
-                            },
-                            child: Icon(Icons.arrow_back,color: Colors.white,size: MediaQuery.of(context).size.height*.035,)),
-                      ),
-                      const Positioned(
-                        top:  2,
-                        right: 40 ,
-                        child: Icon(Icons.closed_caption_off,color: Colors.white,size: 25,),
-                      ),
-                      Positioned(
-                        top:  2,
-                        right: 5,
-                        child: InkWell(
-                            onTap: (){
-
-                              showModalBottomSheet(
-                                context: context,
-                                backgroundColor: Colors.white,
-                                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
-                                builder: (BuildContext context) {
-                                  return Container(
-                                    constraints: BoxConstraints(
-                                      minHeight: MediaQuery.of(context).size.height*.2, // Minimum height of the bottom sheet
-                                      maxHeight: MediaQuery.of(context).size.height*.35, // Maximum height of the bottom sheet
+                          if (_showControls)
+                            Positioned(
+                              top: 2,
+                              left: 3,
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Icon(
+                                  Icons.arrow_back,
+                                  color: Colors.white,
+                                  size: MediaQuery.of(context).size.height * .035,
+                                ),
+                              ),
+                            ),
+                          if (_showControls)
+                            const Positioned(
+                              top: 2,
+                              right: 40,
+                              child: Icon(Icons.closed_caption_off, color: Colors.white, size: 25),
+                            ),
+                          if (_showControls)
+                            Positioned(
+                              top: 2,
+                              right: 5,
+                              child: InkWell(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    backgroundColor: Colors.white,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
                                     ),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: <Widget>[
-                                        Container(
-                                          padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*.01),
-                                          child: Container(
-                                            height: MediaQuery.of(context).size.height*.007,
-                                            width: MediaQuery.of(context).size.width*.2,
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*.13,),
-                                              color: Colors.grey.withOpacity(.5),
+                                    builder: (BuildContext context) {
+                                      return Container(
+                                        constraints: BoxConstraints(
+                                          minHeight: MediaQuery.of(context).size.height * .2,
+                                          maxHeight: MediaQuery.of(context).size.height * .35,
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            Container(
+                                              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * .01),
+                                              child: Container(
+                                                height: MediaQuery.of(context).size.height * .007,
+                                                width: MediaQuery.of(context).size.width * .2,
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height * .13),
+                                                  color: Colors.grey.withOpacity(.5),
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                            Padding(
+                                              padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * .02),
+                                              child: Column(
+                                                children: [
+                                                  ListTile(
+                                                    leading: const Icon(Icons.settings, size: 25),
+                                                    title: Row(
+                                                      children: [
+                                                        Text('Quality:', style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width * .04)),
+                                                        SizedBox(width: MediaQuery.of(context).size.width * .06),
+                                                        DropdownButton<String>(
+                                                          value: selectedQuality,
+                                                          items: ['Auto', '240p', '720p', '1080p'].map((String quality) {
+                                                            return DropdownMenuItem<String>(
+                                                              value: quality,
+                                                              child: Text(quality, style: GoogleFonts.lato()),
+                                                            );
+                                                          }).toList(),
+                                                          onChanged: (String? newValue) {
+                                                            setState(() {
+                                                              selectedQuality = newValue!;
+                                                            });
+                                                            // Add logic here to update the video quality based on the selected option.
+                                                            // Example: _setVideoQuality(newValue);
+                                                            Navigator.pop(context);
+                                                          },
+                                                          underline: Container(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    onTap: () {
+                                                      // Remove this onTap handler if you want to use the dropdown only
+                                                    },
+                                                  ),
+                                                  ListTile(
+                                                    leading: const Icon(Icons.closed_caption),
+                                                    title: Row(
+                                                      children: [
+                                                        Text('Captions', style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width * .04)),
+                                                        SizedBox(width: MediaQuery.of(context).size.width * .01),
+                                                        Switch(
+                                                          value: isFeatureEnabled,
+                                                          onChanged: (bool newValue) {
+                                                            _toggleFeature();
+                                                            Navigator.pop(context);
+                                                          },
+                                                          activeTrackColor: Colors.lightBlueAccent.withOpacity(.5),
+                                                          activeColor: Colors.blue,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    onTap: () {
+                                                      _toggleFeature();
+                                                      Navigator.pop(context);
+                                                    },
+                                                  ),
+                                                  ListTile(
+                                                    leading: const Icon(Icons.speed),
+                                                    title: Row(
+                                                      children: [
+                                                        Text('Speed', style: GoogleFonts.lato(fontSize: MediaQuery.of(context).size.width * .04)),
+                                                        SizedBox(width: MediaQuery.of(context).size.width * .09),
+                                                        DropdownButton<String>(
+                                                          value: selectedSpeed,
+                                                          items: ['0.25x', '0.5x', '0.75x', 'Normal', '1.25x', '1.5x', '1.75x', '2x'].map((String quality) {
+                                                            return DropdownMenuItem<String>(
+                                                              value: quality,
+                                                              child: Text(quality, style: GoogleFonts.lato()),
+                                                            );
+                                                          }).toList(),
+                                                          onChanged: (String? newValue) {
+                                                            setState(() {
+                                                              selectedSpeed = newValue!;
+                                                            });
+                                                            double speedValue = 1.0;
+                                                            switch (selectedSpeed) {
+                                                              case '0.25x':
+                                                                speedValue = 0.25;
+                                                                break;
+                                                              case '0.5x':
+                                                                speedValue = 0.5;
+                                                                break;
+                                                              case '0.75x':
+                                                                speedValue = 0.75;
+                                                                break;
+                                                              case 'Normal':
+                                                                speedValue = 1.0;
+                                                                break;
+                                                              case '1.25x':
+                                                                speedValue = 1.25;
+                                                                break;
+                                                              case '1.5x':
+                                                                speedValue = 1.5;
+                                                                break;
+                                                              case '1.75x':
+                                                                speedValue = 1.75;
+                                                                break;
+                                                              case '2x':
+                                                                speedValue = 2.0;
+                                                                break;
+                                                            }
+                                                            _controller.setPlaybackSpeed(speedValue);
+                                                            // Add logic here to update the video speed based on the selected option.
+                                                            Navigator.pop(context);
+                                                          },
+                                                          underline: Container(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    onTap: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Padding(
-                                          padding:  EdgeInsets.only(top:MediaQuery.of(context).size.height*.02 ),
-                                          child: Column(
-
-                                            children: [
-                                              ListTile(
-                                                leading: const Icon(Icons.settings,size: 25,),
-                                                title: Row(
-                                                  children: [
-                                                    Text('Quality:',style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.width*.04 ),),
-                                                    SizedBox(width:MediaQuery.of(context).size.width*.06 ), // Add spacing
-                                                    DropdownButton<String>(
-                                                      value: selectedQuality,
-                                                      items: ['Auto', '240p', '720p', '1080p'].map((String quality) {
-                                                        return DropdownMenuItem<String>(
-                                                          value: quality,
-                                                          child: Text(quality,style: GoogleFonts.lato(),),
-                                                        );
-                                                      }).toList(),
-                                                      onChanged: (String ?newValue) {
-                                                        setState(() {
-                                                          selectedQuality = newValue!;
-                                                        });
-// You can add logic here to update the video quality based on the selected option.
-// Example: _setVideoQuality(newValue);
-                                                        Navigator.pop(context);
-                                                      },
-                                                      underline: Container(),
-                                                    ),
-                                                  ],
-                                                ),
-                                                onTap: () {
-// Remove this onTap handler if you want to use the dropdown only
-                                                },
-                                              ),
-                                              ListTile(
-                                                leading: const Icon(Icons.closed_caption),
-                                                title: Row(
-                                                  children: [
-                                                    Text('Captions',style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.width*.04)),
-                                                    SizedBox(width:MediaQuery.of(context).size.width*.01 ),
-                                                    Switch(
-                                                      value: isFeatureEnabled,
-                                                      onChanged: (bool newValue) {
-                                                        _toggleFeature();
-                                                        Navigator.pop(context);
-                                                      },
-                                                      activeTrackColor: Colors.lightBlueAccent.withOpacity(.5),
-                                                      activeColor: Colors.blue,
-                                                    ),
-                                                  ],
-                                                ),
-                                                onTap: () {
-                                                  _toggleFeature();
-                                                  Navigator.pop(context);
-                                                },
-                                              ),
-                                              ListTile(
-                                                leading: const Icon(Icons.speed),
-                                                title: Row(
-                                                  children: [
-                                                    Text('Speed',style: GoogleFonts.lato(fontSize:MediaQuery.of(context).size.width*.04 ),),
-                                                    SizedBox(width:MediaQuery.of(context).size.width*.09 ),
-                                                    DropdownButton<String>(
-                                                      value: selectedSpeed,
-                                                      items: ['0.25x', '0.5x', '0.75x', 'Normal',"1.25x","1.5x","1.75","2x"].map((String quality) {
-                                                        return DropdownMenuItem<String>(
-                                                          value: quality,
-                                                          child: Text(quality,style: GoogleFonts.lato(),),
-                                                        );
-                                                      }).toList(),
-                                                      onChanged: (String ?newValue) {
-                                                        setState(() {
-                                                          selectedSpeed = newValue!;
-                                                        });
-                                                        double speedValue = 1.0;
-                                                        switch (selectedSpeed) {
-                                                          case '0.25x':
-                                                            speedValue = 0.25;
-                                                            break;
-                                                          case '0.5x':
-                                                            speedValue = 0.5;
-                                                            break;
-                                                          case '0.75x':
-                                                            speedValue = 0.75;
-                                                            break;
-                                                          case 'Normal':
-                                                            speedValue = 1.0;
-                                                            break;
-                                                          case '1.25x':
-                                                            speedValue = 1.25;
-                                                            break;
-                                                          case '1.5x':
-                                                            speedValue = 1.5;
-                                                            break;
-                                                          case '1.75x':
-                                                            speedValue = 1.75;
-                                                            break;
-                                                          case '2x':
-                                                            speedValue = 2.0;
-                                                            break;
-                                                        }
-                                                        _controller.setPlaybackSpeed(speedValue);
-// You can add logic here to update the video speed based on the selected option.
-                                                        Navigator.pop(context);
-                                                      },
-                                                      underline: Container(),
-                                                    ),
-                                                  ],
-                                                ),
-                                                onTap: () {
-
-                                                  Navigator.pop(context);
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      );
+                                    },
                                   );
                                 },
-                              );
-                            },
-                            child: const Icon(Icons.settings,color: Colors.white,size: 25,)),
+                                child: const Icon(Icons.settings, color: Colors.white, size: 25),
+                              ),
+                            ),
+                          if (_showControls)
+                            Positioned(
+                              bottom: 35,
+                              left: 3,
+                              child: Text(
+                                _getDurationString(),
+                                style: GoogleFonts.montserrat(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          if (_showControls)
+                            const Positioned(
+                              bottom: 35,
+                              right: 3,
+                              child: Icon(Icons.fullscreen, color: Colors.white, size: 25),
+                            ),
+                          if (_showControls)
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: Slider(
+                                activeColor: Colors.green,
+                                inactiveColor: Colors.grey,
+                                value: _currentPosition.inSeconds.toDouble(),
+                                max: _controller.value.duration?.inSeconds.toDouble() ?? 0,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _currentPosition = Duration(seconds: value.toInt());
+                                    _controller.seekTo(_currentPosition);
+                                  });
+                                },
+                              ),
+                            ),
+                        ],
                       ),
-                      Positioned(
-                          bottom:  2,
-                          left:3 ,
-                          child: Text(_getDurationString(),style: GoogleFonts.montserrat(color: Colors.white,fontSize: 14,fontWeight: FontWeight.w600),)
-                      ),
-                      const Positioned(
-                          bottom:  2,
-                          right:3 ,
-                          child: Icon(Icons.fullscreen,color: Colors.white,size:25 ,)
-                      ),
-                    ],
-
-                  ),
+                    );
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
                   SizedBox(height:  MediaQuery.of(context).size.height*.013,),
                   Align(
                       alignment: AlignmentDirectional.topStart,
@@ -407,19 +458,22 @@ class _VideoDetailScreenState extends ConsumerState<VideoDetailScreen> {
                           Column(
                             children: [
                               IconButton(onPressed: () async {
+
                                 try {
                                   if (response.isLikedByMe) {
                                     await likeController.likeUser(widget.Id);
                                   } else {
                                     await likeController.likeUser(widget.Id);
                                   }
-// Refresh the user data after follow/unfollow action
+                                  setState(() {
+                                    isLiked=!isLiked;
+                                  });
                                   ref.refresh(feedControllerProvider);
                                 } catch (error) {
                                   print('Error: $error');
                                 }
-                              }, icon: response.isLikedByMe?const Icon(Icons.favorite,color: Colors.red,size: 25,):const Icon(Icons.favorite_border,size: 25,color: Colors.black38,)),
-                              Text(response.video.likes.length.toString(),style: GoogleFonts.roboto(fontSize: 12),),
+                              }, icon: isLiked?const Icon(Icons.favorite,color: Colors.red,size: 25,):const Icon(Icons.favorite_border,size: 25,color: Colors.black,)),
+                              Text(response.likeCount.toString(),style: GoogleFonts.roboto(fontSize: 12),),
                             ],
                           ),
                           Padding(

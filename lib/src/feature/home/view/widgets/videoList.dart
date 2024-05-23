@@ -66,7 +66,7 @@ class _VideoListState extends ConsumerState<VideoList> {
           padding: const EdgeInsets.only(right: 20),
           child: InkWell(
             onTap: (){
-              Navigator.push(context,MaterialPageRoute(builder: (context)=>VideoDetailScreen(video:widget.video,ownerName: widget.ownerName, ownerImg: widget.ownerImg,Id: widget.Id, commentCount:widget.commentCount ,)));
+              Navigator.push(context,MaterialPageRoute(builder: (context)=>VideoDetailScreen(onLiked:widget.IsLiked,video:widget.video,ownerName: widget.ownerName, ownerImg: widget.ownerImg,Id: widget.Id, commentCount:widget.commentCount ,)));
                 ref.refresh(feedControllerProvider);
               },
             child: ClipRRect(

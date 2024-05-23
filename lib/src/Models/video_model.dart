@@ -201,13 +201,17 @@ class ApiResponse {
   final SingleVideo video;
   final String formattedTimeDifference;
   final bool isLikedByMe;
+  final int commentCount;
+  final int likeCount;
 
-  ApiResponse({
+  ApiResponse( {
     required this.success,
     required this.message,
     required this.video,
     required this.formattedTimeDifference,
     required this.isLikedByMe,
+    required this.commentCount,
+    required this.likeCount,
   });
 
   factory ApiResponse.fromJson(Map<String, dynamic> json) {
@@ -217,6 +221,8 @@ class ApiResponse {
       video: SingleVideo.fromJson(json['video']),
       formattedTimeDifference: json['formattedTimeDifference'],
       isLikedByMe: json['isLikedByMe'],
+      commentCount: json['commentsCount'],
+      likeCount: json['likesCount']
     );
   }
 }

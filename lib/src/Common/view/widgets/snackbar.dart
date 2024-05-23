@@ -8,7 +8,7 @@ class ToastMsg{
       toastLength: Toast.LENGTH_SHORT,
       timeInSecForIosWeb: 5,
       gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.amberAccent.shade100,
+      backgroundColor: Colors.white70,
       textColor: Colors.black,
       fontSize: 16.0,
     );
