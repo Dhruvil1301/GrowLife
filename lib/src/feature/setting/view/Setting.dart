@@ -168,7 +168,11 @@ class _SettingState extends ConsumerState<Setting> {
               SizedBox(height:MediaQuery.of(context).size.height*.05 ,),
               InkWell(
                 onTap: (){
-                    signInController.logout();
+                  Future.delayed(Duration(seconds: 2), () {
+                   CircularProgressIndicator();
+                   signInController.logout();// Close the dialog after 2 seconds
+                  });
+
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

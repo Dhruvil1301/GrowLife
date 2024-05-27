@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesService {
@@ -63,5 +64,30 @@ class SharedPreferencesServiceUser {
   static Future<String?> getUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('userId');
+  }
+}
+class FcmTokenManager {
+  static const String _fcmTokenKey = 'fcmToken';
+
+  /// Save FCM token to shared preferences
+  static Future<void> saveFcmToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    String? token = await messaging.getToken();
+    if (token != null) {
+      await prefs.setString(_fcmTokenKey, token);
+    }
+  }
+
+  /// Get FCM token from shared preferences
+  static Future<String?> getFcmToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_fcmTokenKey);
+  }
+
+  /// Delete FCM token from shared preferences
+  static Future<void> deleteFcmToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_fcmTokenKey);
   }
 }

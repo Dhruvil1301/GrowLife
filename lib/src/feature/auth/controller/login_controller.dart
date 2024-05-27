@@ -93,15 +93,14 @@ class AuthController extends ChangeNotifier {
       print('Error refreshing access token: $error');
     }
   }
-
-  void logout() async {
-    try {
-      await SharedPreferencesService.clearTokens();
-      // Perform any additional logout tasks if needed
-      // For example, navigate to the login screen
-      router.pushReplacement(SignInScreen.routePath);
-    } catch (error) {
-      print('Error logging out: $error');
-    }
+  Future<void> logout() async {
+  try{
+    await _repository.logout();
   }
+  catch (e){
+    print(e);
+  }
+}
+
+
 }

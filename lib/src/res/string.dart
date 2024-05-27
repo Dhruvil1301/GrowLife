@@ -4,6 +4,7 @@ class BaseApi{
 class Api{
    static const _base=BaseApi.Apikey;
    static const SignUp="$_base/auth/signup";
+   static const logout="$_base/auth/logout";
    static const SaveUser="$_base/auth/saveuser";
    static const SignIn="$_base/auth/login";
    static const Forgot="$_base/auth/generateotp";   //forgot passsword generate otp

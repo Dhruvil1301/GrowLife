@@ -67,6 +67,10 @@ dependencies:
   jwt_decode: ^0.3.1
   dart_jwt_token: ^0.0.3
   flutter_staggered_animations: ^1.1.1
+  firebase_core:
+  firebase_messaging:
+  flutter_local_notifications: ^17.1.2
+
 
 
 

@@ -5,6 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <permission android:name="com.example.growlife.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+    <uses-permission android:name="ycom.example.growlife.permission.C2D_MESSAGE"/>
 
     <application
         android:label="Growlife"
